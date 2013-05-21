@@ -1,0 +1,44 @@
+%h1= t(".title")
+= t(".body_html")
+
+%br
+
+= form_for @transfer, :as => :transfer, :url => account_transfers_path do |f|
+  = errors_for(@transfer, :translated_message => t(".error"), :include_nested => :bank_account)
+
+  .form-field
+    = f.label :currency
+    -#= f.select :currency, [["Bitcoins", "BTC"], ["Brazilian Real", "BRL"], ["Dollar Wire USD", "USD"]]
+    = f.select :currency, [["Bitcoins", "BTC"], ["Brazilian Real", "BRL"]]
+  
+  - if @transfer.currency == "BTC"
+    .form-field
+      = f.label :address
+      = f.text_field :address
+
+
+  -#- if ["LRlUSD", "kLREUR"].include? @transfer.currency
+  -#   .form-field
+  -#     = f.label :lr_account_id
+  -#     = f.text_field :lr_account_id
+
+  - if ["BRL"].include? @transfer.currency
+    - if @bank_accounts.blank? && @transfer.bank_account_id.blank?
+      = f.fields_for :bank_account do |bank_account|
+        = render :partial => 'bank_accounts/fieldsbr', :locals => { :form_builder => bank_account }
+    - else
+      .form-field
+        = f.label :bank_account_id
+        = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
+        .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
+        
+  .form-field
+    = label_tag :max_amount, t(".max_amount")
+    = text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
+
+  .form-field
+    = f.label :amount
+    = f.text_field :amount, :value => amount_field_value(@transfer.amount), :autocomplete => "off"
+    
+  .form-field
+    = f.submit :value => t(".submit"), :class => "submit"

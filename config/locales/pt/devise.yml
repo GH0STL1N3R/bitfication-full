@@ -1,0 +1,41 @@
+pt:
+  errors:
+    messages:
+      not_found: "não encontrado"
+      already_confirmed: "já foi confirmado"
+      not_locked: "não foi bloqueado"
+
+  devise:
+    failure:
+      unauthenticated: 'Você precisa estar conectado para acessar essa página'
+      unconfirmed: 'Você precisa confirmar a sua conta antes de continuar'
+      locked: 'Sua conta está bloqueada'
+      invalid: 'Senha ou email inválido'
+      invalid_token: 'Token de autenticação inválido'
+      timeout: 'Sua sessão expirou, por favor, entre novamente para continuar'
+      inactive: 'Sua conta ainda não foi ativada'
+      invalid_ga_otp: Autenticador OTP do Google inválido ou expirado
+      invalid_yk_otp: Yubikey OTP inválido
+    sessions:
+      signed_in: 'Entrou com sucesso'
+      signed_out: 'Saiu com sucesso'
+    passwords:
+      send_instructions: 'Você receberá um email com instruções sobre como reiniciar a sua senha dentro de alguns minutos'
+      updated: 'A sua senha foi modificada com sucesso. Você pode entrar agora'
+    confirmations:
+      send_instructions: 'Você receberá um email com instruções sobre como confirmar a sua conta dentro de alguns minutos'
+      confirmed: 'A sua conta foi confirmada com sucesso. Você entrou'
+    registrations:
+      signed_up: 'Você se registrou com sucesso.'
+      updated: 'Você atualizou a sua conta com sucesso'
+      destroyed: 'Tchau! A sua conta foi cancelada com sucesso. Esperamos te ver novamente em breve'
+    unlocks:
+      send_instructions: 'Você receberá um email com instruç~oes sobre como desbloquear a sua conta dentro de alguns minutos'
+      unlocked: 'A sua conta foi desbloqueada com sucesso. Você entrou'
+    mailer:
+      confirmation_instructions:
+        subject: 'Instruções de confirmação'
+      reset_password_instructions:
+        subject: 'Instruções para reiniciar a senha'
+      unlock_instructions:
+        subject: 'Instruções de desbloqueio'
