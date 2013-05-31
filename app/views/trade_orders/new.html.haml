@@ -46,7 +46,7 @@
     = text_field_tag :balance, nil, :disabled => true, :class => "amount"
     .explanation= t(".your_balance_explanation")
 
-  .form-field
+  -#.form-field
     = f.label :dark_pool
     = f.check_box :dark_pool, :class => "checkbox"
     .explanation= t(".dark_pool_explanation")
