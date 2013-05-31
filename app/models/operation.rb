@@ -11,4 +11,14 @@ class Operation < ActiveRecord::Base
       end
     end
   end
+  
+  # for testing
+  def sum_currency(currency)
+    #account_operations.map(&:currency).uniq.each do |currency|
+      puts account_operations.select{ |ao| ao.currency = currency }.map(&:amount).compact.sum
+      
+      puts account_operations.select{ |ao| ao.currency = currency }.map(&:amount).compact.sum.zero?
+    #end
+  end
+  
 end
