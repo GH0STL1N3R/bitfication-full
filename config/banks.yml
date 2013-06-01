@@ -2,8 +2,8 @@ development:
   bic: ITAUBRSP
   iban: 341324000000069157
   account_holder: TCMC Sistemas Ltda-ME
-  account_holder_address: "Av. Consolação\nBrasil"
-  bank_address: "Rua Augusta\nBrasil"
+  account_holder_address: "Praça da República\nBrasil"
+  bank_address: "Av. Paulista\nBrasil"
   bank: Itaú-Unibanco
   ag: 3240
   cc: "06915-7"
@@ -13,8 +13,8 @@ production:
   bic: ITAUBRSP
   iban: 341324000000069157
   account_holder: TCMC Sistemas Ltda-ME
-  account_holder_address: "Av. Consolação\nBrasil"
-  bank_address: "Rua Augusta\nBrasil"
+  account_holder_address: "Praça da República\nBrasil"
+  bank_address: "Av. Paulista\nBrasil"
   bank: Itaú-Unibanco
   ag: 3240
   cc: "06915-7"
