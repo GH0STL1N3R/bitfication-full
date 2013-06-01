@@ -37,7 +37,7 @@
 
   <div class="form-field">
     <%= f.label :time_zone %>
-    <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
+    <%= f.time_zone_select :time_zone, nil, :default => "Brasilia" %>
     <div class="explanation">
       <%= t("users.form.time_zone_explanation") %>
     </div>
