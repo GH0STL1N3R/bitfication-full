@@ -24,7 +24,7 @@ pt:
       updated: 'A sua senha foi modificada com sucesso. Você pode entrar agora'
     confirmations:
       send_instructions: 'Você receberá um email com instruções sobre como confirmar a sua conta dentro de alguns minutos'
-      confirmed: 'A sua conta foi confirmada com sucesso. Você entrou'
+      confirmed: 'A sua conta foi confirmada com sucesso. Bem Vindo ao Bitfication!'
     registrations:
       signed_up: 'Você se registrou com sucesso. Instruções para confirmar a sua Conta foram enviadas para você por e-mail.'
       updated: 'Você atualizou a sua conta com sucesso'
