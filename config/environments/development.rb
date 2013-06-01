@@ -29,7 +29,7 @@ BitcoinBank::Application.configure do
 #  config.action_mailer.delivery_method = :test
 
   config.action_mailer.default_url_options = {
-    :host => "www.bitfication.com"
+    :host => "bitfication.com"
   }
 
   config.assets.debug = true
