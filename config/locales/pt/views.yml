@@ -173,7 +173,7 @@ pt:
       notifications: Notificações por e-mail
       notify_on_trade_explanation: Receber uma notificação assim que alguma de suas ordens forem realizadas
     ga_otp_configuration:
-      reset: O Autenticador Google <i>hared-secret</i> foi corretamente reiniciado, você deve atualizar as configurações do seu dispositivo móvel
+      reset: O seu <i>shared-secret</i> do Autenticador do Google foi corretamente reiniciado, você deve atualizar as configurações do seu dispositivo móvel
     password_change_form:
       change_password: Mude a sua senha
       submit: Enviar
