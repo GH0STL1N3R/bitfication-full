@@ -96,6 +96,6 @@ class User < Account
   end
 
   def generate_name
-    self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
+    self.name = "BF-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 end

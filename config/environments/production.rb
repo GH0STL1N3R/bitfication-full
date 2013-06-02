@@ -13,7 +13,7 @@ BitcoinBank::Application.configure do
   }
   
   config.middleware.use ::ExceptionNotifier,
-    :email_prefix => "[BC Exception] ",	 	
+    :email_prefix => "[BF Exception] ",	 	
     :sender_address => %w{no-reply@bitfication.com},	 
     :exception_recipients => %w{support@bitfication.com}
   
