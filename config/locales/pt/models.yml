@@ -79,7 +79,7 @@ pt:
         merchant: API do Comerciante
         require_ga_otp: Autenticador do Google
         require_yk_otp: Yubikey
-        ga_otp: Autenticado OTP do Google
+        ga_otp: Autenticador OTP do Google
         yk_otp: Yubikey OTP
         bank_account_id: Conta Bancária
         full_name: Seu nome
