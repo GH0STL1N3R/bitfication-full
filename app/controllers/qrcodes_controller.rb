@@ -4,7 +4,7 @@ class QrcodesController < ApplicationController
   ALLOWED_PATTERN = /^[a-zA-Z0-9\:\/\-\?\=]{1,255}$/
   
   def show
-    data = URI.decode(params[:data])
+    data = params[:data]
 
     raise "Invalid data" unless data.match(ALLOWED_PATTERN)
   
