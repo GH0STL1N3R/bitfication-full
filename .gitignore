@@ -23,5 +23,3 @@ config/environments/development.rb
 db/migrate/20130512002914_add_devise_to_users.rb
 db/schema.rb
 *~
-config/deploy.rb
-Capfile
