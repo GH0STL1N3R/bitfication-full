@@ -5,7 +5,7 @@ pt:
       description: Compre, venda e guarde os seus Bitcoins de forma fácil e segura com a melhor plataforma livre do mercado
     user_informations:
       signed_in_as: Conectado como
-      address_tip: Um novo <b>Endereço Bitcoin</b> é criado automaticamente sempre que você receber um depósito, o seu <b>Endereço Bitcoin</b> anterior continuará funcionando na sua conta
+      address_tip: Um novo Endereço Bitcoin é criado automaticamente sempre que você receber um depósito, o seu Endereço Bitcoin anterior continuará funcionando na sua conta
       your_address: Seu Endereço Bitcoin
       logout: Sair
       sign_up: Cadastro
