@@ -110,8 +110,8 @@ pt:
         iban: IBAN
         bank_name: Nome do Banco
         account_holder: Nome completo
-        ag:
-        cc:
+        ag: AG
+        cc: CC
         cnpj: CPF/CNPJ
         cpf: CPF
         created_at: Registrato em
