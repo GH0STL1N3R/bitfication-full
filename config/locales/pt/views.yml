@@ -88,8 +88,8 @@ pt:
       amount: Montante
       total: Total
       market_order: Ordem de Mercado
-      bids: Compra 
-      asks: Venda
+      bids: Compras
+      asks: Vendas
     new:
       title: Criar uma ordem de negociação
       currency_explanation: Moeda que você deseja negociar

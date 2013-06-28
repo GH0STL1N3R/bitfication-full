@@ -88,6 +88,8 @@ en:
       amount: Amount
       total: Total
       market_order: Market Order  
+      bids: Bids
+      asks: Asks
     new:
       title: Create a trade order
       currency_explanation: Currency you want to trade
