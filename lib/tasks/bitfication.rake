@@ -38,7 +38,11 @@ namespace :bitfication do
       wx += t.traded_btc.to_f * t.ppc.to_f
     end
     
-    @ticker[:wavg] = wx / w
+    if wx != 0 && w != 0
+      @ticker[:wavg] = wx / w
+    else
+      @ticker[:wavg] = 0
+    end
     
     # update db
     s = Stats.last
