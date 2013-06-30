@@ -131,9 +131,12 @@ pt:
     deposit:
       not_available: Depósitos via transferência SEPA não estão dispoíveis no momento
       deposit_bitcoins_title: Depósito em Bitcoins
-      deposit_bitcoins_body_html:
-        <p>Simplesmente transfira as moedas virtuais para o seu <b>Endereço Bitcoin</b> localizado no canto superior direito da tela. O valor aparecerá aqui em poucos minutos.
-        Você será capaz de utilizar estes fundos após a transação ser confirmada (aproximadamente %{estimation} minutos).</p>
+      deposit_bitcoins_body_html: "
+        <p><b>Deposit Address:</b> %{btc_address} <a href=%{qr_code}>(QR-Code)</a></p>
+        <p><b>Confirmations Required:</b> %{confirmations} confirmation(s)</p>
+        <p><b>Confirmation Time:</b> %{confirmation_time} minutes</p>
+        <p>Simply transfer your virtual coins to your Bitcoin Address, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p>
+        <p>After you make the transfer, you can view the confirmation time and transaction progress on <a href=http://blockchain.info>blockchain.info</a></p>"
       deposit_eur_title: Depósito com transferência bancária
       deposit_eur_body_html: "
         <p>

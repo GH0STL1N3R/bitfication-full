@@ -1,5 +1,5 @@
 %h1= t(".deposit_bitcoins_title")
-%p= t(".deposit_bitcoins_body_html", :estimation => Transfer::MIN_BTC_CONFIRMATIONS * 10)
+%p= t(".deposit_bitcoins_body_html", :btc_address => @current_user.bitcoin_address, :confirmations => Transfer::MIN_BTC_CONFIRMATIONS, :confirmation_time => Transfer::MIN_BTC_CONFIRMATIONS * 10, :qr_code => qrcode_image_path(current_user.bitcoin_address))
 
 %h1= t(".deposit_eur_title")
 %p= t(".deposit_eur_body_html")
