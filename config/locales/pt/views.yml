@@ -3,6 +3,12 @@ pt:
     application:
       title: "Bitfication: Compre Bitcoins de forma fácil e segura!"
       description: Compre, venda e guarde os seus Bitcoins de forma fácil e segura com a melhor plataforma livre do mercado
+      ticker:
+        last_price: Last Price
+        high: High
+        low: Low
+        volume: Volume
+        wavg: Weighted Avg
     user_informations:
       signed_in_as: Conectado como
       address_tip: Um novo Endereço Bitcoin é criado automaticamente sempre que você receber um depósito, o seu Endereço Bitcoin anterior continuará funcionando na sua conta
@@ -10,6 +16,12 @@ pt:
       logout: Sair
       sign_up: Cadastro
       sign_in: Entrar
+    ticker:
+      last_price: Last Price
+      high: High
+      low: Low
+      volume: Volume
+      wavg: Weighted Avg
     navigation:
       account:
         main: Conta
