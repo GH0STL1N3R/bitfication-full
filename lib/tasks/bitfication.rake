@@ -1,6 +1,22 @@
+require 'debugger'
+
 namespace :bitfication do
   desc "Update exchange statistics"
   task :stats => :environment do
+    
+    
+    #if stat doesn't exist, create it
+    if Stats.count < 1
+      ns = Stats.new
+      ns.volume = 0
+      ns.phigh = 0
+      ns.plow = 0
+      ns.pwavg = 0
+      ns.save!
+    end
+    
+    
+    puts Stats.count
     
     currency = "brl"
     
@@ -25,7 +41,9 @@ namespace :bitfication do
     @ticker[:wavg] = wx / w
     
     # update db
-    s = Stats.find_by_id(1)
+    s = Stats.last
+    
+    #debugger
     
     s.volume = @ticker[:volume]
     s.phigh = @ticker[:high]
