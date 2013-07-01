@@ -56,12 +56,15 @@ class ApplicationController < ActionController::Base
   
   def get_stats
     
+    @currencies = Currency.all
+    
     currency = "brl"
     
-    @stats = Stats.find_by_id(1)
+    @stats = Stats.last
     
     @stats[:last_price] = Trade.with_currency(currency).count.zero? ? 0 : Trade.with_currency(currency).plottable(currency).last.ppc
     
   end
+  
   
 end

@@ -10,6 +10,7 @@ pt:
         volume: Volume
         wavg: Weighted Avg
     user_informations:
+      balance: Saldo
       signed_in_as: Conectado como
       address_tip: Um novo Endereço Bitcoin é criado automaticamente sempre que você receber um depósito, o seu Endereço Bitcoin anterior continuará funcionando na sua conta
       your_address: Seu Endereço Bitcoin

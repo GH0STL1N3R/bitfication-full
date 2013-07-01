@@ -10,6 +10,7 @@ en:
         volume: Volume
         wavg: Weighted Avg
     user_informations:
+      balance: Balance
       signed_in_as: Signed-in as
       address_tip: A new address is generated each time you receive a payment, your previous addresses will still work though
       your_address: Your Bitcoin Address
