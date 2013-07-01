@@ -131,13 +131,14 @@ en:
       add_funds: Deposit funds
     deposit:
       not_available: SEPA wire deposits are currently unavailable
-      deposit_bitcoins_title: Bitcoins
-      deposit_bitcoins_body_html: "
-        <p><b>Deposit Address:</b> %{btc_address} <a href=%{qr_code}>(QR-Code)</a></p>
-        <p><b>Confirmations Required:</b> %{confirmations} confirmation(s)</p>
-        <p><b>Confirmation Time:</b> %{confirmation_time} minutes</p>
-        <p>Simply transfer your virtual coins to your Bitcoin Address, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p>
-        <p>After you make the transfer, you can view the confirmation time and transaction progress on <a href=http://blockchain.info>blockchain.info</a></p>"
+      bitcoins:
+        title: Bitcoins
+        address: Deposit Address
+        conf_rqd: Confirmations Required
+        conf_rqd_unit: confirmation(s)
+        conf_time: Confirmation Time
+        conf_time_unit: minutes
+        add_info_html: "<p>Simply transfer your virtual coins to your Bitcoin Address, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <a href=%{tx_address}>blockchain.info</a></p>"
       deposit_eur_title: Deposit with bank wire
       deposit_eur_body_html: "
         <p>

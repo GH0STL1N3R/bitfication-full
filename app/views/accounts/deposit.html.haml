@@ -1,6 +1,24 @@
-%h1= t(".deposit_bitcoins_title")
-%p= t(".deposit_bitcoins_body_html", :btc_address => @current_user.bitcoin_address, :confirmations => Transfer::MIN_BTC_CONFIRMATIONS, :confirmation_time => Transfer::MIN_BTC_CONFIRMATIONS * 10, :qr_code => qrcode_image_path(current_user.bitcoin_address))
+%h1= t(".bitcoins.title")
 
+%div{:style => "float:left; width: 80%" }
+  %div{:style => "line-height: 30pt;" }
+    %p
+      %strong= t(".bitcoins.address") + ":"
+      = link_to @current_user.bitcoin_address, "bitcoin:#{@current_user.bitcoin_address}"
+    %p
+      %strong= t(".bitcoins.conf_rqd") + ":"
+      = Transfer::MIN_BTC_CONFIRMATIONS
+      = t(".bitcoins.conf_rqd_unit")
+    %p
+      %strong= t(".bitcoins.conf_time") + ":"
+      = Transfer::MIN_BTC_CONFIRMATIONS * 10
+      = t(".bitcoins.conf_time_unit")
+  %p
+    = t(".bitcoins.add_info_html", :tx_address => "http://blockchain.info/address/#{@current_user.bitcoin_address}")
+
+%div{:style => "float:left" }
+  = image_tag(qrcode_image_path(current_user.bitcoin_address))
+%div{:style => "clear:both;" }
 %h1= t(".deposit_eur_title")
 %p= t(".deposit_eur_body_html")
 
