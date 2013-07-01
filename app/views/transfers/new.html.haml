@@ -6,7 +6,7 @@
 = form_for @transfer, :as => :transfer, :url => account_transfers_path do |f|
   = errors_for(@transfer, :translated_message => t(".error"), :include_nested => :bank_account)
   
-  -# custom script to update 'will receive' amount
+  -# custom script to update 'will receive' & 'amount' boxes
   %script
     $(document).ready(function(e) {
     
@@ -15,6 +15,14 @@
     var txtAmtval = $(this).val();
     
     $('#will_receive').val(txtAmtval * (1-#{@withdrawal_rate}));
+        
+    });
+    
+    $('#will_receive').change(function() {
+    
+    var txtAmtval = $(this).val();
+    
+    $('#transfer_amount').val(txtAmtval * (1+#{@withdrawal_rate}));
         
     });
     
@@ -46,9 +54,9 @@
         = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
         .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
         
-  .form-field
-    = label_tag :max_amount, t(".max_amount")
-    = text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
+  -#.form-field
+    -#= label_tag :max_amount, t(".max_amount")
+    -#= text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
   
   .form-field
     = f.label :amount
@@ -58,7 +66,7 @@
   
     .form-field
       = label_tag :will_receive, t(".will_receive")
-      = text_field_tag :will_receive, amount_field_value(current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate)), :class => "amount", :disabled => true
+      = text_field_tag :will_receive, amount_field_value(current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate))
     
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
