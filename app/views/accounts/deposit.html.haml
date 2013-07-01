@@ -17,7 +17,7 @@
     = t(".bitcoins.add_info_html", :tx_address => "http://blockchain.info/address/#{@current_user.bitcoin_address}")
 
 %div{:style => "float:left" }
-  = image_tag(qrcode_image_path(current_user.bitcoin_address), :size => "200x200")
+  = image_tag(qrcode_image_path(current_user.bitcoin_address), :size => "120x120")
 %div{:style => "clear:both;" }
 %h1= t(".deposit_eur_title")
 %p= t(".deposit_eur_body_html")
