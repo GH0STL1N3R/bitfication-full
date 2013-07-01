@@ -233,7 +233,7 @@ en:
       max_amount: Maximum amount
       submit: Transfer
       manage_bank_accounts: Manage your bank accounts
-
+      will_receive: Amount After Fees 
   bank_accounts:
     index:
       title: Add a bank account

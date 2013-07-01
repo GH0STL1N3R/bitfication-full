@@ -231,7 +231,7 @@ pt:
       max_amount: Quantidada máxima
       submit: Transferir
       manage_bank_accounts: Gerencie as suas contas bancárias
-
+      will_receive: Amount After Fees 
   bank_accounts:
     index:
       title: Adicionar uma conta bancária

@@ -85,7 +85,6 @@ en:
         full_name: Your name
         address: Your address
         notify_on_trade: Successful trade
-        will_receive: Will Receive
       trade:
         type: Type
         amount: Amount
