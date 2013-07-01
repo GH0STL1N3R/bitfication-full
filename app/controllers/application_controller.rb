@@ -58,7 +58,11 @@ class ApplicationController < ActionController::Base
     
     currency = "brl"
     
-    @stats = Stats.find_by_id(1)
+    if Stats.count < 12
+      raise "Please run `rake bitfication:stats`"
+    end
+    
+    @stats = Stats.last
     
     @stats[:last_price] = Trade.with_currency(currency).count.zero? ? 0 : Trade.with_currency(currency).plottable(currency).last.ppc
     
