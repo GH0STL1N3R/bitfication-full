@@ -85,6 +85,7 @@ pt:
         full_name: Seu nome
         address: Seu endereço
         notify_on_trade: Troca concluída
+        will_receive: Will Receive
       trade:
         type: Tipo
         amount: Montante
