@@ -9,6 +9,9 @@ class TransfersController < ApplicationController
   end
 
   def new
+    
+    @withdrawal_rate = WITHDRAWAL_COMMISSION_RATE
+    
     if ["BRL", "USD"].include? params[:currency]
       @transfer = WireTransfer.new(:currency => params[:currency])
       @transfer.build_bank_account

@@ -5,7 +5,21 @@
 
 = form_for @transfer, :as => :transfer, :url => account_transfers_path do |f|
   = errors_for(@transfer, :translated_message => t(".error"), :include_nested => :bank_account)
-
+  
+  -# custom script to update 'will receive' amount
+  %script
+    $(document).ready(function(e) {
+    
+    $('#transfer_amount').change(function() {
+    
+    var txtAmtval = $(this).val();
+    
+    $('#will_receive').val(txtAmtval * (1-#{@withdrawal_rate}));
+        
+    });
+    
+    });
+    
   .form-field
     = f.label :currency
     -#= f.select :currency, [["Bitcoins", "BTC"], ["Brazilian Real", "BRL"], ["Dollar Wire USD", "USD"]]
@@ -35,10 +49,16 @@
   .form-field
     = label_tag :max_amount, t(".max_amount")
     = text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
-
+  
   .form-field
     = f.label :amount
-    = f.text_field :amount, :value => amount_field_value(@transfer.amount), :autocomplete => "off"
+    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? amount_field_value(current_user.max_withdraw_for(@transfer.currency)) : "", :autocomplete => "off"
+
+  - if ["BRL"].include? @transfer.currency
+  
+    .form-field
+      = label_tag :will_receive, t(".will_receive")
+      = text_field_tag :will_receive, amount_field_value(current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate)), :class => "amount", :disabled => true
     
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
