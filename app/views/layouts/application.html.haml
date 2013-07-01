@@ -46,15 +46,15 @@
     %div#userbar-wrapper
       %div#userbar
         %div.index 
-          = t("ticker.last_price") + ": " + number_to_currency(@stats[:last_price], unit: "R$", separator: ",", delimiter: ".")
+          = t("ticker.last_price") + ": " + number_to_currency(@stats[:last_price], unit: "R$")
         %div.index
-          = t("ticker.high") + ": " + number_to_currency(@stats[:phigh], unit: "R$", separator: ",", delimiter: ".")
+          = t("ticker.high") + ": " + number_to_currency(@stats[:phigh], unit: "R$")
         %div.index
-          = t("ticker.low") + ": " + number_to_currency(@stats[:plow], unit: "R$", separator: ",", delimiter: ".")
+          = t("ticker.low") + ": " + number_to_currency(@stats[:plow], unit: "R$")
         %div.index
-          = t("ticker.volume") + ": " + number_to_currency(@stats[:volume], unit: "BTC", separator: ",", delimiter: ".")
+          = t("ticker.volume") + ": " + number_to_currency(@stats[:volume], unit: "BTC", precision: 5 )
         %div.index
-          = t("ticker.wavg") + ": " + number_to_currency(@stats[:pwavg], unit: "R$", separator: ",", delimiter: ".")
+          = t("ticker.wavg") + ": " + number_to_currency(@stats[:pwavg], unit: "R$")
         %div#language
           %select#languagesel
             - I18n.available_locales.each do |locale|
