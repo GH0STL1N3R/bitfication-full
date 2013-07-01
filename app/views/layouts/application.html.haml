@@ -52,7 +52,7 @@
         %div.index
           = t("ticker.low") + ": " + number_to_currency(@stats[:plow], unit: "R$")
         %div.index
-          = t("ticker.volume") + ": " + number_to_currency(@stats[:volume], unit: "BTC", precision: 5 )
+          = t("ticker.volume") + ": " + number_to_currency(@stats[:volume], unit: "BTC", precision: 5, format: "%n %u" )
         %div.index
           = t("ticker.wavg") + ": " + number_to_currency(@stats[:pwavg], unit: "R$")
         %div#language
