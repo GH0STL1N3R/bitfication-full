@@ -1,3 +1,55 @@
+/* spacer */
+div#spacer {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+/* navigation bar */
+div#userbar-wrapper {
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    height:32px;
+    background:#000000;
+    padding: 8px 0;
+    z-index: 100;
+}
+div#userbar-wrapper {
+    position:fixed;
+}
+
+div#userbar {
+    width:100%;
+    padding: 2px 100px;
+}
+
+
+div#userbar {
+	color:#fff;
+  font-family:"Arial", Sans-serif;
+	font-weight: bold;
+}
+
+div#currency {
+  float: left;
+  padding: 0px 50px;
+}
+
+div#language {
+
+  float: left;
+  padding: 0px 80px;
+
+}
+
+.index {
+  float: left;
+  padding: 7px 70px;
+}
+
+
 /* Global styles */
 html {
   background: #EEEEEE;

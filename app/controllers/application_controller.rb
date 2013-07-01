@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
     :move_xml_params,
     :set_locale,
     :set_time_zone,
-    :get_announcements
+    :get_announcements,
+    :get_stats
   
   def set_time_zone
     if current_user and !current_user.time_zone.blank?
@@ -52,4 +53,19 @@ class ApplicationController < ActionController::Base
       @announcements = Announcement.active.all
     end
   end
+  
+  def get_stats
+    
+    currency = "brl"
+    
+    if Stats.count < 1
+      raise "Please run `rake bitfication:stats`"
+    end
+    
+    @stats = Stats.last
+    
+    @stats[:last_price] = Trade.with_currency(currency).count.zero? ? 0 : Trade.with_currency(currency).plottable(currency).last.ppc
+    
+  end
+  
 end

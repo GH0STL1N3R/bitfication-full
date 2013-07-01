@@ -7,3 +7,10 @@ Admin.create! do |user|
 end
 
 puts "Created \"admin@localhost.local\" user with password \"2QmaKCs2fhU8x9iS0AAL4F7ACR3aZxNdq6WyTEE1\""
+
+Stats.create! do |s|
+  s.volume = 0
+  s.phigh = 0
+  s.plow = 0
+  s.pwavg = 0
+end
