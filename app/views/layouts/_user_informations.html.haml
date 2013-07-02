@@ -12,11 +12,12 @@
           = t(".balance") + ":"
         - @currencies.each_with_index do |c, index|
           %strong
-            = c.display
-          = number_to_currency(@current_user.balance(c.code), separator: ",", unit: "", delimiter: ".", precision: c.code=="BTC"? 5 : 2)
+            - if c.code!="BTC"
+              = image_tag("flags/#{c.flag}.png", :size=> "18x12")
+              = c.display
+            = number_to_currency(@current_user.balance(c.code), unit: c.code=="BTC"? "BTC" : "", precision: c.code=="BTC"? 5 : 3)
+            
           = index!=(@currencies.length - 1)? " | " : ""
-          
-          -#= "#{number_to_currency(Transfer.round_amount(@current_user.balance(c.code), c.code), unit: c.code, separator: ",", delimiter: ".")}"
       
     - else
       = link_to t(".sign_up"), new_registration_path(:user)
