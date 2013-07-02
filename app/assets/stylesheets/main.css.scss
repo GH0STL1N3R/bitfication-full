@@ -21,8 +21,8 @@ div#userbar-wrapper {
 }
 
 div#userbar {
-    width:100%;
-    padding: 2px 100px;
+    width:1100px;
+    padding: 2px 0px;
 }
 
 
@@ -30,6 +30,8 @@ div#userbar {
 	color:#fff;
   font-family:"Arial", Sans-serif;
 	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 div#currency {
@@ -46,7 +48,7 @@ div#language {
 
 .index {
   float: left;
-  padding: 7px 70px;
+  padding: 7px 30px;
 }
 
 
