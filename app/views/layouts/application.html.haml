@@ -24,24 +24,6 @@
     = yield :head
 
   %body{ :class => [request[:controller], "#{request[:controller]}-#{request[:action]}"] }
-    %link{:rel => "stylesheet", :type => "text/css", :href => "/assets/dd.css"}
-    %script{:type => "text/javascript", :src  => "/assets/jquery.dd.min.js"}
-    %script{:type => "text/javascript"}
-      $(document).ready(function(e) {
-      try {
-      $("#languagesel").msDropDown();
-      } catch(e) {
-      alert(e.message);
-      }
-      
-      
-      $("#languagesel").change(function () {
-      
-      document.location.href = $(this).val();
-      
-      });
-      
-      });
       
     %div#userbar-wrapper
       %div#userbar
@@ -55,10 +37,6 @@
           = t(".ticker.volume") + ": " + number_to_currency(@stats[:volume], unit: "BTC", precision: 5, format: "%n %u" )
         %div.index
           = t(".ticker.wavg") + ": " + number_to_currency(@stats[:pwavg], unit: "R$")
-        %div#language
-          %select#languagesel
-            - I18n.available_locales.each do |locale|
-              %option{:"data-image" => image_path("flags/#{locale}.png"), :value => "#{locale_switch_link(locale, request.url)}", :selected => (I18n.locale == locale) }
 
     #spacer
       #content{ :style => "clear:both" }
