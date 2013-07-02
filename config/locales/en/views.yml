@@ -10,7 +10,7 @@ en:
         volume: Volume
         wavg: Weighted Avg
     user_informations:
-      balance: Your wallet
+      balance: Your Wallet
       signed_in_as: Signed-in as
       address_tip: A new address is generated each time you receive a payment, your previous addresses will still work though
       your_address: Your Bitcoin Address
@@ -135,10 +135,10 @@ en:
         title: Bitcoins
         address: Deposit Address
         conf_rqd: Confirmations Required
-        conf_rqd_unit: confirmation(s)
+        conf_rqd_unit: confirmations
         conf_time: Confirmation Time
         conf_time_unit: minutes
-        add_info_html: "<p>Simply transfer your virtual coins to your Bitcoin Address, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <a href=%{tx_address}>blockchain.info</a></p>"
+        add_info_html: "<p>Simply transfer your <i>Virtual Coins</i> to your <b>Bitcoin Address</b>, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Bitcoin Payment Voucher</i>).</p>"
       deposit_eur_title: Deposit with bank wire
       deposit_eur_body_html: "
         <p>

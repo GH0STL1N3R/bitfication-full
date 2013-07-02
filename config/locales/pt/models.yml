@@ -29,7 +29,7 @@ pt:
         id: ID
         created_at: Criado em
         user: Usuário
-        amount: Montante
+        amount: Valor máximo
         address: Endereço
         currency: Moeda
         bt_tx_confirmations: Confirmações

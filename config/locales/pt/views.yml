@@ -4,13 +4,13 @@ pt:
       title: "Bitfication: Compre Bitcoins de forma fácil e segura!"
       description: Compre, venda e guarde os seus Bitcoins de forma fácil e segura com a melhor plataforma livre do mercado
       ticker:
-        last_price: Last Price
-        high: High
-        low: Low
+        last_price: Último Preço
+        high: Maior
+        low: Menor
         volume: Volume
-        wavg: Weighted Avg
+        wavg: Média
     user_informations:
-      balance: Saldo
+      balance: Sua Carteira
       signed_in_as: Conectado como
       address_tip: Um novo Endereço Bitcoin é criado automaticamente sempre que você receber um depósito, o seu Endereço Bitcoin anterior continuará funcionando na sua conta
       your_address: Seu Endereço Bitcoin
@@ -18,11 +18,11 @@ pt:
       sign_up: Cadastro
       sign_in: Entrar
     ticker:
-      last_price: Last Price
-      high: High
-      low: Low
+      last_price: Último Preço
+      high: Maior
+      low: Menor
       volume: Volume
-      wavg: Weighted Avg
+      wavg: Média
     navigation:
       account:
         main: Conta
@@ -133,12 +133,12 @@ pt:
       not_available: Depósitos via transferência SEPA não estão dispoíveis no momento
       bitcoins:
         title: Bitcoins
-        address: Deposit Address
-        conf_rqd: Confirmations Required
-        conf_rqd_unit: confirmation(s)
-        conf_time: Confirmation Time
-        conf_time_unit: minutes
-        add_info_html: "<p>Simply transfer your virtual coins to your Bitcoin Address, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <a href=%{tx_address}>blockchain.info</a></p>"
+        address: Seu Endereço Bitcoin
+        conf_rqd: Confirmações necessárias
+        conf_rqd_unit: confirmações
+        conf_time: Tempo estimado para confirmação
+        conf_time_unit: minutos
+        add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
       deposit_eur_title: Depósito com transferência bancária
       deposit_eur_body_html: "
         <p>
@@ -248,7 +248,7 @@ pt:
       max_amount: Quantidada máxima
       submit: Transferir
       manage_bank_accounts: Gerencie as suas contas bancárias
-      will_receive: Amount After Fees 
+      will_receive: Valor após as taxas
   bank_accounts:
     index:
       title: Adicionar uma conta bancária
