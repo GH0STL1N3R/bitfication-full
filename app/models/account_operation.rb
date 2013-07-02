@@ -3,7 +3,7 @@ require 'digest'
 class AccountOperation < ActiveRecord::Base
   #CURRENCIES = %w{ EUR USD LREUR LRUSD BTC PGAU INR CAD BRL }
   CURRENCIES = %w{ BTC BRL }
-  MIN_BTC_CONFIRMATIONS = 1
+  MIN_BTC_CONFIRMATIONS = 3
 
   default_scope order('`account_operations`.`created_at` DESC')
 
