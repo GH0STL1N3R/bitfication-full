@@ -5,8 +5,8 @@ pt:
       description: Compre, venda e guarde os seus Bitcoins de forma fácil e segura com a melhor plataforma livre do mercado
       ticker:
         last_price: Último Preço
-        high: Maior
-        low: Menor
+        high: Alta
+        low: Baixa
         volume: Volume
         wavg: Média
     user_informations:
@@ -19,8 +19,8 @@ pt:
       sign_in: Entrar
     ticker:
       last_price: Último Preço
-      high: Maior
-      low: Menor
+      high: Alta
+      low: Baixa
       volume: Volume
       wavg: Média
     navigation:
