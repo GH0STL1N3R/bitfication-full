@@ -15,7 +15,7 @@
             - if c.code!="BTC"
               = image_tag("flags/#{c.flag}.png", :size=> "18x12")
               = c.display
-            = number_to_currency(@current_user.balance(c.code), unit: c.code=="BTC"? "BTC" : "", precision: c.code=="BTC"? 5 : 3)
+            = number_to_currency(@current_user.balance(c.code), unit: c.code=="BTC"? "BTC" : "", precision: c.code=="BTC"? 8 : 3)
             
           = index!=(@currencies.length - 1)? " | " : ""
       
