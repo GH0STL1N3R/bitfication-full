@@ -61,7 +61,7 @@
   
     .form-field
       = label_tag :will_receive, t(".will_receive")
-      = text_field_tag :will_receive, amount_field_value(current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate))
+      = text_field_tag :will_receive, '%.2f' % amount_field_value(current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate))
     
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
