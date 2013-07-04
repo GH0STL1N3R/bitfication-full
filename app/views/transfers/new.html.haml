@@ -30,9 +30,7 @@
     
   .form-field
     = f.label :currency
-    -#= f.select :currency, [["Bitcoins", "BTC"], ["Brazilian Real", "BRL"], ["Dollar Wire USD", "USD"]]  
-    - @currencies.each do |c|
-      = f.select :currency, [[c.read_attribute(I18n.locale), c.code], ["Brazilian Real", "BRL"]]
+    = f.select :currency, options_from_collection_for_select(@currencies, 'code', I18n.locale)
     - 
   - if @transfer.currency == "BTC"
     .form-field

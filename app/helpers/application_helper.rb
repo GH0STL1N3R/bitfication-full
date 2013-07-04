@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def number_to_bitcoins(amount, options = {})
-    number_to_currency(amount, options.merge({:unit => "BTC"}))
+    number_to_currency(amount, options.merge({:unit => "BTC", :format => "%n %u"}) )
   end
 
   def number_to_lrusd(amount, options = {})
