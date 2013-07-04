@@ -30,7 +30,7 @@
     
   .form-field
     = f.label :currency
-    = f.select :currency, options_from_collection_for_select(@currencies, 'code', I18n.locale)
+    = f.select :currency, options_from_collection_for_select(@currencies, 'code', I18n.locale, @transfer.currency)
     - 
   - if @transfer.currency == "BTC"
     .form-field
@@ -53,15 +53,16 @@
         = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
         .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
         
-  .form-field
-    = f.label :amount
-    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % amount_field_value(current_user.max_withdraw_for(@transfer.currency)) : "", :autocomplete => "off"
+    .form-field
+      = f.label :amount
+      = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % current_user.max_withdraw_for(@transfer.currency) : "", :autocomplete => "off"
+
 
   - if ["BRL"].include? @transfer.currency
   
     .form-field
       = label_tag :will_receive, t(".will_receive")
-      = text_field_tag :will_receive, '%.2f' % amount_field_value(current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate))
+      = text_field_tag :will_receive, '%.2f' % (current_user.max_withdraw_for(@transfer.currency)*(1-@withdrawal_rate))
     
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
