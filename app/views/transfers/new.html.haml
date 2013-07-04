@@ -49,14 +49,13 @@
         = render :partial => 'bank_accounts/fieldsbr', :locals => { :form_builder => bank_account }
     - else
       .form-field
-        = f.label :bank_account_id
+        = label_tag :bank_account_id, t(".bank_account")
         = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
         .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
         
-    .form-field
-      = f.label :amount
-      = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % current_user.max_withdraw_for(@transfer.currency) : "", :autocomplete => "off"
-
+  .form-field
+    = f.label :amount
+    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % current_user.max_withdraw_for(@transfer.currency) : "", :autocomplete => "off"
 
   - if ["BRL"].include? @transfer.currency
   
