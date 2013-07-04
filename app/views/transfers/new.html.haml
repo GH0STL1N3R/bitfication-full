@@ -53,13 +53,9 @@
         = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
         .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
         
-  -#.form-field
-    -#= label_tag :max_amount, t(".max_amount")
-    -#= text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
-  
   .form-field
     = f.label :amount
-    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? amount_field_value(current_user.max_withdraw_for(@transfer.currency)) : "", :autocomplete => "off"
+    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % amount_field_value(current_user.max_withdraw_for(@transfer.currency)) : "", :autocomplete => "off"
 
   - if ["BRL"].include? @transfer.currency
   
