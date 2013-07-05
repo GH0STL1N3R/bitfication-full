@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
     
     @stats = Stats.last
     
-    @stats[:last_price] = Trade.with_currency(currency).count.zero? ? 0 : Trade.with_currency(currency).plottable(currency).last.ppc
+    @last_price = Trade.with_currency(currency).count.zero? ? 0 : Trade.with_currency(currency).plottable(currency).last.ppc
     
   end
   

@@ -28,7 +28,7 @@
     %div#userbar-wrapper
       %div#userbar
         %div.index 
-          = t(".ticker.last_price") + ": " + number_to_currency(@stats[:last_price], unit: "R$")
+          = t(".ticker.last_price") + ": " + number_to_currency(@last_price, unit: "R$")
         %div.index
           = t(".ticker.high") + ": " + number_to_currency(@stats[:phigh], unit: "R$")
         %div.index
