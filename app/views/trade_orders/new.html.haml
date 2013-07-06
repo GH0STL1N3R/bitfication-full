@@ -18,7 +18,7 @@
 
   .form-field
     = f.label :currency
-    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.extra.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :prompt => "--" }, { :class => "currency-select trigger-total-update" }
+    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.extra.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :default => "Real Brasileiro (BRL)" }, { :class => "currency-select" }
     .explanation= t(".currency_explanation")
 
   .form-field
@@ -41,7 +41,7 @@
     = text_field_tag :total, nil, :size => 8, :disabled => true, :class => "amount"
     .explanation= t(".total_explanation")
 
-  .form-field
+  -#.form-field
     = label_tag :balance, t(".your_balance")
     = text_field_tag :balance, nil, :disabled => true, :class => "amount"
     .explanation= t(".your_balance_explanation")
