@@ -10,7 +10,7 @@
   .form-field
     = f.label :category
     .radios
-      = f.radio_button :category, "buy", :class => "category-select trigger-total-update"
+      = f.radio_button :category, "buy", :class => "category-select trigger-total-update", :checked => true
       = f.label :category_buy, t(".buy")
       = f.radio_button :category, "sell", :class => "category-select trigger-total-update"
       = f.label :category_sell, t(".sell")
@@ -18,7 +18,7 @@
 
   .form-field
     = f.label :currency
-    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.extra.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :default => "Real Brasileiro (BRL)" }, { :class => "currency-select" }
+    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.extra.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, :selected => Currency.find_by_code("BRL").code , :class => "currency-select"
     .explanation= t(".currency_explanation")
 
   .form-field
