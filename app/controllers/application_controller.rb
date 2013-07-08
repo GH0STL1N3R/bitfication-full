@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
     
     currency = "brl"
     
-    if Stats.count < 1
+    if Stats.count < 1 || Stats.last.phigh == nil || Stats.last.plow == nil || Stats.last.pwavg == nil || Stats.last.volume == nil
       raise "Please run `rake bitfication:stats`"
     end
     
