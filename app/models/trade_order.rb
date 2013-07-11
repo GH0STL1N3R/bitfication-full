@@ -226,20 +226,26 @@ class TradeOrder < ActiveRecord::Base
           end
 
           # All array elements are BigDecimal, result is BigDecimal
-          btc_amount = [
+          options = [
             sale.amount,                              # Amount of BTC sold
             purchase.amount,                          # Amount of BTC bought
             sale.user.balance(:btc),                  # Seller's BTC balance
             purchase.user.balance(currency) / p       # Buyer's BTC buying power @ p
-          ].min
-
+          ]
+          
+          btc_amount = options.min
+          
+          min_index = options.each_with_index.inject(0){ |minidx, (v,i)| v < options[minidx] ? i : minidx }
+          
           traded_btc = btc_amount
-          traded_currency = (btc_amount * p)
+          
+          traded_currency = min_index==3? purchase.user.balance(currency) : (traded_btc * p)
 
           # This is necessary to prevent market orders from keeping being executed
           # when a user has no balance anymore, or when amounts are so small that one
           # of the sides sells/buy 0.000001 for 0
           if traded_btc > 0 and traded_currency > 0
+            
             # Update orders
             mo.amount = mo.amount - traded_btc
             self.amount = amount - traded_btc
