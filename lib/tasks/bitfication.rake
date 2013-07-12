@@ -21,14 +21,18 @@ namespace :bitfication do
     currency = "brl"
     
     @ticker = {
-      :high => Trade.with_currency(currency).last_24h.maximum(:ppc),
-      :low => Trade.with_currency(currency).last_24h.minimum(:ppc),
-      :volume => (Trade.with_currency(currency).last_week.sum(:traded_btc) || 0),
+      :high => Trade.with_currency(currency).since_0h.maximum(:ppc),
+      :low => Trade.with_currency(currency).since_0h.minimum(:ppc),
+      :volume => (Trade.with_currency(currency).since_0h.sum(:traded_btc) || 0),
       :last_trade => Trade.with_currency(currency).count.zero? ? 0 : {
         :at => Trade.with_currency(currency).plottable(currency).last.created_at.to_i,
         :price => Trade.with_currency(currency).plottable(currency).last.ppc
       }
     }
+    
+    @ticker[:high] = @ticker[:high]==nil ? 0 : @ticker[:high]
+    @ticker[:low] = @ticker[:low]==nil ? 0 : @ticker[:low]
+    @ticker[:volume] = @ticker[:volume]==nil ? 0 : @ticker[:volume]
     
     # weighted average http://en.wikipedia.org/wiki/Mean#Weighted_arithmetic_mean
     w = 0

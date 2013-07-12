@@ -51,6 +51,11 @@ class Trade < Operation
     where("created_at >= ?", DateTime.now.advance(:hours => -24))
   }
   
+  scope :since_0h, lambda {
+    zh = DateTime.new(DateTime.now.year, DateTime.now.month, DateTime.now.day, 00, 00, 00)
+    where("created_at >= ?", zh)
+  }
+  
   scope :last_week, lambda {
     where("created_at >= ?", DateTime.now.advance(:days => -7))
   }
