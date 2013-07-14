@@ -59,6 +59,10 @@ class Trade < Operation
   scope :last_week, lambda {
     where("created_at >= ?", DateTime.now.advance(:days => -7))
   }
+  
+  scope :last_30d, lambda {
+    where("created_at >= ?", DateTime.now.advance(:days => -30))
+  }
 
   scope :involved, lambda { |user|
     where("seller_id = ? OR buyer_id = ?", user.id, user.id)

@@ -15,14 +15,11 @@ namespace :bitfication do
       ns.save!
     end
     
-    
-    puts Stats.count
-    
     currency = "brl"
     
     @ticker = {
-      :high => Trade.with_currency(currency).last.maximum(:ppc),
-      :low => Trade.with_currency(currency).last.minimum(:ppc),
+      :high => Trade.with_currency(currency).last_30d.maximum(:ppc),
+      :low => Trade.with_currency(currency).last_30d.minimum(:ppc),
       :volume => (Trade.with_currency(currency).since_0h.sum(:traded_btc) || 0),
       :last_trade => Trade.with_currency(currency).count.zero? ? 0 : {
         :at => Trade.with_currency(currency).plottable(currency).last.created_at.to_i,
@@ -37,7 +34,7 @@ namespace :bitfication do
     # weighted average http://en.wikipedia.org/wiki/Mean#Weighted_arithmetic_mean
     w = 0
     wx = 0
-    Trade.with_currency(currency).last_24h.each do |t|
+    Trade.with_currency(currency).last_30d.each do |t|
       w += t.traded_btc.to_f
       wx += t.traded_btc.to_f * t.ppc.to_f
     end
@@ -57,7 +54,12 @@ namespace :bitfication do
     s.phigh = @ticker[:high]
     s.plow = @ticker[:low]
     s.pwavg = @ticker[:wavg]
-    s.save
+    
+    if s.save
+      puts "Ok"
+    else
+      puts "Error! " + s.errors
+    end
     
   end
 
