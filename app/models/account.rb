@@ -13,7 +13,7 @@ class Account < ActiveRecord::Base
 
   # BigDecimal returned here
   def balance(currency, options = {} )
-    account_operations.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum.round(5)
+    account_operations.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum.round(5).abs
   end
 
   # Generates a new receiving address if it hasn't already been refreshed during the last hour

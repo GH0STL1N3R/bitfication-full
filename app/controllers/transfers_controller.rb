@@ -4,6 +4,7 @@ class TransfersController < ApplicationController
   respond_to :html, :json
   
   def index
+    
     @transfers = current_user.account_operations.paginate(:page => params[:page], :per_page => 16)
     respond_with @transfers
   end
@@ -32,12 +33,19 @@ class TransfersController < ApplicationController
   end
   
   def create
+    
+    @withdrawal_rate = WITHDRAWAL_COMMISSION_RATE
+    
+    # reset max (to avoid rounding errors)
+    if params[:transfer][:amount] == '%.2f' % current_user.max_withdraw_for(params[:transfer][:currency])
+      
+      params[:transfer][:amount] = current_user.max_withdraw_for(params[:transfer][:currency])
+      
+    end
+    
     @transfer = Transfer.from_params(params[:transfer])
+    
     @transfer.account = current_user
-    
-    #raise @transfer.to_yaml
-    
-    #debug(@transfer)
     
     if @transfer.is_a?(WireTransfer) && @transfer.bank_account
       @transfer.bank_account.user_id = current_user.id
@@ -47,27 +55,14 @@ class TransfersController < ApplicationController
       
       storage_amount = BigDecimal(params[:transfer][:amount]) - withdrawal_fee
       
-      #transfer_amount = @transfer.amount
     else
       
       storage_amount = BigDecimal(params[:transfer][:amount])
       
     end
     
-    #   514.8
-    # 51480.0
-    #-50965.2
-    
-    #puts withdrawal_fee
-    
-    #puts storage_amount
-    
-    #puts @transfer.amount
-    
-    #exit
-    
     Operation.transaction do
-      #debugger
+
       o = Operation.create!
       o.account_operations << @transfer
       
