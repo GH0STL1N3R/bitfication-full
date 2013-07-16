@@ -38,9 +38,9 @@ class ApplicationController < ActionController::Base
   # one allowed root node in a well formed XML document, we remove
   # the root node so we get to pretend that XML === JSON
   def move_xml_params
-    if request.content_type =~ /xml/
-      params.merge! params.delete(:api)
-    end
+    #if request.content_type =~ /xml/
+    #  params.merge! params.delete(:api)
+    #end
   end
 
   # Redirects users to their account page after sign-in
