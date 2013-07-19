@@ -12,7 +12,8 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'whenever'
 gem 'capistrano'
-gem 'active_scaffold', '3.2.20' # 3.3.0 available - need code upgrade
+#gem 'active_scaffold', '3.2.20' # 3.3.0 available - need code upgrade
+gem 'active_scaffold' #, '3.2.20' # 3.3.0 available - need code upgrade
 gem 'haml'
 gem 'jquery-rails', '1.0.12' # 2.2.1 available - need code upgrade
 gem 'sass-rails'
