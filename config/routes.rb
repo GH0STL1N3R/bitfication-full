@@ -32,10 +32,10 @@ BitcoinBank::Application.routes.draw do
       :as => 'balance',
       :only => :get
       
-    get :deposit
-    get :pecunix_deposit_form
-    
     resources :transfers, :only => [:index, :new, :create, :show] 
+    
+    #get :deposit
+    resources :deposits, :only => [:new, :create] 
     
     resources :trades, 
       :only => [:index]

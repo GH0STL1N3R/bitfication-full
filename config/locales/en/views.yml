@@ -223,6 +223,48 @@ en:
     unlocks:
       new:
         resend: Send unlock instructions
+
+  deposits:
+    index:
+      details: Deposit details
+      successful:
+        processed: Your deposit for %{amount} %{currency} has been processed
+        pending: "<p>Your request was posted successfully. </p><p>Please now send %{amount} %{currency} to our bank account.</p><p>You can return any time to this page to view our bank details.</p><p>Once the funds arrive, they will be approved by our staff and credited to your account.</p>"
+        bank_details: Show bank details
+    show:
+    new:
+      title: Make a deposit
+      bitcoins:
+        title: Bitcoins
+        address: Deposit Address
+        conf_rqd: Confirmations Required
+        conf_rqd_unit: confirmations
+        conf_time: Confirmation Time
+        conf_time_unit: minutes
+        add_info_html: "<p>Simply transfer your <i>Virtual Coins</i> to your <b>Bitcoin Address</b>, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Bitcoin Payment Voucher</i>).</p>"
+      deposit_eur_title: Deposit with bank wire
+      deposit_eur_body_html: "
+        <p>
+          Funding your BRL account with Brazillian Reais have a fee of 1%.
+          <ul>
+            <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
+            <li>Make your deposit at the desired value (max R$9,000.00 / min R$100.00) to the account of Itaú Bank below. 
+          </ul>
+        </p>
+        "
+      deposit_form: Please complete the form below with the details of your deposit. This will allow our staff to process the deposit as quickly as possible.
+      bic: BIC
+      account_holder: Account holder
+      iban: IBAN
+      bank: Bank
+      ag: Agency
+      cc: Account
+      cnpj: CNPJ
+      cpf: CPF
+      submit: Deposit 
+
+
+
         
   transfers:
     index:

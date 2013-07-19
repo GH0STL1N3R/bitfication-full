@@ -29,7 +29,8 @@ class Transfer < AccountOperation
         :from => :pending
     end
   end
-
+  
+  # all transfers are withdrawals
   def self.from_params(params)
     transfer = class_for_transfer(params[:currency]).new(params)
    

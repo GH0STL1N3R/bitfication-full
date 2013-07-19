@@ -221,7 +221,46 @@ pt:
     unlocks:
       new:
         resend: Enviar instruções de desbloqueio
-        
+  
+  deposits:
+    index:
+      details: Deposit details
+      successful:
+        processed: Your deposit for %{amount} %{currency} has been processed
+        pending: "<p>Your request was posted successfully. </p><p>Please now send %{amount} %{currency} to our bank account.</p><p>You can return any time to this page to view our bank details.</p><p>Once the funds arrive, they will be approved by our staff and credited to your account.</p>"
+        bank_details: Show bank details
+    show:
+    new:
+      title: Make a deposit
+      bitcoins:
+        title: Bitcoins
+        address: Seu Endereço Bitcoin
+        conf_rqd: Confirmações necessárias
+        conf_rqd_unit: confirmações
+        conf_time: Tempo estimado para confirmação
+        conf_time_unit: minutos
+        add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
+      deposit_eur_title: Depósito com transferência bancária
+      deposit_eur_body_html: "
+        <p>
+          Transferindo Fundos em Reais para a sua conta, tem uma taxa 1%.
+          <ul>
+            <li>É <strong>recomendado</strong> incluir na <b>Identificação do Depósito</b>, o ID da sua conta do <b>Bitfication</b>.
+            <li>Faça o depósito no valor desejado (máximo R$9,000.00 / mínimo R$100.00) na conta do Banco Itaú abaixo. Para acelerar a identicação do seu depósito, envie o comprovante a partir do seu e-mai cadastrado aqui, para o endereço <a href=\"mailto:support@bitfication.com?subject=O Meu ID é BF-UXXXXXX&body=Segue o comprovante em anexo.\">support@bitfication.com</a>, mais o seu ID (BF-UXXXXXX) do <b>Bitfication</b> no campo <i>assunto</i> do e-mail.
+          </ul>
+        </p>
+        "
+      deposit_form: Please complete the form below with the details of your deposit. This will allow our staff to process the deposit as quickly as possible.
+      bic: BIC
+      account_holder: Titular da Conta
+      iban: IBAN
+      bank: Banco
+      ag:
+      cc:
+      cnpj: CNPJ
+      cpf: CPF
+      submit: Deposit
+     
   transfers:
     index:
       details: Detalhes da transação

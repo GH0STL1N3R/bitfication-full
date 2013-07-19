@@ -25,6 +25,7 @@ class TransfersController < ApplicationController
         @transfer = Transfer.new(:currency => params[:currency])
       end
     end
+    
   end
   
   def show
@@ -60,6 +61,8 @@ class TransfersController < ApplicationController
       storage_amount = BigDecimal(params[:transfer][:amount])
       
     end
+    
+    #debugger
     
     Operation.transaction do
 

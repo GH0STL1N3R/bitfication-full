@@ -1,0 +1,120 @@
+
+%h1= t(".bitcoins.title")
+%div{:style => "float:left; width: 50%" }
+  %div{:style => "line-height: 30pt;" }
+    %p
+      %strong= t(".bitcoins.address") + ":"
+      = link_to @current_user.bitcoin_address, "bitcoin:#{@current_user.bitcoin_address}"
+    %p
+      %strong= t(".bitcoins.conf_rqd") + ":"
+      = Transfer::MIN_BTC_CONFIRMATIONS
+      = t(".bitcoins.conf_rqd_unit")
+    %p
+      %strong= t(".bitcoins.conf_time") + ":"
+      = Transfer::MIN_BTC_CONFIRMATIONS * 10
+      = t(".bitcoins.conf_time_unit")
+  %p
+    = t(".bitcoins.add_info_html", :tx_address => "http://blockchain.info/address/#{@current_user.bitcoin_address}")
+
+%div{:style => "float:left" }
+  = image_tag(qrcode_image_path(current_user.bitcoin_address), :size => "120x120")
+%div{:style => "clear:both;" }
+%h1= t(".deposit_eur_title")
+
+%p= t(".deposit_form")
+
+%br
+= form_for @deposit, :as => :deposit, :url => account_deposits_path do |f|
+  = errors_for(@deposit, :translated_message => t(".error"), :include_nested => :bank_account)
+  
+  -# custom script to update 'will receive' & 'amount' boxes
+  %script
+    $(document).ready(function(e) {
+    
+    $('#deposit_amount').change(function() {
+    
+    var txtAmtval = $(this).val();
+    
+    $('#will_receive').val(txtAmtval * (1-#{@deposit_rate}));
+        
+    });
+    
+    $('#will_receive').change(function() {
+    
+    var txtAmtval = $(this).val();
+    
+    $('#deposit_amount').val(txtAmtval * (1+#{@deposit_rate}));
+        
+    });
+    
+    });
+  
+  .form-field
+    = f.label :currency
+    = f.select :currency, options_from_collection_for_select(@currencies_deposit, 'code', I18n.locale, @deposit.currency)
+    -
+  - if @bank_accounts.blank? && @deposit.bank_account_id.blank?
+    = f.fields_for :bank_account do |bank_account|
+      = render :partial => 'bank_accounts/fieldsbr', :locals => { :form_builder => bank_account }
+  - else
+    .form-field
+      = label_tag :bank_account_id, t(".bank_account")
+      = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
+      .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
+        
+  .form-field
+    = f.label :amount
+    = f.text_field :amount, :value => (@deposit.amount)? "" : @deposit.amount, :autocomplete => "off"
+  
+  .form-field
+    = label_tag :will_receive, t(".will_receive")
+    = text_field_tag :will_receive, '%.2f' % (current_user.max_withdraw_for(@deposit.currency)*(1-@deposit_rate))
+    
+  .form-field
+    = f.submit :value => t(".submit"), :class => "submit"
+%br
+%p= t(".deposit_eur_body_html")
+
+%div#bank-info
+  -# if (@bic && @iban && @account_holder)
+  %table
+    %tr
+      %th= t(".comment")
+      %td= current_user.name
+    %tr
+      %th= t(".account_holder")
+      %td.account-holder= @account_holder
+    %tr
+      %th
+      %td.account-holder-address= @account_holder_address
+    
+    %tr
+      %td{ :colspan => 2 } &nbsp;
+      
+    %tr
+      %th= t(".ag")
+      %td= @ag
+    %tr
+      %th= t(".cc")
+      %td= @cc
+    %tr
+      %th= t(".cnpj")
+      %td= @cnpj
+    %tr
+      %th= t(".bank")
+      %td.bank= @bank
+    %tr
+      %th
+      %td.bank-address= @bank_address
+    -#    %tr
+-#      %th= t(".bic")
+-#      %td= @bic
+-#    %tr
+-#      %th= t(".iban")
+-#      %td= @iban
+
+-# else
+  %p#unavailable= t(".not_available")
+
+
+
