@@ -13,7 +13,7 @@ class Admin::PendingTransfersController < Admin::AdminController
       :address
     ]
     
-    config.columns << :withdrawal_after_fee
+    config.columns << [:withdrawal_after_fee, :deposit_after_fee]
     config.columns[:withdrawal_after_fee].label = 'Withdrawal After Fee'
     
     config.action_links.add 'process_tx', 
@@ -34,9 +34,9 @@ class Admin::PendingTransfersController < Admin::AdminController
   end
   
   def process_tx
-    Transfer;WireTransfer;LibertyReserveTransfer;BitcoinTransfer
+    Deposit;Transfer;WireTransfer;BitcoinTransfer
     
-    @record = Transfer.where("currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC')").
+    @record = AccountOperation.where("currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC')").
       find(params[:id])
     
     @record.process!
@@ -45,8 +45,18 @@ class Admin::PendingTransfersController < Admin::AdminController
       @record.execute
     end
     
-    UserMailer.withdrawal_processed_notification(@record).deliver
+    #if @record.type == "Deposit"
+    #  @record.execute
+    #end
     
+    #if @record.type == "BitcoinTransfer" || @record.type == "Deposit"
+    #  @record.execute
+    #end
+    
+    if @record.type == "Transfer" || @record.type == "WireTransfer" 
+      UserMailer.withdrawal_processed_notification(@record).deliver
+    end
+      
     render :template => 'admin/pending_transfers/process_tx'
   end
 end

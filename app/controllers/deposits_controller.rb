@@ -55,43 +55,17 @@ class DepositsController < ApplicationController
     @deposit.account = current_user
     
     @deposit.bank_account.user_id = current_user.id
-      
-    # Charge a fee for deposits
-    deposit_fee = BigDecimal(params[:deposit][:amount]) * DEPOSIT_COMMISSION_RATE
-      
-    storage_amount = BigDecimal(params[:deposit][:amount])
     
-    @deposit.amount = @deposit.amount - deposit_fee
+    # build operation
+    @deposit.build_operation
     
-    #debugger
+    @deposit.save
     
-    Operation.transaction do
-
-      o = Operation.create!
-      o.account_operations << @deposit
-      
-      o.account_operations << AccountOperation.new do |ao|
-        ao.amount = - storage_amount
-        ao.currency = @deposit.currency
-        ao.account = Account.storage_account_for(@deposit.currency)
-      end
-      
-      o.account_operations << AccountOperation.new do |fee|
-        fee.currency = @deposit.currency
-        fee.amount = deposit_fee
-        fee.account = Account.storage_account_for(:fees)
-      end
-      
-      #debugger
-      
-      raise(ActiveRecord::Rollback) unless o.save
-    end
-
     unless @deposit.new_record?
       respond_with do |format|
         format.html do
           redirect_to new_account_deposit_path,
-            :notice => I18n.t("deposits.index.successful.#{@deposit.state}", :amount => @deposit.amount.abs+deposit_fee, :currency => @deposit.currency, :deposit_link => "#{view_context.link_to(I18n.t("deposits.index.successful.bank_details"), new_account_deposit_path)}")
+            :notice => I18n.t("deposits.index.successful.#{@deposit.state}", :amount => @deposit.amount.abs, :currency => @deposit.currency, :deposit_link => "#{view_context.link_to(I18n.t("deposits.index.successful.bank_details"), new_account_deposit_path)}")
         end
           
         format.json { render :json => @deposit }

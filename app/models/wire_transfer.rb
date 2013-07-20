@@ -27,6 +27,7 @@ class WireTransfer < Transfer
     end
   end
   
+  # active_scaffold methods
   def withdrawal_after_fee
     
     if self.amount < 0
@@ -37,5 +38,10 @@ class WireTransfer < Transfer
     end
     
   end
+  
+  def deposit_after_fee
+  end
+  
+  
   
 end

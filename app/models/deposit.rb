@@ -49,7 +49,37 @@ class Deposit < AccountOperation
   end
   
   def execute
-    # Placeholder for now
+    
+    raise 'executing'
+    
+    # Charge a fee for deposits
+    deposit_fee = BigDecimal(self.amount) * DEPOSIT_COMMISSION_RATE
+      
+    storage_amount = BigDecimal(self.amount)
+    
+    self.amount = self.amount - deposit_fee
+    
+    Operation.transaction do
+
+      o = self.operation
+      o.account_operations << self
+      
+      o.account_operations << AccountOperation.new do |ao|
+        ao.amount = - storage_amount
+        ao.currency = self.currency
+        ao.account = Account.storage_account_for(self.currency)
+      end
+      
+      o.account_operations << AccountOperation.new do |fee|
+        fee.currency = self.currency
+        fee.amount = deposit_fee
+        fee.account = Account.storage_account_for(:fees)
+      end
+      
+      raise(ActiveRecord::Rollback) unless o.save
+      
+    end
+    
   end
 
   def check_bank_account_id
@@ -60,13 +90,16 @@ class Deposit < AccountOperation
   
   def deposit_after_fee
     
-    if self.amount < 0
+    if self.amount > 0
       # deduct fee
       number_with_delimiter((1- DEPOSIT_COMMISSION_RATE) * self.amount , :delimiter => ',')
     else
       self.amount
     end
     
+  end
+  
+  def withdrawal_after_fee
   end
   
 end
