@@ -59,7 +59,7 @@ BitcoinBank::Application.routes.draw do
       as_routes
       
       member do
-        post :process_tx
+        post :process_tx, :cancel_tx
       end
     end
     
