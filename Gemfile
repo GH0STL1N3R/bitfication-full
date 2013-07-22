@@ -12,13 +12,15 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'whenever'
 gem 'capistrano'
-#gem 'active_scaffold', '3.2.20' # 3.3.0 available - need code upgrade
-gem 'active_scaffold' #, '3.2.20' # 3.3.0 available - need code upgrade
+gem 'active_scaffold'
 gem 'haml'
-gem 'jquery-rails', '1.0.12' # 2.2.1 available - need code upgrade
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'fancybox2-rails', '~> 0.2.4'
 gem 'sass-rails'
 gem 'coffee-rails', '3.2.2' # 4.0.0 available - test
 gem 'newrelic_rpm'
+
 
 gem 'recaptcha',
   :require => 'recaptcha/rails'
