@@ -29,7 +29,9 @@ pt:
         id: ID
         created_at: Criado em
         user: Usuário
-        amount: Valor máximo
+        amount: Valor
+        amount_tosend: Valor a depositar para nossa conta 
+        amount_afterfee: Valor recibido depois das taxas
         address: Endereço
         currency: Moeda
         bt_tx_confirmations: Confirmações

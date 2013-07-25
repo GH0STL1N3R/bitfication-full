@@ -1,8 +1,10 @@
 class Operation < ActiveRecord::Base
-  has_many :account_operations
+  has_many :account_operations, :dependent => :destroy
 
   validate :check_debit_credit_equality
-
+  
+  #before_destroy { self.account_operations.destroy_all }
+  
   def check_debit_credit_equality
     # Debit and credit amounts should be equal for *each* currency
     account_operations.map(&:currency).uniq.each do |currency|

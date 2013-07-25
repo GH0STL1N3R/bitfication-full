@@ -39,17 +39,41 @@ class DepositsController < ApplicationController
     
     @deposit.account = current_user
     
-    #@deposit.bank_account.user_id = current_user.id
-    
-    # build operation
-    @deposit.build_operation
-    
-    @deposit.save
-    
     @account_id = current_user.name
     
+    # Calculate fee for deposits
+    deposit_fee = @deposit.amount * DEPOSIT_COMMISSION_RATE
+      
+    storage_amount = @deposit.amount
+    
+    @deposit.amount = @deposit.amount - deposit_fee
+    
+    Operation.transaction do
+
+      o = Operation.create!
+      o.account_operations << @deposit
+      
+      o.account_operations << AccountOperation.new do |ao|
+        ao.amount = (storage_amount * -1)
+        ao.currency = @deposit.currency
+        ao.account = Account.storage_account_for(@deposit.currency)
+      end
+      
+      # Charge a fee for depoists
+      o.account_operations << AccountOperation.new do |fee|
+        fee.currency = @deposit.currency
+        fee.amount = deposit_fee
+        fee.account = Account.storage_account_for(:fees)
+      end
+           
+      raise(ActiveRecord::Rollback) unless o.save
+    end
+    
     unless @deposit.new_record?
+      
       get_deposit_account
+      
+      calc_before_after_fee(@deposit)
       
       respond_with do |format|
         format.html { render :action => "show" }
@@ -63,6 +87,8 @@ class DepositsController < ApplicationController
   def show
     
     @deposit = Deposit.first
+    
+    calc_before_after_fee(@deposit)
     
     get_deposit_account
     
@@ -90,4 +116,13 @@ class DepositsController < ApplicationController
       @account_holder_address = bank_account["account_holder_address"]
     end
   end
+  
+  def calc_before_after_fee(deposit)
+    
+    @deposit_beforefee = '%.0f' % (deposit.amount * (1 + DEPOSIT_COMMISSION_RATE)) 
+    
+    @deposit_afterfee =  '%.0f' % deposit.amount
+    
+  end
+  
 end

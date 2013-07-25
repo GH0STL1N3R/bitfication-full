@@ -84,6 +84,9 @@ class TransfersController < ApplicationController
         end
       end
       
+      # link to pending transaction - to enable admin to cancel
+      #p = PendingTransfer.new(:currency => @transfer.currency, :type => "WireTransfer", :state => "pending", :account => current_user.id, :op_btc => 1682, :op_brl => 1682, :op_fees => 1682)
+      
       raise(ActiveRecord::Rollback) unless o.save
     end
 

@@ -54,14 +54,6 @@ class Admin::PendingTransfersController < Admin::AdminController
       @record.execute
     end
     
-    #if @record.type == "Deposit"
-    #  @record.execute
-    #end
-    
-    #if @record.type == "BitcoinTransfer" || @record.type == "Deposit"
-    #  @record.execute
-    #end
-    
     if @record.type == "Transfer" || @record.type == "WireTransfer" 
       UserMailer.withdrawal_processed_notification(@record).deliver
     end
@@ -72,8 +64,9 @@ class Admin::PendingTransfersController < Admin::AdminController
   def cancel_tx
     @record = AccountOperation.where("currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC')").
       find(params[:id])
-      
-    @record.destroy
+    
+    # time-saving advice: already tried putting this in the various models.. it didn't work
+    @record.operation.account_operations.destroy_all
       
     render :template => 'admin/pending_transfers/process_tx'
   end

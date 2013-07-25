@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702005751) do
+ActiveRecord::Schema.define(:version => 20130725161808) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(:version => 20130702005751) do
     t.datetime "updated_at"
     t.string   "display"
     t.string   "flag"
+    t.string   "pt"
+    t.string   "en"
   end
 
   create_table "invoices", :force => true do |t|
@@ -155,6 +157,16 @@ ActiveRecord::Schema.define(:version => 20130702005751) do
     t.integer  "seller_id"
     t.integer  "buyer_id"
     t.string   "type"
+  end
+
+  create_table "pending_transfers", :force => true do |t|
+    t.string  "type"
+    t.string  "state"
+    t.string  "currency"
+    t.integer "account"
+    t.integer "op_btc"
+    t.integer "op_brl"
+    t.integer "op_fees"
   end
 
   create_table "sessions", :force => true do |t|
