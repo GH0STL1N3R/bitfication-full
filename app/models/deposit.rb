@@ -6,14 +6,11 @@ class Deposit < AccountOperation
   
   attr_accessible :bank_account_id, :bank_account_attributes
 
-  belongs_to :bank_account
+  belongs_to :account
 
-  accepts_nested_attributes_for :bank_account
+  #accepts_nested_attributes_for :bank_account
   
-  before_validation :check_bank_account_id
-
-  validates :bank_account,
-    :presence => true
+  #before_validation :check_bank_account_id
 
   validates :currency,
     :inclusion => { :in => ["BRL"] }

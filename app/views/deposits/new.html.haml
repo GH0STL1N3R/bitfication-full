@@ -53,15 +53,7 @@
     = f.label :currency
     = f.select :currency, options_from_collection_for_select(@currencies_deposit, 'code', I18n.locale, @deposit.currency)
     -
-  - if @bank_accounts.blank? && @deposit.bank_account_id.blank?
-    = f.fields_for :bank_account do |bank_account|
-      = render :partial => 'bank_accounts/fieldsbr', :locals => { :form_builder => bank_account }
-  - else
-    .form-field
-      = label_tag :bank_account_id, t(".bank_account")
-      = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
-      .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
-        
+
   .form-field
     = f.label :amount
     = f.text_field :amount, :value => (@deposit.amount)? "" : @deposit.amount, :autocomplete => "off"
@@ -73,48 +65,8 @@
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
 %br
-%p= t(".deposit_eur_body_html")
 
-%div#bank-info
-  -# if (@bic && @iban && @account_holder)
-  %table
-    %tr
-      %th= t(".comment")
-      %td= current_user.name
-    %tr
-      %th= t(".account_holder")
-      %td.account-holder= @account_holder
-    %tr
-      %th
-      %td.account-holder-address= @account_holder_address
-    
-    %tr
-      %td{ :colspan => 2 } &nbsp;
-      
-    %tr
-      %th= t(".ag")
-      %td= @ag
-    %tr
-      %th= t(".cc")
-      %td= @cc
-    %tr
-      %th= t(".cnpj")
-      %td= @cnpj
-    %tr
-      %th= t(".bank")
-      %td.bank= @bank
-    %tr
-      %th
-      %td.bank-address= @bank_address
-    -#    %tr
--#      %th= t(".bic")
--#      %td= @bic
--#    %tr
--#      %th= t(".iban")
--#      %td= @iban
 
--# else
-  %p#unavailable= t(".not_available")
 
 
 
