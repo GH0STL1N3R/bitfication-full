@@ -62,5 +62,74 @@ namespace :bitfication do
     end
     
   end
+  
+  desc "Set up test user with test password, no GA OTP"
+  task :testuser => :environment do
+    
+    u1 = User.find(2)
+    
+    u1.password = "1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+    u1.require_ga_otp = false
+    
+    u1.save
+    
+    puts "user1: #{u1.email}\npassword: 1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+    u2 = User.find(12)
+    
+    u2.password = "1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+    u2.require_ga_otp = false
+    
+    u2.save
+    
+    puts "user2: #{u2.email}\npassword: 1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+    a = Admin.first
+    
+    a.password = "1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+    a.require_ga_otp = false
+    
+    a.save
+    
+    puts "admin: #{a.email}\npassword: 1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+  end
+  
+  desc "Add some BTC balance to a user, for testing"
+  task :addtestbalance => :environment do
+    
+    id = 12 #set to user account to credit
+    amount = 200 # coins to credit
+    txid = "test"
+    confirmations = 6
+    
+    # adds user balance - for testing
+    Operation.transaction do
+      o = Operation.create!
+    
+      o.account_operations << AccountOperation.new do |bt|
+        bt.account_id = id
+        bt.amount = amount
+        bt.bt_tx_id = txid
+        bt.bt_tx_confirmations = confirmations
+        bt.currency = "BTC"
+      end
+    
+      o.account_operations << AccountOperation.new do |ao|
+        ao.account = Account.storage_account_for(:btc)
+        ao.amount = -amount.abs
+        ao.currency = "BTC"
+      end
+    
+      o.save!
+      
+    end
+    
+    puts "added #{amount} BTC to user ID #{id}"
+    
+  end
 
 end

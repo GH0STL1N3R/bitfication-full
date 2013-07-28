@@ -30,6 +30,8 @@ en:
         created_at: Created at
         user: User
         amount: Amount
+        amount_tosend: Amount to send to our account
+        amount_afterfee: Amount received after fees
         address: Address
         currency: Currency
         bt_tx_confirmations: Confirmations

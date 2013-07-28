@@ -35,7 +35,7 @@ BitcoinBank::Application.routes.draw do
     resources :transfers, :only => [:index, :new, :create, :show] 
     
     #get :deposit
-    resources :deposits, :only => [:new, :create] 
+    resources :deposits, :only => [:new, :create, :show] 
     
     resources :trades, 
       :only => [:index]
@@ -59,7 +59,7 @@ BitcoinBank::Application.routes.draw do
       as_routes
       
       member do
-        post :process_tx
+        post :process_tx, :cancel_tx
       end
     end
     

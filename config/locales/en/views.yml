@@ -248,7 +248,7 @@ en:
           Funding your BRL account with Brazillian Reais have a fee of 1%.
           <ul>
             <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
-            <li>Make your deposit at the desired value (max R$9,000.00 / min R$100.00) to the account of Itaú Bank below. 
+            <li>Make your deposit at the desired value (max R$9,000.00 / min R$100.00) to the account of Itaú Bank below. To speed up processing of your deposit, send proof of deposit from your registered email to <a href=\"mailto:support@bitfication.com?subject=O Meu ID é %{account_id}&body=Segue o comprovante em anexo.\">support@bitfication.com</a>, placing your account ID (%{account_id}) in the e-mail subject. 
           </ul>
         </p>
         "

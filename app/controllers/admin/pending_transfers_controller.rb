@@ -21,6 +21,15 @@ class Admin::PendingTransfersController < Admin::AdminController
       :type => :member, 
       :method => :post,
       :position => false
+      
+    config.action_links.add 'cancel_tx', 
+      :label => 'Cancel', 
+      :type => :member, 
+      :method => :post,
+      :position => false,
+      :confirm => "Are you sure?"
+      #:dhtml_confirm => DHTMLConfirm.new
+        #ModalboxConfirm.new
     
     #config.nested.add_link(:bank_account, :label => "Bank Account", :page => true) 
     
@@ -45,17 +54,19 @@ class Admin::PendingTransfersController < Admin::AdminController
       @record.execute
     end
     
-    #if @record.type == "Deposit"
-    #  @record.execute
-    #end
-    
-    #if @record.type == "BitcoinTransfer" || @record.type == "Deposit"
-    #  @record.execute
-    #end
-    
     if @record.type == "Transfer" || @record.type == "WireTransfer" 
       UserMailer.withdrawal_processed_notification(@record).deliver
     end
+      
+    render :template => 'admin/pending_transfers/process_tx'
+  end
+  
+  def cancel_tx
+    @record = AccountOperation.where("currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC')").
+      find(params[:id])
+    
+    # time-saving advice: already tried putting this in the various models.. it didn't work
+    @record.operation.account_operations.destroy_all
       
     render :template => 'admin/pending_transfers/process_tx'
   end

@@ -1,19 +1,15 @@
 require 'digest'
 
 class AccountOperation < ActiveRecord::Base
-  #CURRENCIES = %w{ EUR USD LREUR LRUSD BTC PGAU INR CAD BRL }
   CURRENCIES = %w{ BTC BRL }
   MIN_BTC_CONFIRMATIONS = 3
 
   default_scope order('`account_operations`.`created_at` DESC')
 
   belongs_to :operation
-
+  
   belongs_to :account
   
-  # needed for admin
-  #belongs_to :bank_account
-    
   after_create :refresh_orders,
     :refresh_account_address
   
@@ -30,10 +26,10 @@ class AccountOperation < ActiveRecord::Base
   validates :account,
     :presence => true
 
-  validates :operation,
+  validates :operation, 
     :presence => true
 
-  scope :with_processed_deposits_only, where("(type='Deposit' AND state<>'pending') OR (type<>'Deposit' AND state='pending') OR (type<>'Deposit' AND state<>'pending')")
+  scope :with_processed_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending') OR (type<>'Deposit'))")
     
   scope :with_currency, lambda { |currency|
     where("account_operations.currency = ?", currency.to_s.upcase)
@@ -44,7 +40,15 @@ class AccountOperation < ActiveRecord::Base
       where("currency <> 'BTC' OR bt_tx_confirmations >= ? OR amount <= 0 OR bt_tx_id IS NULL", MIN_BTC_CONFIRMATIONS)
     end
   }
-
+  
+  #after_destroy :destroy_fellow_account_operations
+  
+  #def destroy_fellow_account_operations
+    # our destroy operation, is to destroy the operation for this account_operation
+    # that will in turn destroy this AO, with all the other AO's as well
+    #operation.account_operations.delete_all
+  #end
+  
   def to_label
     "#{I18n.t("activerecord.models.account_operation.one")} no #{id}"
   end
@@ -69,32 +73,6 @@ class AccountOperation < ActiveRecord::Base
 
   def refresh_account_address
     account.generate_new_address if bt_tx_id
-  end
-
-  def self.create_from_lr_transaction_id(lr_tx_id)
-    t = AccountOperation.find_by_lr_transaction_id(lr_tx_id)
-
-    if t.blank?
-      tx = LibertyReserve::Client.instance.get_transaction(lr_tx_id)
-
-      Operation.transaction do
-        o = Operation.create!
-
-        o.account_operations << AccountOperation.new do |t|
-          tx.keys.each { |key| t.send :"#{key}=", tx[key] }
-        end
-
-        o.account_operations << AccountOperation.new do |ao|
-          ao.amount = -tx[:amount]
-          ao.account = Account.storage_account_for(tx[:currency])
-          ao.currency = tx[:currency].to_s.upcase
-        end
-
-        o.save!
-      end
-    end
-
-    t
   end
 
   def self.synchronize_transactions!
@@ -138,64 +116,6 @@ class AccountOperation < ActiveRecord::Base
         end
       end
     end
-  end
-
-  def self.create_from_lr_post!(confirmation)
-    if valid_confirmation?(confirmation)
-      transferred =  confirmation[:lr_amnt].to_d
-      fee = AccountOperation.fee_for(confirmation[:lr_amnt].to_d)
-
-      # TODO : Add originating account ID ?
-      if AccountOperation.find_by_lr_transaction_id(confirmation[:lr_transfer]).blank?
-        Operation.transaction do
-          operation = Operation.create!
-
-          operation.account_operations << AccountOperation.new do |ao|
-            ao.account_id = confirmation[:account_id]
-            ao.amount = transferred - fee
-            ao.currency = confirmation[:lr_currency]
-            ao.lr_transaction_id = confirmation[:lr_transfer]
-            ao.lr_transferred_amount = transferred
-            ao.lr_merchant_fee = fee
-          end
-
-          operation.account_operations << AccountOperation.new do |ao|
-            ao.account = Account.storage_account_for(confirmation[:lr_currency].downcase.to_sym)
-            ao.amount = fee - transferred
-            ao.currency = confirmation[:lr_currency]
-          end
-
-          operation.save!
-        end
-      end
-    else
-      raise "Confirmation was invalid"
-    end
-  end
-
-  def self.valid_confirmation?(confirmation)
-    confirmation[:secret_word] = BitcoinBank::LibertyReserve['secret_word']
-    confirmation[:baggage] = "account_id=#{confirmation[:account_id]}"
-
-    confirmation_array = %w{lr_paidto lr_paidby lr_store lr_amnt lr_transfer lr_merchant_ref baggage lr_currency secret_word}.map do |f|
-      confirmation[f.to_sym]
-    end
-
-    confirmation_string = confirmation_array.join(":")
-
-    confirmation[:lr_encrypted2] == Digest::SHA2.hexdigest(confirmation_string).upcase
-  end
-
-  # Calculates the fee for a Liberty Reserve transfer
-  def self.fee_for(amnt)
-    raise "Only BigDecimal types should be used" unless amnt.is_a?(BigDecimal)
-
-    max_fee = BigDecimal("2.99")
-    min_fee = BigDecimal("0.01")
-
-    fee = (amnt / BigDecimal("100")).round(2, BigDecimal::ROUND_UP)
-
-    [[fee, max_fee].min, min_fee].max
   end
   
   # Should the transaction be highlighted in some way ?
