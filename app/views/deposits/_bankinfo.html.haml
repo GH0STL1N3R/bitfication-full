@@ -1,10 +1,10 @@
 %div{:style => "padding: 35px 5px 5px 5px;"}
-  = t("accounts.deposit.deposit_eur_body_html", :account_id => @account_id)
+  = t("accounts.deposit.deposit_eur_body_html", :account_id => @current_user.name)
 %div#bank-info{:style => "white-space: normal;"}
   %table
     %tr
       %th= t("accounts.deposit.comment")
-      %td= current_user.name
+      %td= @current_user.name
     %tr
       %th= t("accounts.deposit.account_holder")
       %td.account-holder= @account_holder

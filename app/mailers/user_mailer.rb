@@ -24,6 +24,22 @@ class UserMailer < BitcoinCentralMailer
       :subject => I18n.t("emails.withdrawal_processed_notification.subject")
   end
   
+  def deposit_processed_notification(deposit)
+    @user = deposit.account
+    @deposit = deposit
+    
+    mail :to => @user.email,
+      :subject => I18n.t("emails.deposit_processed_notification.subject")
+  end
+  
+  def deposit_request_notification(deposit)
+    @user = deposit.account
+    @deposit = deposit
+    
+    mail :to => @user.email,
+      :subject => I18n.t("emails.deposit_request_notification.subject")
+  end
+  
   def trade_notification(user, sales, purchases)
     @sales = sales
     @purchases = purchases

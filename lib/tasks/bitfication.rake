@@ -86,6 +86,16 @@ namespace :bitfication do
     
     puts "user2: #{u2.email}\npassword: 1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
     
+    u3 = User.find_by_email("willmoss26@gmail.com")
+    
+    u3.password = "1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
+    u3.require_ga_otp = false
+    
+    u3.save
+    
+    puts "user3: #{u3.email}\npassword: 1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"
+    
     a = Admin.first
     
     a.password = "1HtSam7o6vS89nGj4Yf5no4ebBM2z87f2h"

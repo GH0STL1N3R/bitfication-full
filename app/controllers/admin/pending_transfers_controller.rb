@@ -57,6 +57,10 @@ class Admin::PendingTransfersController < Admin::AdminController
     if @record.type == "Transfer" || @record.type == "WireTransfer" 
       UserMailer.withdrawal_processed_notification(@record).deliver
     end
+    
+    if @record.type == "Deposit"
+      UserMailer.deposit_processed_notification(@record).deliver
+    end
       
     render :template => 'admin/pending_transfers/process_tx'
   end

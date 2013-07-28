@@ -1,0 +1,9 @@
+%p= t("emails.deposit_request_notification.body")
+
+%table
+  %tr
+    %th= "#{t("activerecord.attributes.transfer.amount")} : " 
+    %td= "#{@deposit_beforefee} #{@deposit.currency}"
+      
+-#= render :partial => "/deposits/bankinfo", :locals => {:bank => @bank_account, :user => @user, :hello => "hey"}
+-#= render partial: => "/deposits/bankinfo", collection: @bank_account as :bank_account

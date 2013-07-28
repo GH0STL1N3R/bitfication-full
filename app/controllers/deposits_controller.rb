@@ -75,6 +75,9 @@ class DepositsController < ApplicationController
       
       calc_before_after_fee(@deposit)
       
+      # dispatch email to user
+      #UserMailer.deposit_request_notification(@deposit).deliver
+      
       respond_with do |format|
         format.html { render :action => "show" }
         format.json { render :json => @deposit }
@@ -115,6 +118,9 @@ class DepositsController < ApplicationController
       @account_holder = bank_account["account_holder"]
       @account_holder_address = bank_account["account_holder_address"]
     end
+    
+    #@user = current_user
+    
   end
   
   def calc_before_after_fee(deposit)
