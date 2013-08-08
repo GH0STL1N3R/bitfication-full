@@ -35,7 +35,7 @@ BitcoinBank::Application.routes.draw do
     resources :transfers, :only => [:index, :new, :create, :show] 
     
     #get :deposit
-    resources :deposits, :only => [:new, :create, :show, :destroy] 
+    resources :deposits, :only => [:new, :create, :show, :destroy, :update] 
     
     resources :trades, 
       :only => [:index]

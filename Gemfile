@@ -19,6 +19,7 @@ gem 'jquery-rails', '1.0.12' # 2.2.1 available - need code upgrade
 gem 'sass-rails'
 gem 'coffee-rails', '3.2.2' # 4.0.0 available - test
 gem 'newrelic_rpm'
+gem "paperclip", "~> 3.0"
 
 gem 'recaptcha',
   :require => 'recaptcha/rails'
@@ -44,9 +45,6 @@ gem 'delayed_job'
 # CSS toolbox
 gem 'blueprint-rails'
 gem 'bourbon'
-
-# File attachment with database storage support
-gem 'paperclip'
 
 # Apple push notifications
 gem 'apn_on_rails'

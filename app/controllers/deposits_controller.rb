@@ -90,7 +90,7 @@ class DepositsController < ApplicationController
   
   def show
     
-    @deposit = Deposit.first
+    @deposit = Deposit.find(params[:id])
     
     calc_before_after_fee(@deposit)
     
@@ -104,6 +104,21 @@ class DepositsController < ApplicationController
 
     redirect_to new_account_deposit_path,
       :notice => t(".deposits.destroy.deposit_deleted")
+  end
+  
+  def update
+    deposit = Deposit.where(:id => params[:id], :account_id => current_user.id).first
+    
+    deposit.attachment = params[:deposit][:attachment]
+    
+    if deposit.save
+      redirect_to account_deposit_path,
+      :notice => t(".deposits.update.deposit_file_added")
+    else
+      redirect_to account_deposit_path,
+      :notice => t(".deposits.update.error")
+    end
+    
   end
   
   protected

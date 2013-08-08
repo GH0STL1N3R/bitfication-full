@@ -77,15 +77,19 @@
         %th=t("activerecord.attributes.transfer.amount_afterfee")
         %th=t("activerecord.attributes.transfer.amount_tosend")
         %th=t("activerecord.attributes.transfer.currency")
+        %th=t("activerecord.attributes.transfer.fast_deposit")
         %th.auto-sized
     %tbody
       - @pending_deposits.each do |d|
         %tr{ :class => cycle('even', 'odd') }
-          %td.amount=d.id
+          %td.amount=link_to d.id, account_deposit_path(d.id)
           %td=d.created_at
           %td.amount=number_to_currency(d.deposit_after_fee, unit: "", separator: ".", delimiter: ",", precision: 3)
           %td.amount=number_to_currency(d.deposit_before_fee, unit: "", separator: ".", delimiter: ",", precision: 3)
           %td.auto-sized=currency_icon_for(d.currency)
+          %td.auto-sized
+            - if d.attachment? 
+              = image_tag "processed.png"
           %td.auto-sized=tf_delete_link_for(d)
       
 
