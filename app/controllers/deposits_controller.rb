@@ -13,6 +13,7 @@ class DepositsController < ApplicationController
     
     @deposit_rate = DEPOSIT_COMMISSION_RATE
     
+    @pending_deposits = Deposit.where(:account_id => current_user.id, :state => "pending")
     
     #default currency
     if params[:currency].nil?
@@ -95,6 +96,14 @@ class DepositsController < ApplicationController
     
     get_deposit_account
     
+  end
+  
+  def destroy
+    
+    Deposit.where(:id => params[:id], :account_id => current_user.id).first.destroy
+
+    redirect_to new_account_deposit_path,
+      :notice => t(".deposits.destroy.deposit_deleted")
   end
   
   protected

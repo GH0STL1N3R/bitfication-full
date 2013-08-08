@@ -1,4 +1,12 @@
 module TransfersHelper
+  def tf_delete_link_for(deposit)
+    link_to image_tag("delete.png"),
+      account_deposit_path(deposit),
+      :method => :delete,
+      :class => "delete",
+      :confirm => t(".delete_deposit_confirm")
+  end
+  
   def color_for(transfer)
     transfer.amount > 0 ? (transfer.confirmed? ? "green" : "unconfirmed") : "red"
   end

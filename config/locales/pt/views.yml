@@ -242,6 +242,9 @@ pt:
         add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
       deposit_eur_title: Depósito com transferência bancária
       deposit_form: Por favor, preencha o formulário abaixo com os detalhes do seu depósito. Isto irá permitir que o nosso pessoal para processar o depósito tão rapidamente quanto possível. 
+      deposit_pendings: Pending Deposits
+      delete_deposit_confirm: Tem certeza você quer apagar este deposito?
+      deposit_deleted: O seu deposito foi apogado
       bic: BIC
       account_holder: Titular da Conta
       iban: IBAN
@@ -251,7 +254,10 @@ pt:
       cnpj: CNPJ
       cpf: CPF
       submit: Deposit
-     
+    destroy:
+      delete_deposit_confirm: Tem certeza você quer apagar este deposito?
+      deposit_deleted: O seu pedido do deposito foi apogado     
+
   transfers:
     index:
       details: Detalhes da transação

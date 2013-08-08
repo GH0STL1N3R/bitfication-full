@@ -61,9 +61,13 @@ class Deposit < AccountOperation
     
     if self.amount > 0
       # fee already deducted
-      number_with_delimiter(self.amount , :delimiter => ',')
+      number_to_currency(self.amount , unit: "", separator: ".", delimiter: ',', precision: 3)
     end
     
+  end
+  
+  def deposit_before_fee
+    (amount * (1 + DEPOSIT_COMMISSION_RATE))
   end
   
   def withdrawal_after_fee
