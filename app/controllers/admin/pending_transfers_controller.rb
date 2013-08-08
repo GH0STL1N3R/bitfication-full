@@ -13,7 +13,7 @@ class Admin::PendingTransfersController < Admin::AdminController
       :address
     ]
     
-    config.columns << [:withdrawal_after_fee, :deposit_after_fee]
+    config.columns << [:withdrawal_after_fee, :deposit_after_fee, :attachment]
     config.columns[:withdrawal_after_fee].label = 'Withdrawal After Fee'
     
     config.action_links.add 'process_tx', 

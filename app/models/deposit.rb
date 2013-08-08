@@ -2,9 +2,6 @@ class Deposit < AccountOperation
   include ActionView::Helpers::NumberHelper
   include ActiveRecord::Transitions
   
-  # for attachments
-  has_attached_file :attachment
-  
   DEPOSIT_COMMISSION_RATE = BigDecimal("0.01")
   
   attr_accessible :bank_account_id, :bank_account_attributes

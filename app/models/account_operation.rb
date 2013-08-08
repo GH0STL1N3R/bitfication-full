@@ -5,7 +5,10 @@ class AccountOperation < ActiveRecord::Base
   MIN_BTC_CONFIRMATIONS = 3
 
   default_scope order('`account_operations`.`created_at` DESC')
-
+  
+  #for attachments
+  has_attached_file :attachment
+    
   belongs_to :operation
   
   belongs_to :account

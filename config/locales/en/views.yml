@@ -139,6 +139,9 @@ en:
         conf_time: Confirmation Time
         conf_time_unit: minutes
         add_info_html: "<p>Simply transfer your <i>Virtual Coins</i> to your <b>Bitcoin Address</b>, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Bitcoin Payment Voucher</i>).</p>"
+      fast_deposit: Fast Deposit
+      fast_deposit_notice_html: "<p>We have fast deposit on Bitfication. Make a transfer to our bank account, then upload the PDF or image transfer.</p><p>After our team check the file, we'll credit your account immediately! Start trading today immediately - no need to wait.</p>"
+      fast_deposit_uploaded: "The file was sent and the deposit has been queued. After our analysis, this operation should clear within 24 hours."
       deposit_eur_title: Deposit with bank wire
       deposit_eur_body_html: "
         <p>
@@ -157,25 +160,60 @@ en:
       cc: Account
       cnpj: CNPJ
       cpf: CPF
-      
-      
       comment: Comment
       account_holder_address: Account holder address
-      deposit_lr_title: Deposit Liberty Reserve
-      deposit_pgau_title: Deposit Pecunix gold
-      deposit_pgau_body_html:
-        <p>
-          Use this form to specify the amount of gold grams to deposit, upon submission
-          you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
-          is completed, the gold will appear in your balance.
-        </p>
-      pgau_amount: Amount (PGAU)
-      deposit_pgau: Deposit Pecunix
       other_options: Other options
       add_bank_account: Add a bank account
     lr_sci_form:
       click_for_lr_html: <a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).
-      
+
+  deposits:
+    index:
+      details: Deposit details
+      successful:
+        processed: Your deposit for %{amount} %{currency} has been processed
+        pending: "<p>Your request was posted successfully. </p><p>Please now send %{amount} %{currency} to our bank account.</p><p>You can return any time to this page to view our bank details.</p><p>Once the funds arrive, they will be approved by our staff and credited to your account.</p>"
+        bank_details: Show bank details
+    show:
+      submit: Attach File
+    new:
+      title: Make a deposit
+      bitcoins:
+        title: Bitcoins
+        address: Deposit Address
+        conf_rqd: Confirmations Required
+        conf_rqd_unit: confirmations
+        conf_time: Confirmation Time
+        conf_time_unit: minutes
+        add_info_html: "<p>Simply transfer your <i>Virtual Coins</i> to your <b>Bitcoin Address</b>, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Bitcoin Payment Voucher</i>).</p>"
+      deposit_eur_title: Deposit with bank wire
+      deposit_eur_body_html: "
+        <p>
+          Funding your BRL account with Brazillian Reais have a fee of 1%.
+          <ul>
+            <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
+            <li>Make your deposit at the desired value (max R$9,000.00 / min R$100.00) to the account of Itaú Bank below. To speed up processing of your deposit, send proof of deposit from your registered email to <a href=\"mailto:support@bitfication.com?subject=O Meu ID é %{account_id}&body=Segue o comprovante em anexo.\">support@bitfication.com</a>, placing your account ID (%{account_id}) in the e-mail subject. 
+          </ul>
+        </p>
+        "
+      deposit_form: Please complete the form below with the details of your deposit. This will allow our staff to process the deposit as quickly as possible.
+      deposit_pendings: Pending Deposits
+      delete_deposit_confirm: Are you sure you want to delete this deposit?
+      bic: BIC
+      account_holder: Account holder
+      iban: IBAN
+      bank: Bank
+      ag: Agency
+      cc: Account
+      cnpj: CNPJ
+      cpf: CPF
+      submit: Deposit
+    update:
+      deposit_file_added: The file was added to your deposit request
+      error: The file cannot be transmitted
+    destroy:
+      deposit_deleted: The deposit request was deleted
+
   users:
     form:
       submit: Submit
@@ -224,44 +262,7 @@ en:
       new:
         resend: Send unlock instructions
 
-  deposits:
-    index:
-      details: Deposit details
-      successful:
-        processed: Your deposit for %{amount} %{currency} has been processed
-        pending: "<p>Your request was posted successfully. </p><p>Please now send %{amount} %{currency} to our bank account.</p><p>You can return any time to this page to view our bank details.</p><p>Once the funds arrive, they will be approved by our staff and credited to your account.</p>"
-        bank_details: Show bank details
-    show:
-    new:
-      title: Make a deposit
-      bitcoins:
-        title: Bitcoins
-        address: Deposit Address
-        conf_rqd: Confirmations Required
-        conf_rqd_unit: confirmations
-        conf_time: Confirmation Time
-        conf_time_unit: minutes
-        add_info_html: "<p>Simply transfer your <i>Virtual Coins</i> to your <b>Bitcoin Address</b>, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Bitcoin Payment Voucher</i>).</p>"
-      deposit_eur_title: Deposit with bank wire
-      deposit_eur_body_html: "
-        <p>
-          Funding your BRL account with Brazillian Reais have a fee of 1%.
-          <ul>
-            <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
-            <li>Make your deposit at the desired value (max R$9,000.00 / min R$100.00) to the account of Itaú Bank below. To speed up processing of your deposit, send proof of deposit from your registered email to <a href=\"mailto:support@bitfication.com?subject=O Meu ID é %{account_id}&body=Segue o comprovante em anexo.\">support@bitfication.com</a>, placing your account ID (%{account_id}) in the e-mail subject. 
-          </ul>
-        </p>
-        "
-      deposit_form: Please complete the form below with the details of your deposit. This will allow our staff to process the deposit as quickly as possible.
-      bic: BIC
-      account_holder: Account holder
-      iban: IBAN
-      bank: Bank
-      ag: Agency
-      cc: Account
-      cnpj: CNPJ
-      cpf: CPF
-      submit: Deposit 
+ 
 
 
 
