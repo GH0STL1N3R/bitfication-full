@@ -1,4 +1,6 @@
 class UserMailer < BitcoinCentralMailer
+  include DepositsHelper
+  
   def registration_confirmation(user)
     @user = user
     
@@ -34,7 +36,11 @@ class UserMailer < BitcoinCentralMailer
   
   def deposit_request_notification(deposit)
     @user = deposit.account
+    
+    get_deposit_account
+    
     @deposit = deposit
+    @deposit.amount = @deposit.amount.to_f.abs
     
     mail :to => @user.email,
       :subject => I18n.t("emails.deposit_request_notification.subject")

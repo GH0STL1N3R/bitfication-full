@@ -67,7 +67,8 @@ class Deposit < AccountOperation
   end
   
   def deposit_before_fee
-    (amount * (1 + DEPOSIT_COMMISSION_RATE))
+    rounded = '%.0f' % (amount * (1 + DEPOSIT_COMMISSION_RATE))
+    number_to_currency(rounded , unit: "", separator: ".", delimiter: ',', precision: 3)
   end
   
   def withdrawal_after_fee

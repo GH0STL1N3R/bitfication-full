@@ -2,5 +2,5 @@
 
 %table
   %tr
-    %th= "#{t("activerecord.attributes.transfer.amount")} : " 
-    %td= "#{@deposit.amount.to_f.abs} #{@deposit.currency}"
+    %th= "#{t("activerecord.attributes.transfer.amount_afterfee")} : "
+    %td= "#{@deposit.deposit_after_fee} #{@deposit.currency}"
