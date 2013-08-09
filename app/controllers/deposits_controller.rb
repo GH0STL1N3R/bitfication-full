@@ -34,9 +34,13 @@ class DepositsController < ApplicationController
   
   def create
     
+    @bank_account = BankAccount.new
+    
     @currencies_deposit = Currency.where('code != ?', "btc")
     
     @deposit_rate = DEPOSIT_COMMISSION_RATE
+    
+    @pending_deposits = Deposit.where(:account_id => current_user.id, :state => "pending")
     
     @deposit = Deposit.from_params(params[:deposit])
     
