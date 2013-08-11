@@ -71,7 +71,10 @@ class Admin::PendingTransfersController < Admin::AdminController
     
     # time-saving advice: already tried putting this in the various models.. it didn't work
     @record.operation.account_operations.destroy_all
-      
+    
+    # don't delete -> just set all account_operations to cancel
+    #@record.operation.account_operations.
+    
     render :template => 'admin/pending_transfers/process_tx'
   end
 end

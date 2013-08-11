@@ -32,7 +32,7 @@ class AccountOperation < ActiveRecord::Base
   validates :operation, 
     :presence => true
 
-  scope :with_processed_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending') OR (type<>'Deposit'))")
+  scope :with_processed_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending') OR (type='Deposit' AND state<>'cancelled') OR (type<>'Deposit'))")
     
   scope :with_currency, lambda { |currency|
     where("account_operations.currency = ?", currency.to_s.upcase)

@@ -27,28 +27,6 @@
 = form_for @deposit, :as => :deposit, :url => account_deposits_path do |f|
   = errors_for(@deposit, :translated_message => t(".error"), :include_nested => :bank_account)
   
-  -# custom script to update 'will receive' & 'amount' boxes
-  %script
-    $(document).ready(function(e) {
-    
-    $('#deposit_amount').change(function() {
-    
-    var txtAmtval = $(this).val();
-    
-    $('#will_receive').val(txtAmtval * (1-#{@deposit_rate}));
-        
-    });
-    
-    $('#will_receive').change(function() {
-    
-    var txtAmtval = $(this).val();
-    
-    $('#deposit_amount').val(txtAmtval * (1+#{@deposit_rate}));
-        
-    });
-    
-    });
-  
   .form-field
     = f.label :currency
     = f.select :currency, options_from_collection_for_select(@currencies_deposit, 'code', I18n.locale, @deposit.currency)
@@ -58,10 +36,6 @@
     = f.label :amount
     = f.text_field :amount, :value => (@deposit.amount)? "" : @deposit.amount, :autocomplete => "off"
   
-  .form-field
-    = label_tag :will_receive, t(".will_receive")
-    = text_field_tag :will_receive, '%.2f' % (current_user.max_withdraw_for(@deposit.currency)*(1-@deposit_rate))
-    
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
 %br

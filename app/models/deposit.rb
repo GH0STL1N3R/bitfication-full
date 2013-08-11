@@ -23,11 +23,18 @@ class Deposit < AccountOperation
   state_machine do
     state :pending
     state :processed
-
+    state :cancelled
+    
     event :process do
       transitions :to => :processed,
         :from => :pending
     end
+    
+    event :cancel do
+      transitions :to => :cancelled,
+        :from => :pending
+    end
+    
   end
   
   def self.from_params(params)
