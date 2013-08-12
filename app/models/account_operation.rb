@@ -55,7 +55,7 @@ class AccountOperation < ActiveRecord::Base
     
   end
     
-  scope :with_processed_active_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending') OR (type='Deposit' AND state<>'cancelled') OR (type<>'Deposit'))")
+  scope :with_processed_active_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending' AND state<>'cancelled') OR (type<>'Deposit'))")
     
   scope :with_currency, lambda { |currency|
     where("account_operations.currency = ?", currency.to_s.upcase)
