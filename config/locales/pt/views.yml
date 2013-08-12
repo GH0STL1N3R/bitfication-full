@@ -265,6 +265,7 @@ pt:
       state:
         processed: Processado
         pending: Pendente
+        cancelled: Terminado 
     new:
       title: Retirada de Fundos
       body_html: "

@@ -20,6 +20,7 @@ class Transfer < AccountOperation
     type.gsub(/Transfer$/, "").underscore.gsub(/\_/, " ").titleize
   end
 
+=begin
   state_machine do
     state :pending
     state :processed
@@ -29,7 +30,8 @@ class Transfer < AccountOperation
         :from => :pending
     end
   end
-  
+=end
+
   # all transfers are withdrawals
   def self.from_params(params)
     transfer = class_for_transfer(params[:currency]).new(params)

@@ -610,6 +610,11 @@ span.unconfirmed {
   color: gray;
 }
 
+span.cancelled {
+  text-decoration: line-through;
+  color: gray;
+}
+
 td.account-balance span.unconfirmed {
   font-size: 90%;
 }

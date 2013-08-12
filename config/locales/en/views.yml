@@ -276,7 +276,8 @@ en:
     show:
       state:
         processed: Processed
-        pending: Pending        
+        pending: Pending
+        cancelled: Refunded        
     new:
       title: Withdraw funds
       body_html: "

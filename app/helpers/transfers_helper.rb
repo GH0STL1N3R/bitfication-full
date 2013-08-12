@@ -8,7 +8,7 @@ module TransfersHelper
   end
   
   def color_for(transfer)
-    transfer.amount > 0 ? (transfer.confirmed? ? "green" : "unconfirmed") : "red"
+    transfer.amount > 0 ? (transfer.state=='cancelled'? "cancelled" : (transfer.confirmed? ? "green" : "unconfirmed")) : "red"
   end
 
   def confirmation_tooltip_for(transfer)
@@ -34,6 +34,8 @@ module TransfersHelper
       "orange"
     when "processed"
       "green"
+    when "cancelled"
+      "red"
     end
   end
 end

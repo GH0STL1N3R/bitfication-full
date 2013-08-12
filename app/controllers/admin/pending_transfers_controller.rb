@@ -39,7 +39,8 @@ class Admin::PendingTransfersController < Admin::AdminController
   
   
   def conditions_for_collection
-    ["state = 'pending' AND currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC')"]
+    # only show deposits & withdrawals
+    ["state = 'pending' AND currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC') AND type IN ('Deposit', 'WireTransfer')"]
   end
   
   def process_tx
@@ -55,11 +56,11 @@ class Admin::PendingTransfersController < Admin::AdminController
     end
     
     if @record.type == "Transfer" || @record.type == "WireTransfer" 
-      UserMailer.withdrawal_processed_notification(@record).deliver
+      #UserMailer.withdrawal_processed_notification(@record).deliver
     end
     
     if @record.type == "Deposit"
-      UserMailer.deposit_processed_notification(@record).deliver
+      #UserMailer.deposit_processed_notification(@record).deliver
     end
       
     render :template => 'admin/pending_transfers/process_tx'
@@ -70,10 +71,17 @@ class Admin::PendingTransfersController < Admin::AdminController
       find(params[:id])
     
     # time-saving advice: already tried putting this in the various models.. it didn't work
-    @record.operation.account_operations.destroy_all
+    #@record.operation.account_operations.destroy_all
     
     # don't delete -> just set all account_operations to cancel
     #@record.operation.account_operations.
+    
+    # cancel each account operation
+    #@record.operation.account_operations.each do |op|
+    #  debugger
+    #  op.cancel
+    #end
+    @record.operation.cancel
     
     render :template => 'admin/pending_transfers/process_tx'
   end

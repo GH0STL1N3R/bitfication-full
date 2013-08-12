@@ -23,4 +23,12 @@ class Operation < ActiveRecord::Base
     #end
   end
   
+  # set all related operations to `cancel` state
+  def cancel
+    account_operations.each do |op|
+      op.cancel
+      op.save
+    end
+  end
+  
 end
