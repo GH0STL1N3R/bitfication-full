@@ -85,7 +85,7 @@ class DepositsController < ApplicationController
       @user = current_user
       
       # dispatch email to user
-      #UserMailer.deposit_request_notification(@deposit).deliver
+      UserMailer.deposit_request_notification(@deposit).deliver
       
       respond_with do |format|
         format.html { render :action => "show" }
