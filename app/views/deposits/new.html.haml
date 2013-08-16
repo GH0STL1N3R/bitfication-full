@@ -34,7 +34,7 @@
 
   .form-field
     = f.label :amount
-    = f.text_field :amount, :value => (@deposit.amount)? "" : @deposit.amount, :autocomplete => "off"
+    = f.text_field :amount, :value => (@deposit.amount)? "100" : @deposit.amount, :autocomplete => "off"
   
   .form-field
     = f.submit :value => t(".submit"), :class => "submit"
