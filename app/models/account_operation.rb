@@ -14,7 +14,8 @@ class AccountOperation < ActiveRecord::Base
   
   #for attachments
   has_attached_file :attachment
-    
+  validates_attachment_content_type :attachment, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf']
+
   belongs_to :operation
   
   belongs_to :account
