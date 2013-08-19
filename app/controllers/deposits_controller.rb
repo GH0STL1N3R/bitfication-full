@@ -1,4 +1,6 @@
 class DepositsController < ApplicationController
+  include DepositsHelper
+  
   DEPOSIT_COMMISSION_RATE = BigDecimal("0.01")
   
   respond_to :html, :json
@@ -13,6 +15,7 @@ class DepositsController < ApplicationController
     
     @deposit_rate = DEPOSIT_COMMISSION_RATE
     
+    @pending_deposits = Deposit.where(:account_id => current_user.id, :state => "pending")
     
     #default currency
     if params[:currency].nil?
@@ -31,9 +34,13 @@ class DepositsController < ApplicationController
   
   def create
     
+    @bank_account = BankAccount.new
+    
     @currencies_deposit = Currency.where('code != ?', "btc")
     
     @deposit_rate = DEPOSIT_COMMISSION_RATE
+    
+    @pending_deposits = Deposit.where(:account_id => current_user.id, :state => "pending")
     
     @deposit = Deposit.from_params(params[:deposit])
     
@@ -75,6 +82,11 @@ class DepositsController < ApplicationController
       
       calc_before_after_fee(@deposit)
       
+      @user = current_user
+      
+      # dispatch email to user
+      UserMailer.deposit_request_notification(@deposit).deliver
+      
       respond_with do |format|
         format.html { render :action => "show" }
         format.json { render :json => @deposit }
@@ -86,11 +98,36 @@ class DepositsController < ApplicationController
   
   def show
     
-    @deposit = Deposit.first
+    @deposit = Deposit.find(params[:id])
     
     calc_before_after_fee(@deposit)
     
     get_deposit_account
+    
+    @user = current_user
+    
+  end
+  
+  def destroy
+    
+    Deposit.where(:id => params[:id], :account_id => current_user.id).first.destroy
+
+    redirect_to new_account_deposit_path,
+      :notice => t(".deposits.destroy.deposit_deleted")
+  end
+  
+  def update
+    deposit = Deposit.where(:id => params[:id], :account_id => current_user.id).first
+    
+    deposit.attachment = params[:deposit][:attachment]
+    
+    if deposit.save
+      redirect_to account_deposit_path,
+      :notice => t(".deposits.update.deposit_file_added")
+    else
+      redirect_to account_deposit_path,
+      :notice => t(".deposits.update.error")
+    end
     
   end
   
@@ -98,23 +135,6 @@ class DepositsController < ApplicationController
   
   def fetch_bank_accounts
     @bank_accounts = current_user.bank_accounts.map { |ba| [ba.bank_name + " : " + ba.ag + " / " + ba.cc, ba.id] }
-  end
-  
-  def get_deposit_account
-    bank_account = YAML::load(File.open(File.join(Rails.root, "config", "banks.yml")))
-    
-    if bank_account
-      bank_account = bank_account[Rails.env]
-      @ag = bank_account["ag"]
-      @cc = bank_account["cc"]
-      @cnpj = bank_account["cnpj"]
-      @bic = bank_account["bic"]
-      @iban = bank_account["iban"]
-      @bank = bank_account["bank"]
-      @bank_address = bank_account["bank_address"]
-      @account_holder = bank_account["account_holder"]
-      @account_holder_address = bank_account["account_holder_address"]
-    end
   end
   
   def calc_before_after_fee(deposit)

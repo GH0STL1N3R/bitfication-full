@@ -1,10 +1,20 @@
 require 'digest'
 
 class AccountOperation < ActiveRecord::Base
+  include ActiveRecord::Transitions
+  include ActionView::Helpers::NumberHelper
+  
   CURRENCIES = %w{ BTC BRL }
   MIN_BTC_CONFIRMATIONS = 3
-
+  
+  WITHDRAWAL_COMMISSION_RATE = BigDecimal("0.01")
+  DEPOSIT_COMMISSION_RATE = BigDecimal("0.01")
+  
   default_scope order('`account_operations`.`created_at` DESC')
+  
+  #for attachments
+  has_attached_file :attachment
+  validates_attachment_content_type :attachment, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf']
 
   belongs_to :operation
   
@@ -28,8 +38,25 @@ class AccountOperation < ActiveRecord::Base
 
   validates :operation, 
     :presence => true
-
-  scope :with_processed_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending') OR (type<>'Deposit'))")
+  
+  state_machine do
+    state :pending
+    state :processed
+    state :cancelled
+    
+    event :process do
+      transitions :to => :processed,
+        :from => :pending
+    end
+    
+    event :cancel do
+      transitions :to => :cancelled,
+        :from => :pending
+    end
+    
+  end
+    
+  scope :with_processed_active_deposits_only, where("((type IS NULL) OR (type='Deposit' AND state<>'pending' AND state<>'cancelled') OR (type<>'Deposit'))")
     
   scope :with_currency, lambda { |currency|
     where("account_operations.currency = ?", currency.to_s.upcase)
@@ -126,6 +153,34 @@ class AccountOperation < ActiveRecord::Base
   # Extra confirmations this account operation requires to be considered confirmed
   def required_confirmations
     (MIN_BTC_CONFIRMATIONS - bt_tx_confirmations) unless confirmed?
+  end
+  
+  # withdrawal & deposit operations
+  def deposit_after_fee
+    if (type=='Deposit')
+      if self.amount > 0
+        # fee already deducted
+        number_to_currency(self.amount , unit: "", separator: ".", delimiter: ',', precision: 3)
+      end
+    end
+  end
+  
+  def deposit_before_fee
+    if (type=='Deposit')
+      rounded = '%.0f' % (amount * (1 + DEPOSIT_COMMISSION_RATE))
+      number_to_currency(rounded , unit: "", separator: ".", delimiter: ',', precision: 3)
+    end
+  end
+  
+  def withdrawal_after_fee
+    if (type=='Withdrawal')
+      if self.amount < 0
+        # deduct fee
+        number_to_currency((1-WITHDRAWAL_COMMISSION_RATE)*self.amount, unit: "", separator: ".", delimiter: ',', precision: 3)
+      else
+        number_to_currency(self.amount, unit: "", separator: ".", delimiter: ',', precision: 3)
+      end
+    end
   end
   
   def as_json(options={})    

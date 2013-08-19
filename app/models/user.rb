@@ -54,6 +54,9 @@ class User < Account
 
   has_many :tickets,
     :dependent => :destroy
+    
+  #has_many :tickets,
+  #  :dependent => :destroy
 
   validates :email,
     :uniqueness => true,

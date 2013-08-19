@@ -1,6 +1,8 @@
 class Transfer < AccountOperation
   include ActiveRecord::Transitions
   
+  DEPOSIT_WITHDRAW_COMMISSION_RATE = BigDecimal("0.01")
+  
   before_validation :round_amount,
     :on => :create  
   
@@ -20,6 +22,7 @@ class Transfer < AccountOperation
     type.gsub(/Transfer$/, "").underscore.gsub(/\_/, " ").titleize
   end
 
+=begin
   state_machine do
     state :pending
     state :processed
@@ -29,7 +32,8 @@ class Transfer < AccountOperation
         :from => :pending
     end
   end
-  
+=end
+
   # all transfers are withdrawals
   def self.from_params(params)
     transfer = class_for_transfer(params[:currency]).new(params)
@@ -47,15 +51,20 @@ class Transfer < AccountOperation
     end
   end
 
-  def self.minimal_amount_for(currency)
+  def self.minimal_amount_for(currency, display)
     currency = currency.to_s.downcase.to_sym
 
     #if [:u, :lreur].include?(currency)
     #  BigDecimal("0.02")
     #if currency == :usd
     #  BigDecimal("100.0")
+    
     if currency == :brl
-      BigDecimal("100.0")
+      if display==true
+        BigDecimal("100.0")
+      else
+        BigDecimal("100.0")*(1-DEPOSIT_WITHDRAW_COMMISSION_RATE)
+      end
     elsif currency == :btc
       BigDecimal("0.01")
     else

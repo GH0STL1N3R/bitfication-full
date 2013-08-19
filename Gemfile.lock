@@ -220,7 +220,7 @@ DEPENDENCIES
   mocha
   mysql2
   newrelic_rpm
-  paperclip
+  paperclip (~> 3.0)
   qrencoder
   rack (= 1.4.5)
   rails (= 3.2.13)

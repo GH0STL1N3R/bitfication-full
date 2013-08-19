@@ -27,21 +27,4 @@ class WireTransfer < Transfer
     end
   end
   
-  # active_scaffold methods
-  def withdrawal_after_fee
-    
-    if self.amount < 0
-      # deduct fee
-      number_with_delimiter((1- WITHDRAWAL_COMMISSION_RATE) * self.amount , :delimiter => ',')
-    else
-      self.amount
-    end
-    
-  end
-  
-  def deposit_after_fee
-  end
-  
-  
-  
 end

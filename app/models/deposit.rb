@@ -19,17 +19,26 @@ class Deposit < AccountOperation
     :numericality => true,
     :minimal_amount => true
     #:negative => false
-    
+
+=begin  
   state_machine do
     state :pending
     state :processed
-
+    state :cancelled
+    
     event :process do
       transitions :to => :processed,
         :from => :pending
     end
+    
+    event :cancel do
+      transitions :to => :cancelled,
+        :from => :pending
+    end
+    
   end
-  
+=end
+
   def self.from_params(params)
     deposit = class_for_transfer(params[:currency]).new(params)
    
@@ -57,16 +66,6 @@ class Deposit < AccountOperation
     end
   end
   
-  def deposit_after_fee
-    
-    if self.amount > 0
-      # fee already deducted
-      number_with_delimiter(self.amount , :delimiter => ',')
-    end
-    
-  end
   
-  def withdrawal_after_fee
-  end
   
 end

@@ -32,5 +32,11 @@ class BitcoinTransfer < Transfer
     self.amount
     
   end
+  
+  def deposit_after_fee
+    
+    self.amount
+    
+  end
 end
 

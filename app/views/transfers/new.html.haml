@@ -55,7 +55,7 @@
         
   .form-field
     = f.label :amount
-    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % current_user.max_withdraw_for(@transfer.currency) : "", :autocomplete => "off"
+    = f.text_field :amount, :value => (["BRL"].include? @transfer.currency)? '%.2f' % current_user.max_withdraw_for(@transfer.currency) : "100", :autocomplete => "off"
 
   - if ["BRL"].include? @transfer.currency
   

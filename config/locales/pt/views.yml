@@ -139,6 +139,9 @@ pt:
         conf_time: Tempo estimado para confirmação
         conf_time_unit: minutos
         add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
+      fast_deposit: Deposito Rapido
+      fast_deposit_notice_html: "<p>Temos depósito rápido em Bitfication. Fazer uma transferência para a nossa conta bancária, em seguida, fazer o upload do PDF ou imagem da transferência.</p><p>Após nossa equipe verificar o arquivo, vamos creditar a sua conta imediatamente! Começar a negociar imediatamente hoje - não é preciso esperar.</p>"
+      fast_deposit_uploaded: "O arquivo foi enviado eo depósito foi colocado na fila para depósito rápido. Após nossa análise, esta operação deve limpar nas próximas 24 horas."
       deposit_eur_title: Depósito com transferência bancária
       deposit_eur_body_html: "
         <p>
@@ -159,21 +162,49 @@ pt:
       cpf: CPF
       comment: Comentário
       account_holder_address: Endereço do Titular da Conta
-      deposit_lr_title: Depósito com Liberty Reserve
-      deposit_pgau_title: Depósito em ouro do Pecunix
-      deposit_pgau_body_html:
-        <p>
-          Use this form to specify the amount of gold grams to deposit, upon submission
-          you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
-          is completed, the gold will appear in your balance.
-        </p>
-      pgau_amount: montante (PGAU)
-      deposit_pgau: Depósito Pecunix
       other_options: Outras opções
       add_bank_account: Adicionar conta bancária
     lr_sci_form:
       click_for_lr_html: <a href="#lr" onclick="%{action}">Clique aqui</a> para pagar com a sua conta do Liberty Reserve (LREUR and LRUSD).
-      
+
+  deposits:
+    index:
+      details: Deposit details
+      successful:
+        processed: Your deposit for %{amount} %{currency} has been processed
+        pending: "<p>Your request was posted successfully. </p><p>Please now send %{amount} %{currency} to our bank account.</p><p>You can return any time to this page to view our bank details.</p><p>Once the funds arrive, they will be approved by our staff and credited to your account.</p>"
+        bank_details: Show bank details
+    show:
+      submit: Attach File
+    new:
+      title: Make a deposit
+      bitcoins:
+        title: Bitcoins
+        address: Seu Endereço Bitcoin
+        conf_rqd: Confirmações necessárias
+        conf_rqd_unit: confirmações
+        conf_time: Tempo estimado para confirmação
+        conf_time_unit: minutos
+        add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
+      deposit_eur_title: Depósito com transferência bancária
+      deposit_form: Por favor, preencha o formulário abaixo com os detalhes do seu depósito. Isto irá permitir que o nosso pessoal para processar o depósito tão rapidamente quanto possível. 
+      deposit_pendings: Pending Deposits
+      delete_deposit_confirm: Tem certeza você quer apagar este deposito?
+      bic: BIC
+      account_holder: Titular da Conta
+      iban: IBAN
+      bank: Banco
+      ag:
+      cc:
+      cnpj: CNPJ
+      cpf: CPF
+      submit: Deposit
+    update:
+      deposit_file_added: O arquivo foi adicionado ao seu depósito
+      error: Esse arquivo não pode ser transferida
+    destroy:
+      deposit_deleted: O seu pedido do deposito foi apogado
+
   users:
     form:
       submit: Enviar
@@ -222,36 +253,8 @@ pt:
       new:
         resend: Enviar instruções de desbloqueio
   
-  deposits:
-    index:
-      details: Deposit details
-      successful:
-        processed: Your deposit for %{amount} %{currency} has been processed
-        pending: "<p>Your request was posted successfully. </p><p>Please now send %{amount} %{currency} to our bank account.</p><p>You can return any time to this page to view our bank details.</p><p>Once the funds arrive, they will be approved by our staff and credited to your account.</p>"
-        bank_details: Show bank details
-    show:
-    new:
-      title: Make a deposit
-      bitcoins:
-        title: Bitcoins
-        address: Seu Endereço Bitcoin
-        conf_rqd: Confirmações necessárias
-        conf_rqd_unit: confirmações
-        conf_time: Tempo estimado para confirmação
-        conf_time_unit: minutos
-        add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
-      deposit_eur_title: Depósito com transferência bancária
-      deposit_form: Por favor, preencha o formulário abaixo com os detalhes do seu depósito. Isto irá permitir que o nosso pessoal para processar o depósito tão rapidamente quanto possível. 
-      bic: BIC
-      account_holder: Titular da Conta
-      iban: IBAN
-      bank: Banco
-      ag:
-      cc:
-      cnpj: CNPJ
-      cpf: CPF
-      submit: Deposit
      
+
   transfers:
     index:
       details: Detalhes da transação
@@ -262,6 +265,7 @@ pt:
       state:
         processed: Processado
         pending: Pendente
+        cancelled: Terminado 
     new:
       title: Retirada de Fundos
       body_html: "

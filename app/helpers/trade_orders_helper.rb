@@ -7,7 +7,7 @@ module TradeOrdersHelper
     end
   end
 
-  def delete_link_for(trade_order)
+  def to_delete_link_for(trade_order)
     link_to image_tag("delete.png", :title => t(".delete_order"), :alt => t(".delete_order")),
       account_trade_order_path(trade_order),
       :method => :delete,

@@ -11,32 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725161808) do
+ActiveRecord::Schema.define(:version => 20130808091842) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
     t.integer  "account_id"
     t.string   "address"
-    t.decimal  "amount",                :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "amount",                  :precision => 16, :scale => 8, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "currency"
     t.string   "lr_transaction_id"
-    t.decimal  "lr_transferred_amount", :precision => 16, :scale => 8, :default => 0.0
-    t.decimal  "lr_merchant_fee",       :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "lr_transferred_amount",   :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "lr_merchant_fee",         :precision => 16, :scale => 8, :default => 0.0
     t.string   "bt_tx_id"
     t.string   "bt_tx_from"
-    t.integer  "bt_tx_confirmations",                                  :default => 0
+    t.integer  "bt_tx_confirmations",                                    :default => 0
     t.string   "lr_account_id"
     t.integer  "payee_id"
     t.string   "email"
     t.string   "px_tx_id"
     t.string   "px_payer"
-    t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "px_fee",                  :precision => 16, :scale => 8, :default => 0.0
     t.string   "comment"
     t.integer  "operation_id"
     t.string   "state"
     t.integer  "bank_account_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
@@ -157,16 +161,6 @@ ActiveRecord::Schema.define(:version => 20130725161808) do
     t.integer  "seller_id"
     t.integer  "buyer_id"
     t.string   "type"
-  end
-
-  create_table "pending_transfers", :force => true do |t|
-    t.string  "type"
-    t.string  "state"
-    t.string  "currency"
-    t.integer "account"
-    t.integer "op_btc"
-    t.integer "op_brl"
-    t.integer "op_fees"
   end
 
   create_table "sessions", :force => true do |t|

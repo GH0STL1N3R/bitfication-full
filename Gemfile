@@ -20,6 +20,7 @@ gem 'fancybox2-rails', '~> 0.2.4'
 gem 'sass-rails'
 gem 'coffee-rails', '3.2.2' # 4.0.0 available - test
 gem 'newrelic_rpm'
+gem "paperclip", "~> 3.0"
 
 
 gem 'recaptcha',
@@ -46,9 +47,6 @@ gem 'delayed_job'
 # CSS toolbox
 gem 'blueprint-rails'
 gem 'bourbon'
-
-# File attachment with database storage support
-gem 'paperclip'
 
 # Apple push notifications
 gem 'apn_on_rails'
