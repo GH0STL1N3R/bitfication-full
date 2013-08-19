@@ -139,16 +139,16 @@ pt:
         conf_time: Tempo estimado para confirmação
         conf_time_unit: minutos
         add_info_html: "<p>Simplesmente transfira o <i>Dinheiro Virtual</i> para o seu <b>Endereço Bitcoin</b>, e valor aparecerá aqui após o tempo de confirmação. Você será capaz de utilizar os fundos após isso.</p><p>Após você realizar a transferência, você poderá observar o decorrer das confirmaçõe e o progresso da transação em <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Comprovante de Pagamento Bitcoin</i>).</p>"
-      fast_deposit: Deposito Rapido
-      fast_deposit_notice_html: "<p>Temos depósito rápido em Bitfication. Fazer uma transferência para a nossa conta bancária, em seguida, fazer o upload do PDF ou imagem da transferência.</p><p>Após nossa equipe verificar o arquivo, vamos creditar a sua conta imediatamente! Começar a negociar imediatamente hoje - não é preciso esperar.</p>"
-      fast_deposit_uploaded: "O arquivo foi enviado eo depósito foi colocado na fila para depósito rápido. Após nossa análise, esta operação deve limpar nas próximas 24 horas."
+      fast_deposit: Depósito Rápido
+      fast_deposit_notice_html: "<p>Para se beneficiar do <b>Depósito Rápido</b>, nos envie o comprovante do depósito aqui nesta página.<p>Faça o seu depósito em nossa conta informada aqui e envie uma foto do comprovante, nos formatos PNG, JPEG, GIF ou mesmo arquivos PDF.<p>Para nos enviar o comprovante, clique no botão <i>browse</i> abaixo, selecione o arquivo e clique em <i>Attach File</i>, pronto! O seu depósito será idenficado de forma muito mais rápida e segura.<p><b>NOTA:</b> caso o valor creditado em nossa conta seja diferente, o seu depósito será atualizado automaticamente.<br>"
+      fast_deposit_uploaded: "O seu comprovante foi enviado e o processo está na fila <b>Depósito Rápido</b>. A operação será processada dentro de 24 horas (dias úteis)."
       deposit_eur_title: Depósito com transferência bancária
       deposit_eur_body_html: "
         <p>
-          Transferindo Fundos em Reais para a sua conta, tem uma taxa 1%.
+          Combramos uma taxa de 1% sobre o valor de cada depósito.
           <ul>
-            <li>É <strong>recomendado</strong> incluir na <b>Identificação do Depósito</b>, o ID da sua conta do <b>Bitfication</b>.
-            <li>Faça o depósito no valor desejado (máximo R$9,000.00 / mínimo R$100.00) na conta do Banco Itaú abaixo. Para acelerar a identicação do seu depósito, envie o comprovante a partir do seu e-mai cadastrado aqui, para o endereço <a href=\"mailto:support@bitfication.com?subject=O Meu ID é %{account_id}&body=Segue o comprovante em anexo.\">support@bitfication.com</a>, mais o seu ID (%{account_id}) do <b>Bitfication</b> no campo <i>assunto</i> do e-mail.
+            <li>Faça o depósito no valor acima, de acordo com o seu pedido, na conta do Banco Itaú abaixo.
+            <li>Em posse do comprovante, envie o mesmo para o Bitfication, acessando novamente a página de depósito em sua conta e anexe o arquivo.
           </ul>
         </p>
         "

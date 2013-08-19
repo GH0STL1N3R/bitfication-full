@@ -30,9 +30,9 @@ pt:
         created_at: Criado em
         user: Usuário
         amount: Valor
-        amount_tosend: Valor a depositar para nossa conta 
-        amount_afterfee: Valor recibido depois das taxas
-        fast_deposit: Deposito Rapido
+        amount_tosend: Valor do depósito
+        amount_afterfee: Valor a ser creditado
+        fast_deposit: Depósito Rápido
         address: Endereço
         currency: Moeda
         bt_tx_confirmations: Confirmações

@@ -15,7 +15,7 @@
     %th= t("activerecord.attributes.transfer.state")
     %td= transfer_state(@deposit.state, :message => t(".state.#{@deposit.state}").html_safe, :icon => true)
 
-  %tr
+  -#%tr
     %th= t("activerecord.attributes.transfer.amount_afterfee")
     %td.fixed= number_to_currency(@deposit_afterfee, :unit => "", :precision => 3)
     

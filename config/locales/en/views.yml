@@ -140,15 +140,15 @@ en:
         conf_time_unit: minutes
         add_info_html: "<p>Simply transfer your <i>Virtual Coins</i> to your <b>Bitcoin Address</b>, and they'll show up in your account after the confirmation time, shown above. You will be able to use these funds after this.</p><p>After you make the transfer, you can view the confirmation time and transaction progress on <b><a href=%{tx_address}>blockchain.info</a></b> (<i>Bitcoin Payment Voucher</i>).</p>"
       fast_deposit: Fast Deposit
-      fast_deposit_notice_html: "<p>We have fast deposit on Bitfication. Make a transfer to our bank account, then upload the PDF or image transfer.</p><p>After our team check the file, we'll credit your account immediately! Start trading today immediately - no need to wait.</p>"
+      fast_deposit_notice_html: "<p>To get the benefit from the Fast Deposit, send us proof of deposit here on this page. Make your transfer to our Bank account informed here and attach the document, we accept image formats PNG, JPEG, GIF or even PDF.<p>To send it, click on <i>browse</i> below, select it and click on <i>Attach File</i>, well done! <p>Your deposit will be identified ASAP! <p><b>NOTE:</b> If the amount credited into our account differ, your deposit will be updated automatically."
       fast_deposit_uploaded: "The file was sent and the deposit has been queued. After our analysis, this operation should clear within 24 hours."
       deposit_eur_title: Deposit with bank wire
       deposit_eur_body_html: "
         <p>
           Funding your BRL account with Brazillian Reais have a fee of 1%.
           <ul>
-            <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
-            <li>Make your deposit at the desired value (max R$9,000.00 / min R$100.00) to the account of Itaú Bank below. To speed up the identication of your deposit, send the voucher from your e-mail registered here, to <a href=\"mailto:support@bitfication.com?subject=My ID is BF-UXXXXXX&body=Follows the proof of deposit attached.\">support@bitfication.com</a>, plus your Bitfication ID (BF-UXXXXXX) at the e-mail <i>subject</i> field.
+            <li>Make the deposit according to your request, into the Bank account informed below.
+            <li>With the deposit proof in hands, send it to Bitfication, by accessing the deposit page again and attach the file.
           </ul>
         </p>
         "
