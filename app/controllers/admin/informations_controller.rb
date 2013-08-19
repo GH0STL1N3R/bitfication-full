@@ -1,6 +1,5 @@
 class Admin::InformationsController < Admin::AdminController
   def balances
-    #@balances = [:lrusd, :lreur, :pgau, :eur, :btc, :cad, :inr].inject({}) do |balances, currency|
     @balances = [:brl, :btc].inject({}) do |balances, currency|
       balances[currency] = {}
       
@@ -25,7 +24,8 @@ class Admin::InformationsController < Admin::AdminController
       balances
     end
     
-    @currencies = @balances.keys.map(&:to_s).sort.map(&:to_sym)
+    @balance_currencies = @balances.keys.map(&:to_s).sort.map(&:to_sym)
+    
   end
   
   

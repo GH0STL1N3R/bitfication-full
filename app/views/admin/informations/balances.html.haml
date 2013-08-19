@@ -9,7 +9,7 @@
     %th User total balance
     %th Third-party balance
     %th Delta
-  - @currencies.each do |currency|
+  - @balance_currencies.each do |currency|
     %tr{ :class => cycle('even', 'odd') }
       %td= currency.to_s.upcase
       %td.amount= number_with_delimiter(@balances[currency][:user].to_f.round(2))

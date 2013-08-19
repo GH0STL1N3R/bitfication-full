@@ -10,6 +10,7 @@
       %p
         %strong
           = t(".balance") + ":"
+        - #debugger
         - @currencies.each_with_index do |c, index|
           %strong
             - if c.code!="BTC"
