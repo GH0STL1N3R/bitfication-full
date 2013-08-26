@@ -40,7 +40,7 @@ class Admin::PendingTransfersController < Admin::AdminController
   
   def conditions_for_collection
     # only show deposits & withdrawals
-    ["state = 'pending' AND currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC') AND type IN ('Deposit', 'WireTransfer')"]
+    ["state = 'pending' AND currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")},'BTC') AND type IN ('Deposit', 'WireTransfer', 'BitcoinTransfer')"]
   end
   
   def process_tx
