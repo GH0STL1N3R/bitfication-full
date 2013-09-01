@@ -13,7 +13,7 @@ class AccountOperation < ActiveRecord::Base
   default_scope order('`account_operations`.`created_at` DESC')
   
   #for attachments
-  has_attached_file :attachment
+  has_attached_file :attachment, :styles => {:thumbnail => "75x75#"}
   validates_attachment_content_type :attachment, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf']
 
   belongs_to :operation
@@ -166,15 +166,21 @@ class AccountOperation < ActiveRecord::Base
   end
   
   def deposit_before_fee
+    rounded = '%.0f' % (amount * (1 + DEPOSIT_COMMISSION_RATE))
+    number_to_currency(rounded , unit: "", separator: ".", delimiter: ',', precision: 3)
+  end
+  
+  def admincp_deposit_before_fee
     if (type=='Deposit')
-      rounded = '%.0f' % (amount * (1 + DEPOSIT_COMMISSION_RATE))
-      number_to_currency(rounded , unit: "", separator: ".", delimiter: ',', precision: 3)
+      deposit_before_fee
     end
   end
   
-  def withdrawal_after_fee
-    if (type=='Withdrawal')
-      if self.amount < 0
+  def admincp_withdrawal_after_fee
+    if (type=='Withdrawal' || type=='WireTransfer' || type=='BitcoinTransfer')
+      if type=='BitcoinTransfer'
+        return self.amount
+      elsif self.amount < 0
         # deduct fee
         number_to_currency((1-WITHDRAWAL_COMMISSION_RATE)*self.amount, unit: "", separator: ".", delimiter: ',', precision: 3)
       else

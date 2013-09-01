@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'debugger'
-#gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'rails', '3.2.13'
 gem 'rack', '1.4.5'
@@ -12,7 +11,7 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'whenever'
 gem 'capistrano'
-gem 'active_scaffold'
+gem 'active_scaffold', :git => "https://github.com/activescaffold/active_scaffold.git", :ref => "6ef005c0dc384a6189d6ccdf1a6ba8ff5fce3a90"
 gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -20,8 +19,7 @@ gem 'fancybox2-rails', '~> 0.2.4'
 gem 'sass-rails'
 gem 'coffee-rails', '3.2.2' # 4.0.0 available - test
 gem 'newrelic_rpm'
-gem "paperclip", "~> 3.0"
-
+gem "paperclip", :git => "https://github.com/thoughtbot/paperclip.git"
 
 gem 'recaptcha',
   :require => 'recaptcha/rails'

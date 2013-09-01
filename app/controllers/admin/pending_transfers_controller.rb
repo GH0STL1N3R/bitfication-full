@@ -10,11 +10,13 @@ class Admin::PendingTransfersController < Admin::AdminController
       :currency,
       :type,
       :created_at,
-      :address
+      :address,
+      :attachment
     ]
     
-    config.columns << [:withdrawal_after_fee, :deposit_after_fee, :attachment]
-    config.columns[:withdrawal_after_fee].label = 'Withdrawal After Fee'
+    config.columns << [:admincp_withdrawal_after_fee, :admincp_deposit_before_fee]
+    config.columns[:admincp_withdrawal_after_fee].label = 'Withdrawal After Fee'
+    config.columns[:admincp_deposit_before_fee].label = 'Deposit Before Fee'
     
     config.action_links.add 'process_tx', 
       :label => 'Mark processed', 
