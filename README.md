@@ -12,7 +12,7 @@ Bitfication uses Ubuntu Linux.
 # Requirements
 Run this commands as 'root' user, change only when required.
 
-## Installation on top of Ubuntu 12.04 LTS
+## Installation on top of Ubuntu 12.04.3 LTS
 * Install required packages
 
         aptitude install git ruby1.9.3 curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
@@ -20,7 +20,6 @@ Run this commands as 'root' user, change only when required.
 ## Prepare the RoR environment
 * Update to the latest gem and install the `bundler` rubygem, it will easily manage and compile all the other dependencies.
 
-        REALLY_GEM_UPDATE_SYSTEM=true gem update --system
         gem install bundler
 
 ## Create a regular user to run RoR app
