@@ -12,10 +12,12 @@ BitcoinBank::Application.configure do
     :host => "bitfication.com"
   }
   
-  config.middleware.use ::ExceptionNotifier,
-    :email_prefix => "[BF Exception] ",	 	
-    :sender_address => %w{no-reply@bitfication.com},	 
-    :exception_recipients => %w{support@bitfication.com}
+  config.middleware.use ::ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[BF Exception] ",	 	
+      :sender_address => %w{no-reply@bitfication.com},	 
+      :exception_recipients => %w{support@bitfication.com}
+    }
   
   # Used to broadcast invoices public URLs
   config.base_url = "https://bitfication.com/"
