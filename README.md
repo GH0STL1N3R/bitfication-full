@@ -15,7 +15,7 @@ Run this commands as 'root' user, change only when required.
 ## Installation on top of Ubuntu 12.04.3 LTS
 * Install required packages
 
-        aptitude install git ruby1.9.3 curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
+        apt-get install git ruby1.9.3 curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
 
 ## Prepare the RoR environment
 * Update to the latest gem and install the `bundler` rubygem, it will easily manage and compile all the other dependencies.
@@ -33,6 +33,11 @@ Run this commands as 'root' user, change only when required.
 * Check out sources with git
 
         su - webapp
+
+	git clone https://bitbucket.org/tmartinx/bitfication.git
+
+	# Or if you have a BitBucket account:
+
         git clone git@bitbucket.org:tmartinx/bitfication.git
 
 * Get into the sources directory
