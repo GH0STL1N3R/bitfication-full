@@ -19,7 +19,7 @@ gem 'fancybox2-rails', '~> 0.2.4'
 gem 'sass-rails'
 gem 'coffee-rails', '3.2.2' # 4.0.0 available - test
 gem 'newrelic_rpm'
-gem "paperclip", :git => "https://github.com/thoughtbot/paperclip.git"
+gem "paperclip", '4.1.1'
 
 gem 'recaptcha',
   :require => 'recaptcha/rails'
