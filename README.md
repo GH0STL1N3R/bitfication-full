@@ -33,7 +33,6 @@ Run this commands as 'root' user, change only when required.
 * Check out sources with git
 
         su - webapp
-
 	git clone https://bitbucket.org/tmartinx/bitfication.git
 
 * Or if you have a BitBucket account:
