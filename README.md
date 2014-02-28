@@ -12,7 +12,7 @@ Bitfication uses Ubuntu Linux.
 # Requirements
 Run this commands as 'root' user, change only when required.
 
-## Installation on top of Ubuntu 12.04.3 LTS
+## Installation on top of Ubuntu 12.04.4 LTS
 * Install required packages
 
         apt-get install git ruby1.9.3 curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
@@ -36,7 +36,7 @@ Run this commands as 'root' user, change only when required.
 
 	git clone https://bitbucket.org/tmartinx/bitfication.git
 
-	# Or if you have a BitBucket account:
+* Or if you have a BitBucket account:
 
         git clone git@bitbucket.org:tmartinx/bitfication.git
 
