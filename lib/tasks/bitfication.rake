@@ -18,8 +18,8 @@ namespace :bitfication do
     currency = "brl"
     
     @ticker = {
-      :high => Trade.with_currency(currency).last_30d.maximum(:ppc),
-      :low => Trade.with_currency(currency).last_30d.minimum(:ppc),
+      :high => Trade.with_currency(currency).last_week.maximum(:ppc),
+      :low => Trade.with_currency(currency).last_week.minimum(:ppc),
       :volume => (Trade.with_currency(currency).since_0h.sum(:traded_btc) || 0),
       :last_trade => Trade.with_currency(currency).count.zero? ? 0 : {
         :at => Trade.with_currency(currency).plottable(currency).last.created_at.to_i,

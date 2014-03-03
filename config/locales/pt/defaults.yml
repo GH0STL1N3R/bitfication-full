@@ -138,7 +138,7 @@ pt:
       prompt: "Por favor selecione"
 
     submit:
-      create: 'Criar %{model}'
+      create: 'Enviar Pedido'
       update: 'Atualizar %{model}'
       submit: 'Gravar %{model}'
 

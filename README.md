@@ -1,43 +1,52 @@
-# Bitfication
-Bitfication powers bitfication.com, a bitcoin trading platform. It is:
+# **Bitfication**
 
-* Open Source,
-* Based on Ruby on Rails,
-* Fully localizable,
-* Multi-currency.
+**Bitfication** powers bitfication.com, a Bitcoin Trading Platform.
 
-# Installation
-Bitfication uses Ubuntu Linux.
+Features:
 
-# Requirements
+* Open Source
+* Based on Ruby on Rails
+* Fully localizable
+* Multi-currency (under development)
+
+## Installation
+
+**Bitfication** is powered by Ubuntu Linux!
+
+## Requirements
+
 Run this commands as 'root' user, change only when required.
 
 ## Installation on top of Ubuntu 12.04.4 LTS
+
 * Install required packages
 
         apt-get install git ruby1.9.3 curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
 
 ## Prepare the RoR environment
-* Update to the latest gem and install the `bundler` rubygem, it will easily manage and compile all the other dependencies.
+
+* Use gem to install `bundler` rubygem package:
 
         gem install bundler
 
 ## Create a regular user to run RoR app
-* We'll use the 'webapp' Linux user and it'll be added to 'sudo' group temporarily.
+
+* We'll use the 'webapp' user and it'll be added to 'sudo' group temporarily, this way, all the required packages to run **Bitfication**, will get installed on your Ubuntu.
 
         adduser webapp
         adduser webapp sudo
 
 ## Become 'webapp' and get the code
+
 * Fork project if relevant
-* Check out sources with git
+* Clone the **Bitficaion** source code with git
 
         su - webapp
         git clone https://bitbucket.org/tmartinx/bitfication.git
 
 * Or if you have a BitBucket account:
 
-        git clone git@bitbucket.org:tmartinx/bitfication.git
+        git clone https://tmartinx@bitbucket.org/tmartinx/bitfication.git
 
 * Get into the sources directory
 
@@ -64,7 +73,7 @@ Run this commands as 'root' user, change only when required.
 
 Your fresh instance should now be running on `http://localhost:3000/` !
 
-## Production deployment
+# Production deployment (obsolete procedure)
 
 Usually, Rails applications are deployed in production using nginx or Apache, I'll introduce the Apache option.
 
@@ -83,6 +92,7 @@ To use the `cap` sweetness a couple of extra steps are required :
 You'll just need to issue a `cap deploy` locally for any subsequent deployment.
 
 # Contributions
+
 All are welcome, improvements, fixes and translations (the string extraction bounty has been paid).
 
  * The use of the `Numeric#to_f` method is big no-no, every single numeric that passes through the code should be typed as `BigDecimal`,
@@ -90,9 +100,11 @@ All are welcome, improvements, fixes and translations (the string extraction bou
  * Pull requests should apply cleanly on top of `master`, rebase if necessary
 
 # Updates
-Bitfication team.
+
+**Bitfication** team.
 
  * Thiago Martins updated this README.md
 
 # License
+
 AGPL License. Copyright 2010-2011 David FRANCOIS
