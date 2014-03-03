@@ -58,8 +58,8 @@ Run this commands as 'root' user, change only when required.
 
 * Log-in to MySQL console and run the following commands. If you are installing a production machine you'll obviously need to pick different credentials. Update the `config/database.yml` file accordingly.
 
-        > CREATE DATABASE 'bitficdevdb';
-        > GRANT ALL PRIVILEGES ON 'bitficdevdb'.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        > CREATE DATABASE bitficdevdb;
+        > GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
 
 * Run a couple of rake tasks (omit the `RAILS_ENV` option if you're setting up a development environment, Rails will grab the database configuration in the `config/database.yml` file under the right section (development, test, or production)
 
