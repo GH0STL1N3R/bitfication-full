@@ -6,16 +6,6 @@ GIT
     active_scaffold (3.3.4.rc)
       rails (>= 3.2.6, < 5)
 
-GIT
-  remote: https://github.com/thoughtbot/paperclip.git
-  revision: 7bf50e12848fbe7d70a013405425940303bb4112
-  specs:
-    paperclip (3.5.1)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.5.0)
-      mime-types
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -70,7 +60,7 @@ GEM
     chunky_png (1.2.8)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.1)
+    cocaine (0.5.3)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -82,6 +72,7 @@ GEM
     columnize (0.3.6)
     configatron (2.13.0)
       yamler (>= 0.1.0)
+    dalli (2.7.0)
     debugger (1.6.1)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -90,7 +81,7 @@ GEM
     debugger-ruby_core_source (1.2.3)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
-    devise (3.0.3)
+    devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -142,6 +133,11 @@ GEM
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.5.130)
     orm_adapter (0.4.0)
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.3)
     qrencoder (1.4.1)
       chunky_png (~> 1.1)
@@ -152,7 +148,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (3.2.13)
+    rails (3.2.16)
       actionmailer (= 3.2.13)
       actionpack (= 3.2.13)
       activerecord (= 3.2.13)
@@ -215,9 +211,10 @@ DEPENDENCIES
   bourbon
   capistrano
   coffee-rails (= 3.2.2)
+  dalli
   debugger
   delayed_job
-  devise
+  devise (= 2.2.4)
   devise-encryptable
   exception_notification
   execjs
@@ -230,10 +227,10 @@ DEPENDENCIES
   mocha
   mysql2
   newrelic_rpm
-  paperclip!
+  paperclip (= 4.1.1)
   qrencoder
   rack (= 1.4.5)
-  rails (= 3.2.13)
+  rails (= 3.2.16)
   rake
   recaptcha
   rotp (~> 1.4.1)
