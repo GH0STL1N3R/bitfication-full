@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'debugger'
 
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.17'
 gem 'rack', '1.4.5'
 gem 'rake'
 gem 'mysql2'
