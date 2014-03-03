@@ -29,12 +29,14 @@ BitcoinBank::Application.configure do
 #  config.action_mailer.delivery_method = :test
 
   config.action_mailer.default_url_options = {
-    :host => "bitfication.com"
+    :host => "bitfication.com:3000"
   }
 
   config.assets.debug = true
 
+  # It will manage cache for us with memcached
+  config.cache_store = :dalli_store, 'localhost'
+
   # Used to broadcast invoices public URLs
   config.base_url = "http://bitfication.com:3000/"
 end
-

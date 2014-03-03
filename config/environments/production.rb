@@ -6,6 +6,8 @@ BitcoinBank::Application.configure do
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.force_ssl = true
+
+  config.cache_store = :dalli_store, 'localhost'
   
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = {
