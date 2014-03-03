@@ -1,27 +1,24 @@
 # **Bitfication**
 
-**Bitfication** powers bitfication.com, a Bitcoin Trading Platform.
+**Bitfication** powers the Exchange bitfication.com, a Bitcoin Trading Platform, and it is is powered by Ubuntu Linux!
 
 Features:
 
 * Open Source
+
 * Based on Ruby on Rails
+
 * Fully localizable
+
 * Multi-currency (under development)
-
-## Installation
-
-**Bitfication** is powered by Ubuntu Linux!
-
-## Requirements
-
-Run this commands as 'root' user, change only when required.
 
 ## Installation on top of Ubuntu 12.04.4 LTS
 
+Run the following commands as 'root' and change to another user only when required.
+
 * Install required packages
 
-        apt-get install git ruby1.9.3 curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
+        apt-get install git ruby1.9.3 memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
 
 ## Prepare the RoR environment
 
@@ -39,12 +36,13 @@ Run this commands as 'root' user, change only when required.
 ## Become 'webapp' and get the code
 
 * Fork project if relevant
+
 * Clone the **Bitficaion** source code with git
 
         su - webapp
         git clone https://bitbucket.org/tmartinx/bitfication.git
 
-* Or if you have a BitBucket account:
+* Or if you have a BitBucket account (and if you fork the code):
 
         git clone https://tmartinx@bitbucket.org/tmartinx/bitfication.git
 
@@ -69,9 +67,9 @@ Run this commands as 'root' user, change only when required.
 
 * You're good to go! Run the rails server
 
-        rails s
+        RAILS_ENV=development rails s
 
-Your fresh instance should now be running on `http://localhost:3000/` !
+Your fresh instance should now be running on `http://localhost:3000/`!
 
 # Production deployment (obsolete procedure)
 
@@ -82,11 +80,17 @@ The `capistrano` tool is used to automate pretty much every deployment step. Dep
 To use the `cap` sweetness a couple of extra steps are required : 
 
 * You'll need to fork the project since all your deployment configuration is stored in `config/deploy.rb`, these configs are pulled directly from GitHub when deploying, so go for it, change them to suit your needs.
+
 * Set the remote machine up by typing `cap deploy:setup`
+
 * Log in to the remote machine and create the production configuration files in `{APP PATH}/shared/config/*.yml`, they will be used in production (you don't want your production passwords hanging around on GitHub do you ?)
+
 * Create the remote DB
+
 * Now you can run locally `cap deploy:migrations`, this will update the remote sources and run the migrations on the remote database
+
 * Now you just need to install the `passenger` gem on the remote server which will install an apache module
+
 * Create an apache virtual host and you're good to go.
 
 You'll just need to issue a `cap deploy` locally for any subsequent deployment.
@@ -96,12 +100,14 @@ You'll just need to issue a `cap deploy` locally for any subsequent deployment.
 All are welcome, improvements, fixes and translations (the string extraction bounty has been paid).
 
  * The use of the `Numeric#to_f` method is big no-no, every single numeric that passes through the code should be typed as `BigDecimal`,
+
  * Bugfixes should include a failing test,
+
  * Pull requests should apply cleanly on top of `master`, rebase if necessary
 
 # Updates
 
-**Bitfication** team.
+By **Bitfication** team!
 
  * Thiago Martins updated this README.md
 
