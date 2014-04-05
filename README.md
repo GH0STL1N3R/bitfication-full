@@ -18,7 +18,7 @@ Run the following commands as 'root' and change to another user only when requir
 
 * Install required packages
 
-        apt-get install git ruby1.9.3 memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
+        apt-get install git ruby1.9.3 imagemagick memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
 
 ## Prepare the RoR environment
 
