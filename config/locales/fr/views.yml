@@ -1,7 +1,7 @@
 fr:
   layouts:
     application:
-      title: "Bitcoin-Central : Achetez et vendez des Bitcoins"
+      title: "Bitfication : Achetez et vendez des Bitcoins"
       description: Achetez, vendez et stockez vos Bitcoins de manière simple et sûre avec la meilleure plateforme Bitcoin open-source  
     user_informations:
       signed_in_as: Connecté sous
@@ -261,7 +261,7 @@ fr:
       download: Télécharger Bitcoin 0.5.0
       source: Code source
       trading_data_title: Échanges de la semaine passée
-      welcome: Bienvenue sur bitcoin-central.net !
+      welcome: Bienvenue sur bitfication.com !
     support:
       contact: Contactez-nous
       contact_description_html: "Vous pouvez nous contacter à l'adresse <a href=\"mailto:%{email}\">%{email}</a>"

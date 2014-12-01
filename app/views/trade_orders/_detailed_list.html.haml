@@ -27,7 +27,7 @@
         %td.auto-sized= dark_pool_icon_for(to)
         %td.auto-sized= currency_icon_for(to[:currency])
         %td.auto-sized= activate_link_for(to) if to.activable?
-        %td.auto-sized= delete_link_for(to)
+        %td.auto-sized= to_delete_link_for(to)
 
     - reset_cycle 'trade_orders'
   - else

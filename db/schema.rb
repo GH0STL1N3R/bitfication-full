@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,32 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111205110307) do
+ActiveRecord::Schema.define(:version => 20130808091842) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
     t.integer  "account_id"
     t.string   "address"
-    t.decimal  "amount",                :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "amount",                  :precision => 16, :scale => 8, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "currency"
     t.string   "lr_transaction_id"
-    t.decimal  "lr_transferred_amount", :precision => 16, :scale => 8, :default => 0.0
-    t.decimal  "lr_merchant_fee",       :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "lr_transferred_amount",   :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "lr_merchant_fee",         :precision => 16, :scale => 8, :default => 0.0
     t.string   "bt_tx_id"
     t.string   "bt_tx_from"
-    t.integer  "bt_tx_confirmations",                                  :default => 0
+    t.integer  "bt_tx_confirmations",                                    :default => 0
     t.string   "lr_account_id"
     t.integer  "payee_id"
     t.string   "email"
     t.string   "px_tx_id"
     t.string   "px_payer"
-    t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "px_fee",                  :precision => 16, :scale => 8, :default => 0.0
     t.string   "comment"
     t.integer  "operation_id"
     t.string   "state"
     t.integer  "bank_account_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
@@ -43,7 +48,6 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
   create_table "accounts", :force => true do |t|
     t.string   "name",                                                                     :null => false
     t.string   "email"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "bitcoin_address"
@@ -80,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.integer  "last_notified_trade_id",                                :default => 0,     :null => false
     t.integer  "max_read_tx_id",                                        :default => 0,     :null => false
     t.decimal  "commission_rate",        :precision => 16, :scale => 8
+    t.datetime "reset_password_sent_at"
   end
 
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true
@@ -94,12 +99,16 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
 
   create_table "bank_accounts", :force => true do |t|
     t.integer  "user_id",        :null => false
-    t.string   "bic",            :null => false
-    t.string   "iban",           :null => false
-    t.text     "account_holder"
+    t.string   "bic"
+    t.string   "iban"
+    t.string   "account_holder", :null => false
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ag",             :null => false
+    t.string   "cc",             :null => false
+    t.string   "cnpj"
+    t.string   "bank_name"
   end
 
   create_table "comments", :force => true do |t|
@@ -114,6 +123,10 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.string   "code",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "display"
+    t.string   "flag"
+    t.string   "pt"
+    t.string   "en"
   end
 
   create_table "invoices", :force => true do |t|
@@ -167,6 +180,13 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.text     "contents"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "stats", :force => true do |t|
+    t.decimal "volume", :precision => 9, :scale => 5
+    t.decimal "phigh",  :precision => 9, :scale => 5
+    t.decimal "plow",   :precision => 9, :scale => 5
+    t.decimal "pwavg",  :precision => 9, :scale => 5
   end
 
   create_table "tickets", :force => true do |t|

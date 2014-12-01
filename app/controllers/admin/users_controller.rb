@@ -6,7 +6,7 @@ class Admin::UsersController < Admin::AdminController
     end
   end
 
-
+  
   def balances
     @balances = {}
     @user = User.find(params[:id])

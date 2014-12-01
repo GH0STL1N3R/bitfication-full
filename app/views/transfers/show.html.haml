@@ -1,5 +1,5 @@
 %h1
-  Transaction n°
+  Transaction no.
   %span.fixed= @transfer.id
 
 %table.default.details
@@ -11,14 +11,14 @@
     %th= t("activerecord.attributes.transfer.created_at")
     %td= l(@transfer.created_at)
 
-  - if @transfer.is_a?(Transfer)
+  - if @transfer.is_a?(Transfer) | @transfer.is_a?(Deposit) 
     %tr
       %th= t("activerecord.attributes.transfer.state")
       %td= transfer_state(@transfer.state, :message => t(".state.#{@transfer.state}").html_safe, :icon => true)
 
   %tr
     %th= t("activerecord.attributes.transfer.amount")
-    %td.fixed= number_to_currency(@transfer.amount, :unit => "", :precision => 6)
+    %td.fixed= number_to_currency(@transfer.amount, :unit => "", :precision => 8)
 
   %tr
     %th= t("activerecord.attributes.transfer.currency")
@@ -48,8 +48,20 @@
 
   - if @transfer.respond_to? :bank_account
     %tr
-      %th= t("activerecord.models.bank_account.one")
-      %td.fixed= @transfer.bank_account.iban
+      %th= t("activerecord.attributes.bank_account.account_holder")
+      %td.fixed= @transfer.bank_account.account_holder
+    %tr
+      %th= t("activerecord.attributes.bank_account.bank_name")
+      %td.fixed= @transfer.bank_account.bank_name
+    %tr
+      %th= t("activerecord.attributes.bank_account.ag")
+      %td.fixed= @transfer.bank_account.ag
+    %tr
+      %th= t("activerecord.attributes.bank_account.cc")
+      %td.fixed= @transfer.bank_account.cc
+    %tr
+      %th= t("activerecord.attributes.bank_account.cnpj")
+      %td.fixed= @transfer.bank_account.cnpj
 
   - unless @transfer.comment.blank?
     %tr

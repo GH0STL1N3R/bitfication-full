@@ -50,12 +50,12 @@
         = f.check_box :notify_on_trade, :class => "checkbox"
         .explanation= t(".notify_on_trade_explanation")        
 
-    %fieldset
-      %legend= t(".api_tools")
-      .form-field
-        = f.label :merchant
-        = f.check_box :merchant, :class => "checkbox"
-        .explanation= t(".merchant_explanation")
+    -#%fieldset
+      -#%legend= t(".api_tools")
+      -#.form-field
+        -#= f.label :merchant
+        -#= f.check_box :merchant, :class => "checkbox"
+        -#.explanation= t(".merchant_explanation")
 
 
   - if @user.new_record?

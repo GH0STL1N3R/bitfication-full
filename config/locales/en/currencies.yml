@@ -10,10 +10,10 @@ en:
       link: http://www.ecb.int/
     lrusd:
       name: Liberty Reserve Dollar
-      link: https://www.libertyreserve.com/?ref=U8651415
+      link: https://www.libertyreserve.com/?ref=U4552263
     lreur:
       name: Liberty Reserve Euro
-      link: https://www.libertyreserve.com/?ref=U8651415
+      link: https://www.libertyreserve.com/?ref=U4552263
     pgau:
       name: Pecunix Gold
       link: http://www.pecunix.com/
@@ -26,3 +26,6 @@ en:
     usd:
       name: US Dollar
       link: http://www.federalreserve.gov/
+    brl:
+      name: Brazilian Real
+      link: http://www.bb.com.br/

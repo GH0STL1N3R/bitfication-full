@@ -1,32 +1,39 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'debugger'
+
+gem 'rails', '3.2.17'
+gem 'rack', '1.4.5'
 gem 'rake'
 gem 'mysql2'
 gem 'addressable'
-gem 'devise'
+gem 'devise', '2.2.4'
+gem 'devise-encryptable'
 gem 'whenever'
 gem 'capistrano'
-gem 'active_scaffold'
+gem 'active_scaffold', '3.4.0'
 gem 'haml'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'fancybox2-rails', '~> 0.2.4'
 gem 'sass-rails'
-gem 'coffee-rails'
+gem 'coffee-rails', '3.2.2' # 4.0.0 available - test
+gem 'newrelic_rpm'
+gem 'paperclip', '4.1.1'
+gem 'dalli'
 
 gem 'recaptcha',
   :require => 'recaptcha/rails'
 
-gem 'exception_notification',
-  :git => "git@github.com:rails/exception_notification.git",
-  :require => 'exception_notifier'
+gem 'exception_notification'
 
 gem 'transitions',
   :require => ["transitions", "active_record/transitions"]
 
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'will_paginate', '~> 3.0.4'
 
 # OTP toolbox
-gem 'rotp', '~> 1.3.0'
+gem 'rotp', '~> 1.4.1'
 
 # QR Code generation
 gem 'qrencoder'
@@ -40,14 +47,8 @@ gem 'delayed_job'
 gem 'blueprint-rails'
 gem 'bourbon'
 
-# File attachment with database storage support
-gem 'paperclip', 
-  :git => 'https://github.com/patshaughnessy/paperclip.git'
-
 # Apple push notifications
-gem 'apn_on_rails',
-  :git => 'https://github.com/natescherer/apn_on_rails.git',
-  :branch => 'rails3'
+gem 'apn_on_rails'
 
 group :test do
   gem 'mocha', :require => false

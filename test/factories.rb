@@ -4,7 +4,7 @@ Factory.define :announcement do |a|
 end
 
 Factory.define :user do |user|
-  user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
+  user.name                   { |u| "BF-U#{(rand * 10 ** 6).to_i}" }
   user.email                  { |u| "#{u.name}@domain.tld" }
   user.password               "password"
   user.password_confirmation  { |u| u.password }
@@ -16,7 +16,7 @@ Factory.define :user do |user|
 end
 
 Factory.define :manager do |user|
-  user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
+  user.name                   { |u| "BF-U#{(rand * 10 ** 6).to_i}" }
   user.email                  { |u| "#{u.name}@domain.tld" }
   user.password               "password"
   user.password_confirmation  { |u| u.password }
@@ -27,7 +27,7 @@ Factory.define :manager do |user|
 end
 
 Factory.define :admin do |user|
-  user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
+  user.name                   { |u| "BF-U#{(rand * 10 ** 6).to_i}" }
   user.email                  { |u| "#{u.name}@domain.tld" }
   user.password               "password"
   user.password_confirmation  { |u| u.password }

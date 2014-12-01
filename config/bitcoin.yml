@@ -1,11 +1,11 @@
 development:
-  username: bitcoin-admin
-  password: 5MLpeupM46
+  username: bitficbtcusr
+  password: PASSWORD
   url: http://localhost:8332/
-  donations: 1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz
+  donations: 18nN5efnoyn8FqBLgNSJhVc6QUbSgM8yF5
   
-test:
-  username: bitcoin-admin
-  password: 5MLpeupM46
+production:
+  username: bitficbtcusr
+  password: PASSWORD
   url: http://localhost:8332/
-  donations: 1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz
+  donations: 18nN5efnoyn8FqBLgNSJhVc6QUbSgM8yF5

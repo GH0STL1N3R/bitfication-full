@@ -1,10 +1,10 @@
-recipient: backup@bitcoin-central.net
+recipient: backup@bitfication.com
 ftp_servers:
   server1:
-    host: ftp.domain.tld
+    host: ftp.bitfication.com
     username: user
     password: pass
   server2:
-    host: ftp2.domain.tld
+    host: ftp2.bitfication.com
     username: user
     password: pass

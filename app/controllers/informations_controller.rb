@@ -2,7 +2,7 @@ class InformationsController < ApplicationController
   skip_before_filter :authenticate_user!
 
   def welcome
-    currency = (params[:currency] || "eur").downcase.to_sym
+    currency = (params[:currency] || "brl").downcase.to_sym
     
     @min_y = [0.3 * (Trade.last_week.with_currency(currency).minimum(:ppc) or 0) - (Trade.with_currency(currency).maximum(:ppc) or 0), 0].max
     @max_y = 1.3 * (Trade.last_week.with_currency(currency).maximum(:ppc) or 0)

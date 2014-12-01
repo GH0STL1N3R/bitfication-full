@@ -30,6 +30,8 @@ en:
         created_at: Created at
         user: User
         amount: Amount
+        amount_tosend: Amount to send to our account
+        amount_afterfee: Amount received after fees
         address: Address
         currency: Currency
         bt_tx_confirmations: Confirmations
@@ -108,7 +110,12 @@ en:
       bank_account:
         bic: BIC
         iban: IBAN
-        account_holder: Full name and address
+        bank_name: Bank name
+        account_holder: Full name
+        ag: Agency
+        cc: Account
+        cnpj: CPF/CNPJ
+        cpf: CPF
         created_at: Registered on
         state: Status
       currency:
@@ -188,7 +195,8 @@ en:
           lrusd: Liberty Reserve Dollar
           lreur: Liberty Reserve Euro
           pgau: Pecunix Gold
-          btc: Bitcoin        
+          btc: Bitcoin   
+          brl: Brazilian Real  
       ticket:
         states:
           pending: Pending

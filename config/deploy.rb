@@ -7,7 +7,7 @@ set :rails_env, ENV['rails_env'] || ENV['RAILS_ENV'] || default_env
 django = "django.webflows.fr"
 
 set :application, "bitcoin-bank"
-set :repository,  "git@github.com:davout/bitcoin-central.git"
+set :repository,  "git@github.com:tmartinx/bitfication.git"
 
 set :scm, :git
 set :deploy_to, "~/bitcoin-bank"

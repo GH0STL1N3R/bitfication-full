@@ -8,7 +8,7 @@ class CreateCurrencies < ActiveRecord::Migration
       t.timestamps
     end
     
-    %w{eur lrusd lreur pgau btc usd cad inr}.each do |c|
+    %w{btc brl}.each do |c|
       execute "INSERT INTO currencies (code, created_at, updated_at) VALUES ('#{c.to_s.upcase}', NOW(), NOW())"
     end
   end

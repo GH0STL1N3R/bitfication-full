@@ -1,6 +1,8 @@
 class Transfer < AccountOperation
   include ActiveRecord::Transitions
-
+  
+  DEPOSIT_WITHDRAW_COMMISSION_RATE = BigDecimal("0.01")
+  
   before_validation :round_amount,
     :on => :create  
   
@@ -14,12 +16,13 @@ class Transfer < AccountOperation
     :negative => true
 
   validates :currency,
-    :inclusion => { :in => ["LRUSD", "LREUR", "EUR", "BTC"] }
+    :inclusion => { :in => ["BRL", "BTC"] }
 
   def type_name
     type.gsub(/Transfer$/, "").underscore.gsub(/\_/, " ").titleize
   end
 
+=begin
   state_machine do
     state :pending
     state :processed
@@ -29,7 +32,9 @@ class Transfer < AccountOperation
         :from => :pending
     end
   end
+=end
 
+  # all transfers are withdrawals
   def self.from_params(params)
     transfer = class_for_transfer(params[:currency]).new(params)
    
@@ -46,15 +51,22 @@ class Transfer < AccountOperation
     end
   end
 
-  def self.minimal_amount_for(currency)
+  def self.minimal_amount_for(currency, display)
     currency = currency.to_s.downcase.to_sym
 
-    if [:lrusd, :lreur].include?(currency)
-      BigDecimal("0.02")
-    elsif currency == :eur
-      BigDecimal("30.0")
+    #if [:u, :lreur].include?(currency)
+    #  BigDecimal("0.02")
+    #if currency == :usd
+    #  BigDecimal("100.0")
+    
+    if currency == :brl
+      if display==true
+        BigDecimal("100.0")
+      else
+        BigDecimal("100.0")*(1-DEPOSIT_WITHDRAW_COMMISSION_RATE)
+      end
     elsif currency == :btc
-      BigDecimal("0.05")
+      BigDecimal("0.01")
     else
       raise RuntimeError.new("Invalid currency")
     end
@@ -63,16 +75,20 @@ class Transfer < AccountOperation
   def self.round_amount(amount, currency)
     currency = currency.to_s.downcase.to_sym
     amount = amount.to_f if amount.is_a?(Fixnum)
-    amount.to_d.round(2, BigDecimal::ROUND_DOWN)
+    amount.to_d.round(8, BigDecimal::ROUND_DOWN)
   end
   
   def self.class_for_transfer(currency)
+    
+    puts currency
+    
     currency = currency.to_s.downcase.to_sym
 
-    if currency == :eur
+    #if [:usd, :brl].include?(currency)
+    if [:brl].include?(currency)
       WireTransfer
-    elsif [:lrusd, :lreur].include?(currency)
-      LibertyReserveTransfer
+    #elsif [:lrusd, :lreur].include?(currency)
+    #  LibertyReserveTransfer
     elsif currency == :btc
       BitcoinTransfer
     else

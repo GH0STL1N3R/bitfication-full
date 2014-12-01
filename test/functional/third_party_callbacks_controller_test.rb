@@ -5,7 +5,7 @@ class ThirdPartyCallbacksControllerTest < ActionController::TestCase
     user = Factory(:user, :id => 293383075)
     
     params = {
-      "PAYEE_ACCOUNT" => "support@bitcoin-central.net",
+      "PAYEE_ACCOUNT" => "support@bitfication.com",
       "PAYMENT_AMOUNT" => "1.0000",
       "PAYMENT_UNITS" => "GAU",
       "PAYMENT_REC_ID" => "123456",
@@ -15,7 +15,7 @@ class ThirdPartyCallbacksControllerTest < ActionController::TestCase
       "PAYMENT_ID" => "293383075",
       "PAYMENT_FEE" => "0.0000",
       "TXN_DATETIME" => "2011-02-01 18:18:44",
-      "SUGGESTED_MEMO" => "Payment Bitcoin Central",
+      "SUGGESTED_MEMO" => "Payment Bitfication",
     }
 
     assert !AccountOperation.find_by_px_tx_id("123456")

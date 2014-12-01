@@ -1,5 +1,5 @@
 development:
-  account: support@bitcoin-central.net
+  account: support@bitfication.com
   secret: secret word is secret
 
   # Pecunix POSTs here to confirm payment
@@ -12,9 +12,9 @@ development:
   no_payment_url: http://localhost:3030/third_party_callbacks/px_cancel
 
 test:
-  account: support@bitcoin-central.net
+  account: support@bitfication.com
   secret: secret word is secret
-  status_url: https://bitcoin-central.net/third_party_callbacks/px_status
-  payment_url: https://bitcoin-central.net/third_party_callbacks/px_payment
-  no_payment_url: https://bitcoin-central.net/third_party_callbacks/px_cancel
+  status_url: https://bitfication.com/third_party_callbacks/px_status
+  payment_url: https://bitfication.com/third_party_callbacks/px_payment
+  no_payment_url: https://bitfication.com/third_party_callbacks/px_cancel
   

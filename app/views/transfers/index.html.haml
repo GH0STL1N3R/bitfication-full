@@ -16,7 +16,7 @@
           = transfer.currency
         %td.amount
           %span{ :class => color_for(transfer), :title => confirmation_tooltip_for(transfer) }
-            = "#{transfer.amount > 0 ? "+" : "-"} #{number_to_currency transfer.amount.abs, :unit => ""}"
+            = "#{transfer.amount > 0 ? "+" : "-"} #{number_to_currency transfer.amount.abs, :unit => "", :precision => 8}"
         %td.auto-sized
           = transfer_details(transfer)  
 

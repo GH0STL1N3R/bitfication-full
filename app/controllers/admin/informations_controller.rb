@@ -1,6 +1,6 @@
 class Admin::InformationsController < Admin::AdminController
   def balances
-    @balances = [:lrusd, :lreur, :pgau, :eur, :btc, :cad, :inr].inject({}) do |balances, currency|
+    @balances = [:brl, :btc].inject({}) do |balances, currency|
       balances[currency] = {}
       
       balances[currency][:user] = AccountOperation.
@@ -24,7 +24,8 @@ class Admin::InformationsController < Admin::AdminController
       balances
     end
     
-    @currencies = @balances.keys.map(&:to_s).sort.map(&:to_sym)
+    @balance_currencies = @balances.keys.map(&:to_s).sort.map(&:to_sym)
+    
   end
   
   
@@ -34,7 +35,7 @@ class Admin::InformationsController < Admin::AdminController
       if currency == :btc
         Bitcoin::Client.instance.get_balance
       elsif [:lreur, :lrusd].include?(currency)
-        LibertyReserve::Client.instance.get_balance(currency)
+        #LibertyReserve::Client.instance.get_balance(currency)
       else
         "N/A"
       end

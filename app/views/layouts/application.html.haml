@@ -24,20 +24,35 @@
     = yield :head
 
   %body{ :class => [request[:controller], "#{request[:controller]}-#{request[:action]}"] }
-    #content
+      
+    %div#userbar-wrapper
+      %div#userbar
+        %div.index 
+          = t(".ticker.last_price") + ": " + number_to_currency(@last_price, unit: "R$")
+        %div.index
+          = t(".ticker.high") + ": " + number_to_currency(@stats[:phigh], unit: "R$")
+        %div.index
+          = t(".ticker.low") + ": " + number_to_currency(@stats[:plow], unit: "R$")
+        %div.index
+          = t(".ticker.volume") + ": " + number_to_currency(@stats[:volume], unit: "BTC", precision: 5, format: "%n %u" )
+        %div.index
+          = t(".ticker.wavg") + ": " + number_to_currency(@stats[:pwavg], unit: "R$")
 
-      %h1#main-title= link_to(content_tag(:span, t(".title")), root_path)
-
-      = render :partial => 'layouts/locale_select'
-      = render :partial => 'layouts/user_informations'
-      = render :partial => 'layouts/navigation'
-      = render :partial => 'layouts/announcements'
-      = render :partial => 'layouts/flash', :object => flash
-
-      #right-content
-        = yield
-
-        / This is used to force the container to stretch
-        %div{ :style => "clear:both" }
-
-    = render :partial => 'layouts/footer'
+    #spacer
+      #content{ :style => "clear:both" }
+  
+        %h1#main-title= link_to(content_tag(:span, t(".title")), root_path)
+  
+        = render :partial => 'layouts/locale_select'
+        = render :partial => 'layouts/user_informations'
+        = render :partial => 'layouts/navigation'
+        = render :partial => 'layouts/announcements'
+        = render :partial => 'layouts/flash', :object => flash
+  
+        #right-content
+          = yield
+  
+          / This is used to force the container to stretch
+          %div{ :style => "clear:both" }
+  
+      = render :partial => 'layouts/footer'

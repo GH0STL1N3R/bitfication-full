@@ -1,12 +1,12 @@
 //= require jquery
+//= require fancybox
 //= require jquery_ujs
-//= require jquery-ui.js
+//= require jquery.ui.core
 //= require excanvas.js
-//= require jqplot.js
+//= require jquery.jqplot.js
 //= require jqplot.dateAxisRenderer.js
 //= require jqplot.highlighter.js
 //= require jquery.countdown.js
-//= require jquery.fancybox.js
 //= require active_scaffold
 
 $(document).ready(function() {

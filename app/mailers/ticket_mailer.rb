@@ -1,4 +1,4 @@
-class TicketMailer < BitcoinCentralMailer
+class TicketMailer < BitficationMailer
   def create_notification(ticket)
     do_notify(:create, ticket)
   end

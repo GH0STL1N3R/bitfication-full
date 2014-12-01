@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def number_to_bitcoins(amount, options = {})
-    number_to_currency(amount, options.merge({:unit => "BTC"}))
+    number_to_currency(amount, options.merge({:unit => "BTC", :format => "%n %u"}) )
   end
 
   def number_to_lrusd(amount, options = {})
@@ -62,20 +62,27 @@ module ApplicationHelper
   end
 
   def bbe_link(type, id)
-    link_to(truncate(id, :length => 15, :omission => ""), "http://blockexplorer.com/#{type}/#{id}", :target => "_blank", :title => id)
+    link_to(truncate(id, :length => 15, :omission => ""), "http://blockchain.info/pt/#{type}/#{id}", :target => "_blank", :title => id)
   end
 
   def locale_switch_link(locale, url)
     scheme, address = url.split(":\/\/")
-    first_subdomain = address.match(/^[^\.]+/)[0]
+    #first_subdomain = address.match(/^[^\.]+/)[0]
 
-    if I18n.available_locales.map(&:to_s).include? first_subdomain
-      address.gsub!(/^[^\.]+/, "")
+    #if I18n.available_locales.map(&:to_s).include? first_subdomain
+    #  address.gsub!(/^[^\.]+/, "")
+    #else
+    #  address = ".#{address}"
+    #end
+    #"#{scheme}://#{locale}#{address}"
+    #"#{url}?locale=#{locale}"
+    
+    if !request.port.nil? && !request.port==80
+      "#{scheme}://#{request.host}:#{request.port}#{request.path}?locale=#{locale}"
     else
-      address = ".#{address}"
+      "#{scheme}://#{request.host}:#{request.port}#{request.path}?locale=#{locale}"
     end
-
-    "#{scheme}://#{locale}#{address}"
+    
   end
   
   def qrcode_image_tag(data)

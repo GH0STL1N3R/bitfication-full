@@ -1,5 +1,8 @@
+production:
+  account: UA-XXXXXXXX-1
+
 development:
-  account: UA-XXXXXXXX-X
+  account: UA-XXXXXXXX-1
 
 test:
-  account: UA-XXXXXXXX-X
+  account: UA-XXXXXXXX-1

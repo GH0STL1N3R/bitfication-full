@@ -1,4 +1,4 @@
-class BackupMailer < BitcoinCentralMailer
+class BackupMailer < BitficationMailer
   def wallet_backup(recipient, wallet)
     attachments["wallet_#{DateTime.now.strftime("%Y_%m_%d_%H_%M.dat.gpg")}"] = File.read(wallet)
 

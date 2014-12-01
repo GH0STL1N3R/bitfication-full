@@ -5,7 +5,6 @@
       %th= t(".price")
       %th= t(".amount")
       %th= t(".total")
-      %th.auto-sized
 
     - unless orders.blank?
       - orders.each do |to|
@@ -19,6 +18,5 @@
             %td.amount= format_amount(to[:ppc]*to[:amount], to[:currency], 3)
           - else
             %td= t(".market_order")
-          %td.auto-sized= currency_icon_for(to.currency)
     - else
       = render :partial => "layouts/no_data"

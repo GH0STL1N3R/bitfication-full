@@ -3,7 +3,7 @@
     %ul
       = menu_item ".account.balance", account_path
       = menu_item ".account.history", account_transfers_path
-      = menu_item ".account.deposit", deposit_account_path
+      = menu_item ".account.deposit", new_account_deposit_path
       = menu_item ".account.withdraw", new_account_transfer_path
 
   = menu_item ".trading.main", nil do
@@ -29,8 +29,9 @@
 
   = menu_item ".help.main", nil do
     %ul
+      = menu_item ".help.support_newticket", new_user_ticket_path
+      = menu_item ".help.support_alltickets", user_tickets_path
       = menu_item ".help.faq", static_path(:faq)
       = menu_item ".help.terms_of_service", static_path(:terms_of_service), :logged_in => true
       = menu_item ".help.fees", static_path(:fees)
-      = menu_item ".help.support", support_path
       = menu_item ".help.api_docs", static_path(:api_docs)

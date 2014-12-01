@@ -1,4 +1,8 @@
-class WireTransfer < Transfer
+class WireTransfer < Transfer 
+  include ActionView::Helpers::NumberHelper
+  
+  WITHDRAWAL_COMMISSION_RATE = BigDecimal("0.01")
+  
   attr_accessible :bank_account_id, :bank_account_attributes
 
   belongs_to :bank_account
@@ -11,8 +15,8 @@ class WireTransfer < Transfer
     :presence => true
 
   validates :currency,
-    :inclusion => { :in => ["EUR"] }
-
+    :inclusion => { :in => ["BRL"] }
+ 
   def execute
     # Placeholder for now
   end
@@ -22,4 +26,5 @@ class WireTransfer < Transfer
       raise "Someone is trying to pull something fishy off"
     end
   end
+  
 end

@@ -53,7 +53,7 @@ fr:
     other: En attente de %{count} confirmations
 
   # mailers/backup_mailer.rb
-  support_from: Bitcoin Central Support <%{support_email}>
+  support_from: Bitfication Support <%{support_email}>
   wallet_backup_subject: Sauvegarde du wallet.dat %{date}
 
   # mailers/user_mailer.rb
@@ -130,7 +130,7 @@ fr:
       <ul>
         <li>une adresse <strong>bitcoin</strong> (BTC uniquement),</li>
         <li>une adresse <strong>e-mail</strong> (toutes devises),</li>
-        <li>une n° de compte <strong>Bitcoin Central</strong> (toutes devises), ou</li>
+        <li>une n° de compte <strong>Bitfication</strong> (toutes devises), ou</li>
         <li>un compte <strong>Liberty Reserve</strong> (LREUR et LRUSD)</li>
       </ul>
     </p>
@@ -138,24 +138,24 @@ fr:
   how_does_it_work_title: Comment ça marche ?
   how_does_it_work_body_html:
     <p>
-      Les transferts en bitcoins peuvent-être effectués vers un compte Bitcoin Central ou vers une adresse e-mail.
-      Le transfert reste interne à Bitcoin Central dans le cas d&#146;un envoi vers une adresse bitcoin si cette adresse
+      Les transferts en bitcoins peuvent-être effectués vers un compte Bitfication ou vers une adresse e-mail.
+      Le transfert reste interne à Bitfication dans le cas d&#146;un envoi vers une adresse bitcoin si cette adresse
       appartient à un de ses utilisateurs, sinon ils sont effectués via le réseau bitcoin.
     </p>
     <p>
-      Les transferts entre comptes Bitcoin Central sont entièrement gratuits.
+      Les transferts entre comptes Bitfication sont entièrement gratuits.
     </p>
     <p>
       Les transferts vers une adresse e-mail déclenchent l&#146;envoi d&#146;un message si son propriétaire
-      ne possède pas de compte Bitcoin Central, dans ce cas, le message l&#146;informe que les fonds sont
-      disponibles sur Bitcoin Central. Si les fonds ne sont pas récupérés par leur destinataire ils sont
+      ne possède pas de compte Bitfication, dans ce cas, le message l&#146;informe que les fonds sont
+      disponibles sur Bitfication. Si les fonds ne sont pas récupérés par leur destinataire ils sont
       re-crédités sur le compte de l&#146;expéditeur après un certain temps. <strong>Cette fonctionnalité n&#146;est pas encore disponible.</strong>
     </p>
   payee: Destinataire
-  payee_id_eur: N° de compte Bitcoin Central ou adresse e-mail
-  payee_id_lrusd: N° de compte Bitcoin Central, Liberty Reserve, ou adresse e-mail
-  payee_id_lreur: N° de compte Bitcoin Central, Liberty Reserve, ou adresse e-mail
-  payee_id_btc: N° de compte Bitcoin Central, adresse bitcoin ou e-mail
+  payee_id_eur: N° de compte Bitfication ou adresse e-mail
+  payee_id_lrusd: N° de compte Bitfication, Liberty Reserve, ou adresse e-mail
+  payee_id_lreur: N° de compte Bitfication, Liberty Reserve, ou adresse e-mail
+  payee_id_btc: N° de compte Bitfication, adresse bitcoin ou e-mail
   payee_id_none: Identification du destinataire
   confirmed_balance: Votre solde disponible
   transfer_amount: Montant
@@ -163,7 +163,7 @@ fr:
 
   # views/user_mailer/registration_confirmation.html
   # views/user_mailer/registration_confirmation.text
-  thanks_for_registering: "Merci d'avoir créé votre compte Bitcoin Central."
+  thanks_for_registering: "Merci d'avoir créé votre compte Bitfication."
   your_account_id_is: "Votre n° de compte : %{account_id}"
 
   # views/users/_form.html

@@ -8,7 +8,7 @@ class UrlValidatorTest < ActiveSupport::TestCase
     invoice = Invoice.new({
         :user => Factory(:user),
         :amount => 100,
-        :payment_address => '1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz'
+        :payment_address => '1HmL6m5sveWreQgPoyPFWfZevEkcfNWwf3'
       })
 
     assert !invoice.valid?

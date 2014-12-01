@@ -1,5 +1,5 @@
 class Trade < Operation
-  DEFAULT_COMMISSION_RATE = BigDecimal("0")
+  DEFAULT_COMMISSION_RATE = BigDecimal("0.003")
 
   default_scope order("created_at DESC")
   
@@ -51,8 +51,17 @@ class Trade < Operation
     where("created_at >= ?", DateTime.now.advance(:hours => -24))
   }
   
+  scope :since_0h, lambda {
+    zh = DateTime.new(DateTime.now.year, DateTime.now.month, DateTime.now.day, 00, 00, 00)
+    where("created_at >= ?", zh)
+  }
+  
   scope :last_week, lambda {
     where("created_at >= ?", DateTime.now.advance(:days => -7))
+  }
+  
+  scope :last_30d, lambda {
+    where("created_at >= ?", DateTime.now.advance(:days => -30))
   }
 
   scope :involved, lambda { |user|

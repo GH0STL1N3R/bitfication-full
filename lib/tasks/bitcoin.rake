@@ -1,6 +1,7 @@
 namespace :bitcoin do
   desc "Synchronizes the transactions in the client with the transactions stored in the database"
   task :synchronize_transactions => :environment do
+    # Only receives incoming transactions
     Lockfile.lock(:synchronize_transactions) do
       BitcoinTransfer.synchronize_transactions!
     end

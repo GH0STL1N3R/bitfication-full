@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
         :notice => t("devise.registrations.signed_up")
     else
       clean_up_passwords(resource)
-      render_with_scope :new
+      render :new
     end
   end
 end

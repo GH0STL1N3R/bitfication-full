@@ -135,7 +135,7 @@ module LibertyReserve
     def format_transaction(t)
       unless t.blank? or t["Transfer"].blank? or t["Transfer"]["Memo"].blank?
 
-        name = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
+        name = t["Transfer"]["Memo"].match(/BF\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BF\-[A-Z][0-9]+/)[0]
 
         if name
           {

@@ -1,6 +1,6 @@
 class TradeOrder < ActiveRecord::Base
-  MIN_AMOUNT = 1.0
-  MIN_DARK_POOL_AMOUNT = 400.0
+  MIN_AMOUNT = 0.01
+  MIN_DARK_POOL_AMOUNT = 20.0
 
   TYPES = [:limit_order, :market_order]
 
@@ -204,10 +204,12 @@ class TradeOrder < ActiveRecord::Base
   end
   
   def execute!
+    
     executed_trades = []
-
+    
     TradeOrder.transaction do
       begin
+        
         mos = TradeOrder.matching_orders(self)
         mos.reverse!
         mo = mos.pop
@@ -224,20 +226,26 @@ class TradeOrder < ActiveRecord::Base
           end
 
           # All array elements are BigDecimal, result is BigDecimal
-          btc_amount = [
+          options = [
             sale.amount,                              # Amount of BTC sold
             purchase.amount,                          # Amount of BTC bought
             sale.user.balance(:btc),                  # Seller's BTC balance
             purchase.user.balance(currency) / p       # Buyer's BTC buying power @ p
-          ].min
-
-          traded_btc = btc_amount.round(5)
-          traded_currency = (btc_amount * p).round(5)
+          ]
+          
+          btc_amount = options.min
+          
+          min_index = options.each_with_index.inject(0){ |minidx, (v,i)| v < options[minidx] ? i : minidx }
+          
+          traded_btc = btc_amount
+          
+          traded_currency = min_index==3? purchase.user.balance(currency) : (traded_btc * p)
 
           # This is necessary to prevent market orders from keeping being executed
           # when a user has no balance anymore, or when amounts are so small that one
           # of the sides sells/buy 0.000001 for 0
           if traded_btc > 0 and traded_currency > 0
+            
             # Update orders
             mo.amount = mo.amount - traded_btc
             self.amount = amount - traded_btc
@@ -246,6 +254,7 @@ class TradeOrder < ActiveRecord::Base
             save!
 
             # Record the trade
+            
             trade = Trade.create! do |t|
               t.traded_btc = traded_btc
               t.traded_currency = traded_currency
@@ -256,9 +265,9 @@ class TradeOrder < ActiveRecord::Base
               t.purchase_order_id = purchase.id
               t.sale_order_id = sale.id
             end
-
+            
             executed_trades << trade
-
+            
             # TODO : Split orders if an user has enough funds to partially honor an order ?
             # Destroy or save them according to the remaining balance
             [self, mo].each do |o|
@@ -268,6 +277,8 @@ class TradeOrder < ActiveRecord::Base
                 o.save!
               end
             end
+            
+            
           end
           
           mo = mos.pop
@@ -278,9 +289,12 @@ class TradeOrder < ActiveRecord::Base
         raise ActiveRecord::Rollback
       ensure
         raise @exception if @exception
-      end
-    end
 
+      end
+
+    end
+      
+    # Aggregation of executed trades
     result = {
       :trades => 0,
       :total_traded_btc => 0,

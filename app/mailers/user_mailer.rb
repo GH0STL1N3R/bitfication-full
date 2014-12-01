@@ -1,4 +1,6 @@
-class UserMailer < BitcoinCentralMailer
+class UserMailer < BitficationMailer
+  include DepositsHelper
+  
   def registration_confirmation(user)
     @user = user
     
@@ -17,9 +19,31 @@ class UserMailer < BitcoinCentralMailer
   def withdrawal_processed_notification(withdrawal)
     @user = withdrawal.account
     @withdrawal = withdrawal
+    @withdrawal.bank_account.ag[2..-1] = '*' * (@withdrawal.bank_account.ag.length - 2)
+    @withdrawal.bank_account.cc[3..-1] = '*' * (@withdrawal.bank_account.cc.length - 3)
     
     mail :to => @user.email,
       :subject => I18n.t("emails.withdrawal_processed_notification.subject")
+  end
+  
+  def deposit_processed_notification(deposit)
+    @user = deposit.account
+    @deposit = deposit
+    
+    mail :to => @user.email,
+      :subject => I18n.t("emails.deposit_processed_notification.subject")
+  end
+  
+  def deposit_request_notification(deposit)
+    @user = deposit.account
+    
+    get_deposit_account
+    
+    @deposit = deposit
+    @deposit.amount = @deposit.amount.to_f.abs
+    
+    mail :to => @user.email,
+      :subject => I18n.t("emails.deposit_request_notification.subject")
   end
   
   def trade_notification(user, sales, purchases)

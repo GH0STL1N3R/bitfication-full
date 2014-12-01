@@ -53,7 +53,7 @@ en:
     other: %{count} confirmations left
 
   # mailers/backup_mailer.rb
-  support_from: Bitcoin Central support <%{support_email}>
+  support_from: Bitfication support <%{support_email}>
   wallet_backup_subject: Wallet backup %{date}
 
   # mailers/user_mailer.rb
@@ -124,7 +124,7 @@ en:
 
   # views/user_mailer/registration_confirmation.html
   # views/user_mailer/registration_confirmation.text
-  thanks_for_registering: Thank you for registering at Bitcoin Central.
+  thanks_for_registering: Thank you for registering at Bitfication.
   your_account_id_is: "Your account ID is : %{account_id}"
 
   # views/users/_form.html

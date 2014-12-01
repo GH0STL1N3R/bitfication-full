@@ -1,13 +1,23 @@
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: bitficproddb
+  username: bitficprodusr
+  password: bitficpass
+  host: localhost
+
 development:
   adapter: mysql2
   encoding: utf8
-  database: bitcoin-bank_development
-  username: rails
-  password: rails
+  database: bitficdevdb
+  username: bitficdevusr
+  password: bitficpass
+  host: localhost
 
 test:
   adapter: mysql2
   encoding: utf8
-  database: bitcoin-bank_test
-  username: rails
-  password: rails
+  database: bitfictestdb
+  username: bitfictstusr
+  password: bitficpass
+  host: localhost

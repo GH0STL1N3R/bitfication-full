@@ -1,5 +1,13 @@
 class User < Account
   # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable,
     :ga_otp_authenticatable,
@@ -13,8 +21,7 @@ class User < Account
     :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :password, :password_confirmation, :remember_me, :time_zone, 
-    :merchant, :require_ga_otp, :require_yk_otp, :full_name, :address
+  attr_accessible :password, :password_confirmation, :remember_me, :time_zone, :require_ga_otp, :require_yk_otp, :full_name, :address
 
   attr_accessor :captcha,
     :skip_captcha,
@@ -47,6 +54,9 @@ class User < Account
 
   has_many :tickets,
     :dependent => :destroy
+    
+  #has_many :tickets,
+  #  :dependent => :destroy
 
   validates :email,
     :uniqueness => true,
@@ -89,6 +99,6 @@ class User < Account
   end
 
   def generate_name
-    self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
+    self.name = "BF-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 end
