@@ -12,9 +12,9 @@ Features:
 
 - Multi-currency (under development)
 
-## Installation on top of Ubuntu 12.04.5 LTS
+## Installation on top of Ubuntu 14.04.1 LTS
 
-You must have, at least, 1 Ubuntu 12.04.5 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
+You must have, at least, one Ubuntu 14.04.1 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
 
 For a Production Environment, you might want to split the services, each one deployed on its own Ubuntu Instance. Like for example:
 
@@ -30,7 +30,7 @@ The following commands must be executed as `root` user, change to another user o
 
 * Install the following packages:
 
-        apt-get install git ruby1.9.3 imagemagick memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev python-software-properties
+        apt-get install git acpid tmux ruby rails bundler capistrano ruby-mysql2 ruby-addressable ruby-coffee-rails ruby-will-paginate ruby-mocha ruby-execjs ruby-factory-girl-rails ruby-recaptcha ruby-sprockets ruby-uglifier ruby-bcrypt imagemagick memcached curl vim postfix apache2 libapache2-mod-passenger mysql-client mysql-server build-essential apache2-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev software-properties-common
 
 ## Install Bitcoin Daemon
 
@@ -55,15 +55,12 @@ Complete procedure to install Bitfication's Bitcoin Hot Wallet.
 * Now, run the `bitcoind` logged as user `bitcoin`, like this:
 
         su - bitcoin
+
         bitcoind
 
 There is a Bitcoin Daemon configuration example located at the file: `bitfication/misc/bitcoin.conf`. You'll need to copy it to: `~bitcoin/.bitcoin/bitcoin.conf`.
 
 ### Preparing your environment
-
-* Use `gem` to install `bundler` rubygem package:
-
-        gem install bundler
 
 ### Create a regular user to host/run Bitfication
 
@@ -72,6 +69,7 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 * Add `webuser` runtime user:
 
         adduser webapp
+
         adduser webapp sudo
 
 ### Become 'webapp' and get the code
@@ -92,9 +90,9 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 
         cd ~/bitfication
 
-* Compile and install the required dependencies:
+* Compile and install the required dependencies (You'll need `webapp's` password):
 
-        sudo bundle install
+        bundle install
 
 * Listing installed gem packages:
 
@@ -103,6 +101,7 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 * Remove `webapp` from `sudo` group (return to `root` user):
 
         logout
+
         deluser webapp sudo
 
 ### Development environment
@@ -117,6 +116,8 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 
         CREATE DATABASE bitficdevdb;
         GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        FLUSH PRIVILEGES;
+        QUIT;
 
 #### Populate the database
 
@@ -160,6 +161,8 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
         CREATE DATABASE bitficproddb;
         GRANT ALL PRIVILEGES ON bitficproddb.* TO 'bitficprodusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        FLUSH PRIVILEGES;
+        QUIT;
 
 #### Populate the database
 
@@ -172,6 +175,10 @@ Run the following rake task to populate the database.
 * Enter **Bitfication's** directory:
 
         cd ~/bitfication
+
+* Compile and install the required dependencies (You'll need `webapp's` password):
+
+        bundle install
 
 * and run:
 
@@ -199,40 +206,15 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
 *NOTE 2: If you don't want Apache2 for running your Production Environment, you might want to disable SSL, by editting `bitfication/config/environments/production.rb` and set `config.force_ssl` to `false`.*
 
-#### Installing Passenger
+#### Configure the Apache2 Virtual Host for you Bitcoin Exchange
 
-The following procedure will guide you in the required steps to install and configure Passenger for Apache2. Run this procedure as root.
-
-* Installing Passenger Rubygem:
-
-        gem install passenger
-
-* ...and run:
-
-        passenger-install-apache2-module
-
-*During Apache'2 Passenger module compilation / installation, you can just accept the defaults by hitting "enter".*
-
-* Then, download the following files:
-
-        cd /etc/apache2/mods-available
-    
-        wget https://github.com/tmartinx/bitfication/misc/apache2/mods-available/passenger.conf
-    
-        wget https://github.com/tmartinx/bitfication/misc/apache2/mods-available/passenger.load
-
-*NOTE: You must pay attention to the Passenger module version, at the time of this writting, it is "4.0.53".* 
-
-* To finish, enable the Passenger Apache2 module by running:
+* Enable the following Apache modules:
 
         a2enmod passender
 
-* Also, you'll need to enable the following Apache module(s):
-
         a2enmod ssl
-        a2enmod rewrite
 
-#### Configure the Apache2 Virtual Host for you Bitcoin Exchange
+        a2enmod rewrite
 
 * Download Apache's files:
 
@@ -245,6 +227,7 @@ The following procedure will guide you in the required steps to install and conf
 * Activate Virtual Hosts:
 
         a2ensite bitfication.com
+
         a2ensite bitfication.com-ssl
 
 *NOTE: You'might want to disable the Ubuntu's Default Apache2 Test Page, if yes, just remove the file: `/etc/apache2/sites-enabled/000-default` and you're done.*
@@ -257,7 +240,7 @@ Here are some instructions to create the required SSL Certificates for running y
 
         mkdir /etc/apache2/ssl
 
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
 
 * Then, restart Apache:
 
@@ -337,24 +320,11 @@ All are welcome, improvements, fixes and translations (the string extraction bou
 
  * Pull requests should apply cleanly on top of `master`, rebase if necessary
 
-<<<<<<< HEAD
 # Updates since the fork
 
 First, we worked to update the code to make it work with the latest Ruby on Rails versions, including gem packages (i.e., by upgrading Gemfile packages version and the code itself).
 
 We started working privately on BitBucket but, it is time to go back to Github. No reason to keep it private for any longer.
-=======
-# Music
-Bitcoin-Central was, and is currently being developed with the following musical background :
-
- * [Ali Farka Touré - In The Heart Of The Moon](http://www.amazon.fr/Heart-Farka-Tour%C3%A9-Toumani-Diabat%C3%A9/dp/B0009NDLJA)
- * [Latchès](http://www.amazon.fr/Latches/dp/B001CISIGC/ref=sr_1_1?s=music&ie=UTF8&qid=1311581988&sr=1-1)
- * Tons of [Django Reinhardt](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=django+reinhardt&x=0&y=0&sprefix=django+reinhardt)
- * [Biréli Lagrène - Blue Eyes](http://www.amazon.fr/Blue-Eyes-Bireli-Lagrene/dp/B000007N92/ref=sr_1_1?s=music&ie=UTF8&qid=1311582073&sr=1-1)
- * Lots of [Gary Potter](http://www.amazon.fr/s/ref=nb_sb_noss?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=gary+potter&x=0&y=0)
- * [Tchavolo Schmitt](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt), [Romane](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt#/ref=nb_sb_noss?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Dpopular&field-keywords=romane&rh=n%3A301062%2Ck%3Aromane), [Angelo Debarre](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt#/ref=nb_sb_noss?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Dpopular&field-keywords=angelo+debarre&rh=n%3A301062%2Ck%3Aangelo+debarre)
- * ....
->>>>>>> davout/master
 
 # License
 
