@@ -1,77 +1,309 @@
 # **Bitfication**
 
-**Bitfication** powers the Exchange bitfication.com, a Bitcoin Trading Platform, and it is is powered by Ubuntu Linux!
+**Bitfication** is a fully functional, Open Source, Bitcoin Exchange. It powers the Exchange `bitfication.com`, a CryptoCurrency Trading Platform.
 
 Features:
 
-* Open Source
+- Written in Ruby on Rails
 
-* Based on Ruby on Rails
+- Powered by Ubuntu
 
-* Fully localizable
+- Fully localizable
 
-* Multi-currency (under development)
+- Multi-currency (under development)
 
-## Installation on top of Ubuntu 12.04.4 LTS
+## Installation on top of Ubuntu 12.04.5 LTS
 
-Run the following commands as 'root' and change to another user only when required.
+You must have, at least, 1 Ubuntu 12.04.5 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
 
-* Install required packages
+For a Production Environment, you might want to split the services, each one deployed on its own Ubuntu Instance. Like for example:
 
-        apt-get install git ruby1.9.3 imagemagick memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev
+- Public Apache (forbid /admin and cronjobs);
 
-## Prepare the RoR environment
+- Private Apache (allow /admin + cronjobs);
 
-* Use gem to install `bundler` rubygem package:
+- Bitcoin Daemon;
+
+- MySQL.
+
+The following commands must be executed as `root` user, change to another user only when required.
+
+* Install the following packages:
+
+        apt-get install git ruby1.9.3 imagemagick memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev python-software-properties
+
+## Install Bitcoin Daemon
+
+Complete procedure to install Bitfication's Bitcoin Hot Wallet.
+
+* Add Bitcoin's Ubuntu Oficial PPA Repository:
+
+        add-apt-repository ppa:bitcoin/bitcoin
+
+* Updating Ubuntu:
+
+        apt-get update
+
+* Install Bitcoin Daemon:
+
+        apt-get install bitcoind
+
+* Create the Bitcoin Deamon Runtime User:
+
+        adduser bitcoin
+
+* Now, run the `bitcoind` logged as user `bitcoin`, like this:
+
+        su - bitcoin
+        bitcoind
+
+There is a Bitcoin Daemon configuration example located at the file: `bitfication/misc/bitcoin.conf`. You'll need to copy it to: `~bitcoin/.bitcoin/bitcoin.conf`.
+
+### Preparing your environment
+
+* Use `gem` to install `bundler` rubygem package:
 
         gem install bundler
 
-## Create a regular user to run RoR app
+### Create a regular user to host/run Bitfication
 
-* We'll use the 'webapp' user and it'll be added to 'sudo' group temporarily, this way, all the required packages to run **Bitfication**, will get installed on your Ubuntu.
+We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this way, all the required packages to run **Bitfication**, will get installed on your Ubuntu, then, you can remove it from `sudo` group.
+
+* Add `webuser` runtime user:
 
         adduser webapp
         adduser webapp sudo
 
-## Become 'webapp' and get the code
+### Become 'webapp' and get the code
 
-* Fork project if relevant
-
-* Clone the **Bitficaion** source code with git
+* From `root` user, become `webapp` runtime user:
 
         su - webapp
-        git clone https://bitbucket.org/tmartinx/bitfication.git
 
-* Or if you have a BitBucket account (and if you fork the code):
+* Clone **Bitficaion's** source code anonymously with git:
 
-        git clone https://tmartinx@bitbucket.org/tmartinx/bitfication.git
+        git clone https://github.com/tmartinx/bitfication.git
 
-* Get into the sources directory
+* Or, if you have a Github account (and if you forked the code):
+
+        git clone https://tmartinx@github.com/tmartinx/bitfication.git
+
+* Enter **Bitfication's** directory:
 
         cd ~/bitfication
 
-* Compile and install the required dependencies
+* Compile and install the required dependencies:
 
         sudo bundle install
 
-* Log-in to MySQL console and run the following commands. If you are installing a production machine you'll obviously need to pick different credentials. Update the `config/database.yml` file accordingly.
+* Listing installed gem packages:
 
-        > CREATE DATABASE bitficdevdb;
-        > GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        gem list --all
 
-* Run a couple of rake tasks (omit the `RAILS_ENV` option if you're setting up a development environment, Rails will grab the database configuration in the `config/database.yml` file under the right section (development, test, or production)
+* Remove `webapp` from `sudo` group (return to `root` user):
+
+        logout
+        deluser webapp sudo
+
+### Development environment
+
+#### Create your MySQL Database
+
+* Log-in to MySQL console:
+
+        mysql -u root -p
+ 
+* and run the following commands:
+
+        CREATE DATABASE bitficdevdb;
+        GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
+
+#### Populate the database
+
+You'll need to run a rake task to populate the database.
+
+* From `root` user, become `webapp` runtime user:
+
+        su - webapp
+
+* Enter **Bitfication's** directory again:
+
+        cd ~/bitfication
+
+* and run:
 
         RAILS_ENV=development rake db:setup
+        
+*NOTE: You can omit the `RAILS_ENV` option if you're setting up a development environment, Rails will grab the database configuration from the `config/database.yml` file under the right section (development, test, or production.*
+        
+#### Configure access to the Bitcoin Hot Wallet
 
-* Edit config/bitcoin.yml to be able to connect your instance to a bitcoin client, the `config/bitcoin.yml` file contents are self-explanatory, just add a production section if you're deploying on a production server.
+If you have used the Bitcoin Daemon configuration example (`bitcoin.conf`), then, you're ready to go. Just starts up `bitcoind`. Otherwise, edit the `config/bitcoin.yml` file and configure it according, so, **Bitfication** can have access to its Bitcoin Hot Wallet.
 
-* You're good to go! Run the rails server
+#### Start Up Bitfication!
+
+* You're ready to go! Run the rails server:
 
         RAILS_ENV=development rails s
 
-Your fresh instance should now be running on `http://localhost:3000/`!
+Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
-# Production deployment (obsolete procedure)
+### Production environment
+
+#### Create your MySQL Database
+
+* Log-in to MySQL console:
+
+        mysql -u root -p
+ 
+* and run the following commands:
+
+        CREATE DATABASE bitficproddb;
+        GRANT ALL PRIVILEGES ON bitficproddb.* TO 'bitficprodusr'@'localhost' IDENTIFIED BY 'bitficpass';
+
+#### Populate the database
+
+Run the following rake task to populate the database.
+
+* From `root` user, become `webapp` runtime user:
+
+        su - webapp
+
+* Enter **Bitfication's** directory:
+
+        cd ~/bitfication
+
+* and run:
+
+        RAILS_ENV=production rake db:setup
+
+#### Precompile assets
+
+* Still within ~/bitfication directory, run:
+
+        RAILS_ENV=production bundle exec rake assets:precompile
+
+#### Configure access to the Bitcoin Hot Wallet
+
+If you have used the Bitcoin Daemon configuration example (`bitcoin.conf`), then, you're ready to go. Just starts up `bitcoind`. Otherwise, edit the `config/bitcoin.yml` file and configure it according, so, **Bitfication** can have access to its Bitcoin Hot Wallet.
+
+#### Start Up Bitfication!
+
+* You're ready to go! Run the rails server:
+
+        RAILS_ENV=production rails s
+
+Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
+
+*Note 1: To run Bitficaion in a production environment, we recommend running it under Apache2 with Passenger.*
+
+*NOTE 2: If you don't want Apache2 for running your Production Environment, you might want to disable SSL, by editting `bitfication/config/environments/production.rb` and set `config.force_ssl` to `false`.*
+
+#### Installing Passenger
+
+The following procedure will guide you in the required steps to install and configure Passenger for Apache2. Run this procedure as root.
+
+* Installing Passenger Rubygem:
+
+        gem install passenger
+
+* ...and run:
+
+        passenger-install-apache2-module
+
+*During Apache'2 Passenger module compilation / installation, you can just accept the defaults by hitting "enter".*
+
+* Then, download the following files:
+
+        cd /etc/apache2/mods-available
+    
+        wget https://github.com/tmartinx/bitfication/misc/apache2/mods-available/passenger.conf
+    
+        wget https://github.com/tmartinx/bitfication/misc/apache2/mods-available/passenger.load
+
+*NOTE: You must pay attention to the Passenger module version, at the time of this writting, it is "4.0.53".* 
+
+* To finish, enable the Passenger Apache2 module by running:
+
+        a2enmod passender
+
+* Also, you'll need to enable the following Apache module(s):
+
+        a2enmod ssl
+        a2enmod rewrite
+
+#### Configure the Apache2 Virtual Host for you Bitcoin Exchange
+
+* Download Apache's files:
+
+        cd /etc/apache2/sites-available
+    
+        wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com
+    
+        wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com-ssl
+
+* Activate Virtual Hosts:
+
+        a2ensite bitfication.com
+        a2ensite bitfication.com-ssl
+
+*NOTE: You'might want to disable the Ubuntu's Default Apache2 Test Page, if yes, just remove the file: `/etc/apache2/sites-enabled/000-default` and you're done.*
+
+##### Creating your Self-Signed SSL Certificate
+
+Here are some instructions to create the required SSL Certificates for running your Exchange more safely.
+
+* Self-signing your SSL Certificate:
+
+        mkdir /etc/apache2/ssl
+
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+
+* Then, restart Apache:
+
+        service apache2 restart
+
+That's it! Your `Bitcoin Exchange` should now be running at: `http://bitfication.com`! Or at your own domain, of course...
+
+#### Configure the cronjobs
+
+From time to time, you'll need to run a few tasks.
+
+Those tasks does:
+
+- Syncronization of User's Bitcoin Transactions;
+- Update the Navbar's Status;
+- User's E-Mail notifications.
+
+* To use it, as `webapp` user, do the following:
+
+        cd ~ ; mkdir bin ; cd ~/bin
+
+        wget https://github.com/tmartinx/bitfication/misc/cronjobs/bitcoin-synchronize-transactions.sh
+
+        wget https://github.com/tmartinx/bitfication/misc/cronjobs/bitfication-stats.sh
+
+        wget https://github.com/tmartinx/bitfication/misc/cronjobs/notification-trades.sh
+
+* Then, configure `webapp's` cronjobs by running `crontab -e` and then, copy and paste this:
+
+        */7 * * * * /home/webapp/bin/bitcoin-synchronize-transactions.sh
+        */5 * * * * /home/webapp/bin/bitfication-stats.sh
+        */3 * * * * /home/webapp/bin/notification-trades.sh
+
+*NOTE: You might want to test each cronjob before enabling it.*
+
+#### Configure Postfix
+
+The Ubuntu Instance that will run the cronjobs, will also need to send e-mails, so, just configure your Postfix, probably, you might want to make use of an external SMTP, to send e-mails to the Internet (i.e., this will be just a "satellite" SMTP).
+
+* Reconfiguring Postfix
+
+        sudo dpkg-reconfigure postfix
+
+*NOTE: If you don't know the answers, you might just hit "enter" to accept the defaults.*
+
+# Production deployment (obsolete/unused/optional procedure)
 
 Usually, Rails applications are deployed in production using nginx or Apache, I'll introduce the Apache option.
 
@@ -105,12 +337,27 @@ All are welcome, improvements, fixes and translations (the string extraction bou
 
  * Pull requests should apply cleanly on top of `master`, rebase if necessary
 
-# Updates
+<<<<<<< HEAD
+# Updates since the fork
 
-By **Bitfication** team!
+First, we worked to update the code to make it work with the latest Ruby on Rails versions, including gem packages (i.e., by upgrading Gemfile packages version and the code itself).
 
- * Thiago Martins updated this README.md
+We started working privately on BitBucket but, it is time to go back to Github. No reason to keep it private for any longer.
+=======
+# Music
+Bitcoin-Central was, and is currently being developed with the following musical background :
+
+ * [Ali Farka Touré - In The Heart Of The Moon](http://www.amazon.fr/Heart-Farka-Tour%C3%A9-Toumani-Diabat%C3%A9/dp/B0009NDLJA)
+ * [Latchès](http://www.amazon.fr/Latches/dp/B001CISIGC/ref=sr_1_1?s=music&ie=UTF8&qid=1311581988&sr=1-1)
+ * Tons of [Django Reinhardt](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=django+reinhardt&x=0&y=0&sprefix=django+reinhardt)
+ * [Biréli Lagrène - Blue Eyes](http://www.amazon.fr/Blue-Eyes-Bireli-Lagrene/dp/B000007N92/ref=sr_1_1?s=music&ie=UTF8&qid=1311582073&sr=1-1)
+ * Lots of [Gary Potter](http://www.amazon.fr/s/ref=nb_sb_noss?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=gary+potter&x=0&y=0)
+ * [Tchavolo Schmitt](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt), [Romane](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt#/ref=nb_sb_noss?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Dpopular&field-keywords=romane&rh=n%3A301062%2Ck%3Aromane), [Angelo Debarre](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt#/ref=nb_sb_noss?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Dpopular&field-keywords=angelo+debarre&rh=n%3A301062%2Ck%3Aangelo+debarre)
+ * ....
+>>>>>>> davout/master
 
 # License
 
-AGPL License. Copyright 2010-2011 David FRANCOIS
+AGPLv3 License - Copyright 2013-2014 Thiago Martins
+
+Original Author - David FRANCOIS
