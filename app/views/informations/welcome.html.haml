@@ -41,10 +41,11 @@ fjs.parentNode.insertBefore(js, fjs);
 %div{ :class => "question", :style => "text-align:justify" }
   %h2= t(".download")
   %ul{ :id => "downloads" }
-    %li= link_to image_tag("os/linux.png") + "Linux", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-0.8.6/bitcoin-0.8.6-linux.tar.gz/download"
+    %li= link_to image_tag("os/linux.png") + "Linux", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-9.3/bitcoin-0.9.3-linux.tar.gz/download"
     %li= link_to image_tag("os/ubuntu_ppa.png") + "Ubuntu PPA", "https://launchpad.net/~bitcoin/+archive/bitcoin"
-    %li= link_to image_tag("os/apple.png") + "Mac OS X", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-0.8.6/bitcoin-0.8.6-macosx.dmg/download"
-    %li= link_to image_tag("os/windows.png") + "Windows", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-0.8.6/bitcoin-0.8.6-win32-setup.exe/download"
+    %li= link_to image_tag("os/apple.png") + "Mac OS X", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-9.3/bitcoin-0.9.3-macosx.dmg/download"
+    %li= link_to image_tag("os/windows.png") + "Windows 64-bit", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-9.3/bitcoin-0.9.3-win64-setup.exe/download"
+    %li= link_to image_tag("os/windows.png") + "Windows 32-bit", "http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-9.3/bitcoin-0.9.3-win32-setup.exe/download"
     %li= link_to image_tag("os/github.png") + t(".source"), "https://github.com/bitcoin/bitcoin", :target => "_blank"
 
 %script{ :type => "text/javascript" }
