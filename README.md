@@ -30,7 +30,23 @@ The following commands must be executed as `root` user, change to another user o
 
 * Install the following packages:
 
-        apt-get install git acpid tmux ruby rails bundler capistrano ruby-mysql2 ruby-addressable ruby-coffee-rails ruby-will-paginate ruby-mocha ruby-execjs ruby-factory-girl-rails ruby-recaptcha ruby-sprockets ruby-uglifier ruby-bcrypt imagemagick memcached curl vim postfix apache2 libapache2-mod-passenger mysql-client mysql-server build-essential apache2-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev software-properties-common
+        apt-get install git acpid tmux ruby rails bundler capistrano ruby-mysql2 ruby-addressable ruby-coffee-rails ruby-will-paginate ruby-mocha ruby-execjs ruby-factory-girl-rails ruby-sprockets ruby-uglifier ruby-bcrypt imagemagick memcached curl vim postfix apache2 libapache2-mod-passenger mysql-client mysql-server build-essential apache2-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev software-properties-common
+
+*NOTE: The Ubuntu package `ruby-recaptcha` can not be used due to bug LP#1400564*
+
+## Prepate Ubuntu 14.04.1 LTS
+
+Due to Ubuntu Bug LP#1319376, we need to add an external PPA into our O.S., which will provides a newer version of Rails (3.2.19) for our RoR Application.
+
+This new PPA contains a fews backports from Ubuntu Utopic, to Trusty. So, if you prefer, you can use Ubuntu 14.10 without any problem.
+
+* Adding InternetGroup's Ubuntu PPA Repository:
+
+	add-apt-repository ppa:martinx/ig
+
+	apt-get update
+
+	apt-get dist-upgrade
 
 ## Install Bitcoin Daemon
 
@@ -111,7 +127,7 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 * Log-in to MySQL console:
 
         mysql -u root -p
- 
+
 * and run the following commands:
 
         CREATE DATABASE bitficdevdb;
@@ -134,9 +150,9 @@ You'll need to run a rake task to populate the database.
 * and run:
 
         RAILS_ENV=development rake db:setup
-        
+
 *NOTE: You can omit the `RAILS_ENV` option if you're setting up a development environment, Rails will grab the database configuration from the `config/database.yml` file under the right section (development, test, or production.*
-        
+
 #### Configure access to the Bitcoin Hot Wallet
 
 If you have used the Bitcoin Daemon configuration example (`bitcoin.conf`), then, you're ready to go. Just starts up `bitcoind`. Otherwise, edit the `config/bitcoin.yml` file and configure it according, so, **Bitfication** can have access to its Bitcoin Hot Wallet.
@@ -156,7 +172,7 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 * Log-in to MySQL console:
 
         mysql -u root -p
- 
+
 * and run the following commands:
 
         CREATE DATABASE bitficproddb;
@@ -219,9 +235,9 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 * Download Apache's files:
 
         cd /etc/apache2/sites-available
-    
+
         wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com
-    
+
         wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com-ssl
 
 * Activate Virtual Hosts:
@@ -292,7 +308,7 @@ Usually, Rails applications are deployed in production using nginx or Apache, I'
 
 The `capistrano` tool is used to automate pretty much every deployment step. Deploying a new version is as easy as typing `cap deploy` in your local command prompt.
 
-To use the `cap` sweetness a couple of extra steps are required : 
+To use the `cap` sweetness a couple of extra steps are required :
 
 * You'll need to fork the project since all your deployment configuration is stored in `config/deploy.rb`, these configs are pulled directly from GitHub when deploying, so go for it, change them to suit your needs.
 

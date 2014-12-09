@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.16'
+gem 'arel', '4.0.0'
+gem 'rails', '3.2.19'
 gem 'rack', '1.4.5'
 gem 'rake', '10.0.4'
 gem 'mysql2', '0.3.14'
