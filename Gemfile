@@ -50,6 +50,7 @@ gem 'bourbon', '3.1.8'
 gem 'apn_on_rails'
 
 gem 'debugger', '1.6.8'
+gem 'fpm', '0.4.6'
 #group :development do
 #  gem 'debugger', '1.6.8'
 #end
