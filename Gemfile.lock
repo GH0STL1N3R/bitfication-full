@@ -36,6 +36,9 @@ GEM
       activerecord
       configatron
     arel (4.0.0)
+    arr-pm (0.0.9)
+      cabin (> 0)
+    backports (3.6.4)
     bcrypt-ruby (3.1.2)
     blueprint-rails (0.2.0)
       railties (>= 3.0, < 5.0)
@@ -44,14 +47,18 @@ GEM
       sass (>= 3.2.0)
       thor
     builder (3.2.2)
+    cabin (0.6.1)
     capistrano (2.12.0)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.1)
     chunky_png (1.2.8)
+    clamp (0.6.3)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -94,6 +101,15 @@ GEM
       railties (>= 3.0.0)
     fancybox2-rails (0.2.4)
       railties (>= 3.1.0)
+    ffi (1.9.6)
+    fpm (1.3.3)
+      arr-pm (~> 0.0.9)
+      backports (>= 2.6.2)
+      cabin (>= 0.6.0)
+      childprocess
+      clamp (~> 0.6)
+      ffi
+      json (>= 1.7.7)
     haml (4.0.5)
       tilt
     highline (1.6.20)
@@ -215,6 +231,7 @@ DEPENDENCIES
   execjs (= 1.4.0)
   factory_girl_rails (= 4.2.1)
   fancybox2-rails (~> 0.2.4)
+  fpm (= 1.3.3)
   haml (= 4.0.5)
   iban-tools (= 0.0.9)
   jquery-rails (= 3.0.4)
