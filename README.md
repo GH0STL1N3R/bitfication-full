@@ -68,13 +68,13 @@ Complete procedure to install Bitfication's Bitcoin Hot Wallet.
 
         adduser bitcoin
 
+*NOTE: There is a Bitcoin Daemon configuration example located at the file: `bitfication/misc/bitcoin.conf`. You'll need to copy it to: `~bitcoin/.bitcoin/bitcoin.conf`.*
+
 * Now, run the `bitcoind` logged as user `bitcoin`, like this:
 
         su - bitcoin
 
         bitcoind
-
-There is a Bitcoin Daemon configuration example located at the file: `bitfication/misc/bitcoin.conf`. You'll need to copy it to: `~bitcoin/.bitcoin/bitcoin.conf`.
 
 ### Preparing your environment
 
