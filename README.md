@@ -12,9 +12,9 @@ Features:
 
 - Multi-currency (under development)
 
-## Installation on top of Ubuntu 12.04.5 LTS
+## Installation on top of Ubuntu 14.04.1 LTS
 
-You must have, at least, 1 Ubuntu 12.04.5 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
+You must have, at least, one Ubuntu 14.04.1 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
 
 For a Production Environment, you might want to split the services, each one deployed on its own Ubuntu Instance. Like for example:
 
@@ -30,7 +30,23 @@ The following commands must be executed as `root` user, change to another user o
 
 * Install the following packages:
 
-        apt-get install git ruby1.9.3 imagemagick memcached curl vim postfix apache2 mysql-client mysql-server build-essential apache2-threaded-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev python-software-properties
+        apt-get install git acpid tmux ruby rails bundler capistrano ruby-mysql2 ruby-addressable ruby-coffee-rails ruby-will-paginate ruby-mocha ruby-execjs ruby-factory-girl-rails ruby-sprockets ruby-uglifier ruby-bcrypt imagemagick memcached curl vim postfix apache2 libapache2-mod-passenger mysql-client mysql-server build-essential apache2-dev libqrencode-dev libcurl4-gnutls-dev libmysqlclient-dev software-properties-common
+
+*NOTE: The Ubuntu package `ruby-recaptcha` can not be used due to bug LP#1400564*
+
+## Prepate Ubuntu 14.04.1 LTS
+
+Due to Ubuntu Bug LP#1319376, we need to add an external PPA into our O.S., which will provides a newer version of Rails (3.2.19) for our RoR Application.
+
+This new PPA contains a fews backports from Ubuntu Utopic, to Trusty. So, if you prefer, you can use Ubuntu 14.10 without any problem.
+
+* Adding InternetGroup's Ubuntu PPA Repository:
+
+	add-apt-repository ppa:martinx/ig
+
+	apt-get update
+
+	apt-get dist-upgrade
 
 ## Install Bitcoin Daemon
 
@@ -52,18 +68,15 @@ Complete procedure to install Bitfication's Bitcoin Hot Wallet.
 
         adduser bitcoin
 
+*NOTE: There is a Bitcoin Daemon configuration example located at the file: `bitfication/misc/bitcoin.conf`. You'll need to copy it to: `~bitcoin/.bitcoin/bitcoin.conf`.*
+
 * Now, run the `bitcoind` logged as user `bitcoin`, like this:
 
         su - bitcoin
+
         bitcoind
 
-There is a Bitcoin Daemon configuration example located at the file: `bitfication/misc/bitcoin.conf`. You'll need to copy it to: `~bitcoin/.bitcoin/bitcoin.conf`.
-
 ### Preparing your environment
-
-* Use `gem` to install `bundler` rubygem package:
-
-        gem install bundler
 
 ### Create a regular user to host/run Bitfication
 
@@ -72,6 +85,7 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 * Add `webuser` runtime user:
 
         adduser webapp
+
         adduser webapp sudo
 
 ### Become 'webapp' and get the code
@@ -92,9 +106,9 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 
         cd ~/bitfication
 
-* Compile and install the required dependencies:
+* Compile and install the required dependencies (You'll need `webapp's` password):
 
-        sudo bundle install
+        bundle install
 
 * Listing installed gem packages:
 
@@ -103,6 +117,7 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 * Remove `webapp` from `sudo` group (return to `root` user):
 
         logout
+
         deluser webapp sudo
 
 ### Development environment
@@ -112,11 +127,13 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 * Log-in to MySQL console:
 
         mysql -u root -p
- 
+
 * and run the following commands:
 
         CREATE DATABASE bitficdevdb;
         GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        FLUSH PRIVILEGES;
+        QUIT;
 
 #### Populate the database
 
@@ -133,9 +150,9 @@ You'll need to run a rake task to populate the database.
 * and run:
 
         RAILS_ENV=development rake db:setup
-        
+
 *NOTE: You can omit the `RAILS_ENV` option if you're setting up a development environment, Rails will grab the database configuration from the `config/database.yml` file under the right section (development, test, or production.*
-        
+
 #### Configure access to the Bitcoin Hot Wallet
 
 If you have used the Bitcoin Daemon configuration example (`bitcoin.conf`), then, you're ready to go. Just starts up `bitcoind`. Otherwise, edit the `config/bitcoin.yml` file and configure it according, so, **Bitfication** can have access to its Bitcoin Hot Wallet.
@@ -155,11 +172,13 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 * Log-in to MySQL console:
 
         mysql -u root -p
- 
+
 * and run the following commands:
 
         CREATE DATABASE bitficproddb;
         GRANT ALL PRIVILEGES ON bitficproddb.* TO 'bitficprodusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        FLUSH PRIVILEGES;
+        QUIT;
 
 #### Populate the database
 
@@ -172,6 +191,10 @@ Run the following rake task to populate the database.
 * Enter **Bitfication's** directory:
 
         cd ~/bitfication
+
+* Compile and install the required dependencies (You'll need `webapp's` password):
+
+        bundle install
 
 * and run:
 
@@ -199,52 +222,28 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
 *NOTE 2: If you don't want Apache2 for running your Production Environment, you might want to disable SSL, by editting `bitfication/config/environments/production.rb` and set `config.force_ssl` to `false`.*
 
-#### Installing Passenger
+#### Configure the Apache2 Virtual Host for you Bitcoin Exchange
 
-The following procedure will guide you in the required steps to install and configure Passenger for Apache2. Run this procedure as root.
-
-* Installing Passenger Rubygem:
-
-        gem install passenger
-
-* ...and run:
-
-        passenger-install-apache2-module
-
-*During Apache'2 Passenger module compilation / installation, you can just accept the defaults by hitting "enter".*
-
-* Then, download the following files:
-
-        cd /etc/apache2/mods-available
-    
-        wget https://github.com/tmartinx/bitfication/misc/apache2/mods-available/passenger.conf
-    
-        wget https://github.com/tmartinx/bitfication/misc/apache2/mods-available/passenger.load
-
-*NOTE: You must pay attention to the Passenger module version, at the time of this writting, it is "4.0.53".* 
-
-* To finish, enable the Passenger Apache2 module by running:
+* Enable the following Apache modules:
 
         a2enmod passender
 
-* Also, you'll need to enable the following Apache module(s):
-
         a2enmod ssl
-        a2enmod rewrite
 
-#### Configure the Apache2 Virtual Host for you Bitcoin Exchange
+        a2enmod rewrite
 
 * Download Apache's files:
 
         cd /etc/apache2/sites-available
-    
+
         wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com
-    
+
         wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com-ssl
 
 * Activate Virtual Hosts:
 
         a2ensite bitfication.com
+
         a2ensite bitfication.com-ssl
 
 *NOTE: You'might want to disable the Ubuntu's Default Apache2 Test Page, if yes, just remove the file: `/etc/apache2/sites-enabled/000-default` and you're done.*
@@ -309,7 +308,7 @@ Usually, Rails applications are deployed in production using nginx or Apache, I'
 
 The `capistrano` tool is used to automate pretty much every deployment step. Deploying a new version is as easy as typing `cap deploy` in your local command prompt.
 
-To use the `cap` sweetness a couple of extra steps are required : 
+To use the `cap` sweetness a couple of extra steps are required :
 
 * You'll need to fork the project since all your deployment configuration is stored in `config/deploy.rb`, these configs are pulled directly from GitHub when deploying, so go for it, change them to suit your needs.
 
