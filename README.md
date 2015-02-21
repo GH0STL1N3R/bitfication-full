@@ -12,9 +12,9 @@ Features:
 
 - Multi-currency (under development)
 
-## Installation on top of Ubuntu 14.04.1 LTS
+## Installation on top of Ubuntu 14.04.2 LTS
 
-You must have, at least, one Ubuntu 14.04.1 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
+You must have, at least, one Ubuntu 14.04.2 Server, fresh installed. Can be the `Minimum Virtual Machine` flavor, option `F4` at Ubuntu's ISO Boot Menu.
 
 For a Production Environment, you might want to split the services, each one deployed on its own Ubuntu Instance. Like for example:
 
@@ -34,11 +34,11 @@ The following commands must be executed as `root` user, change to another user o
 
 *NOTE: The Ubuntu package `ruby-recaptcha` can not be used due to bug LP#1400564*
 
-## Prepate Ubuntu 14.04.1 LTS
+## Prepate Ubuntu 14.04.2 LTS
 
 Due to Ubuntu Bug LP#1319376, we need to add an external PPA into our O.S., which will provides a newer version of Rails (3.2.19) for our RoR Application.
 
-This new PPA contains a fews backports from Ubuntu Utopic, to Trusty. So, if you prefer, you can use Ubuntu 14.10 without any problem.
+This new PPA contains a fews backports from Ubuntu Utopic, to Trusty. So, if you prefer, you can use Ubuntu 14.10 without any problems (I believe).
 
 * Adding InternetGroup's Ubuntu PPA Repository:
 
@@ -96,15 +96,15 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 
 * Clone **Bitficaion's** source code anonymously with git:
 
-        git clone https://github.com/tmartinx/bitfication.git
+        git clone https://github.com/Bitfication/bitfication-full.git
 
 * Or, if you have a Github account (and if you forked the code):
 
-        git clone https://tmartinx@github.com/tmartinx/bitfication.git
+        git clone https://YOUR_GITHUB_USER_ACCOUNT@github.com/Bitfication/bitfication-full.git
 
 * Enter **Bitfication's** directory:
 
-        cd ~/bitfication
+        cd ~/bitfication-full
 
 * Compile and install the required dependencies (You'll need `webapp's` password):
 
@@ -132,6 +132,7 @@ We'll use the `webapp` user and it'll be added to `sudo` group temporarily, this
 
         CREATE DATABASE bitficdevdb;
         GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        GRANT ALL PRIVILEGES ON bitficdevdb.* TO 'bitficdevusr'@'%' IDENTIFIED BY 'bitficpass';
         FLUSH PRIVILEGES;
         QUIT;
 
@@ -145,7 +146,7 @@ You'll need to run a rake task to populate the database.
 
 * Enter **Bitfication's** directory again:
 
-        cd ~/bitfication
+        cd ~/bitfication-full
 
 * and run:
 
@@ -177,6 +178,7 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
         CREATE DATABASE bitficproddb;
         GRANT ALL PRIVILEGES ON bitficproddb.* TO 'bitficprodusr'@'localhost' IDENTIFIED BY 'bitficpass';
+        GRANT ALL PRIVILEGES ON bitficproddb.* TO 'bitficprodusr'@'%' IDENTIFIED BY 'bitficpass';
         FLUSH PRIVILEGES;
         QUIT;
 
@@ -190,7 +192,7 @@ Run the following rake task to populate the database.
 
 * Enter **Bitfication's** directory:
 
-        cd ~/bitfication
+        cd ~/bitfication-full
 
 * Compile and install the required dependencies (You'll need `webapp's` password):
 
@@ -202,7 +204,7 @@ Run the following rake task to populate the database.
 
 #### Precompile assets
 
-* Still within ~/bitfication directory, run:
+* Still within ~/bitfication-full directory, run:
 
         RAILS_ENV=production bundle exec rake assets:precompile
 
@@ -236,9 +238,9 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
         cd /etc/apache2/sites-available
 
-        wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com
+        wget https://github.com/Bitfication/bitfication/misc/apache2/sites-available/bitfication.com
 
-        wget https://github.com/tmartinx/bitfication/misc/apache2/sites-available/bitfication.com-ssl
+        wget https://github.com/Bitfication/bitfication/misc/apache2/sites-available/bitfication.com-ssl
 
 * Activate Virtual Hosts:
 
@@ -278,11 +280,11 @@ Those tasks does:
 
         cd ~ ; mkdir bin ; cd ~/bin
 
-        wget https://github.com/tmartinx/bitfication/misc/cronjobs/bitcoin-synchronize-transactions.sh
+        wget https://github.com/Bitfication/bitfication/misc/cronjobs/bitcoin-synchronize-transactions.sh
 
-        wget https://github.com/tmartinx/bitfication/misc/cronjobs/bitfication-stats.sh
+        wget https://github.com/Bitfication/bitfication/misc/cronjobs/bitfication-stats.sh
 
-        wget https://github.com/tmartinx/bitfication/misc/cronjobs/notification-trades.sh
+        wget https://github.com/Bitfication/bitfication/misc/cronjobs/notification-trades.sh
 
 * Then, configure `webapp's` cronjobs by running `crontab -e` and then, copy and paste this:
 
@@ -347,3 +349,4 @@ We started working privately on BitBucket but, it is time to go back to Github. 
 AGPLv3 License - Copyright 2013-2014 Thiago Martins
 
 Original Author - David FRANCOIS
+
