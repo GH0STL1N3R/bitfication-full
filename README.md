@@ -238,9 +238,9 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
         cd /etc/apache2/sites-available
 
-        wget https://github.com/Bitfication/bitfication/misc/apache2/sites-available/bitfication.com
+        wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/apache2/sites-available/bitfication.com.conf
 
-        wget https://github.com/Bitfication/bitfication/misc/apache2/sites-available/bitfication.com-ssl
+        wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/apache2/sites-available/bitfication.com-ssl.conf
 
 * Activate Virtual Hosts:
 
@@ -280,11 +280,11 @@ Those tasks does:
 
         cd ~ ; mkdir bin ; cd ~/bin
 
-        wget https://github.com/Bitfication/bitfication/misc/cronjobs/bitcoin-synchronize-transactions.sh
+        wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/cronjobs/bitcoin-synchronize-transactions.sh
 
-        wget https://github.com/Bitfication/bitfication/misc/cronjobs/bitfication-stats.sh
+        wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/cronjobs/bitfication-stats.sh
 
-        wget https://github.com/Bitfication/bitfication/misc/cronjobs/notification-trades.sh
+        wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/cronjobs/notification-trades.sh
 
 * Then, configure `webapp's` cronjobs by running `crontab -e` and then, copy and paste this:
 
