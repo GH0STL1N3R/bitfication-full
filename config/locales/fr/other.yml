@@ -13,7 +13,7 @@ fr:
   no_data: Aucune donnée
 
   # controllers/informations_controller.rb
-  chart_date_format: %d.%m.
+  chart_date_format: "%d.%m."
 
   # controllers/sessions_controller.rb
   sign_in_success: Connection réussie

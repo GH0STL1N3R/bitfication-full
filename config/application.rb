@@ -16,7 +16,7 @@ module BitcoinBank
 #     :fr => "Français"
     }
 
-    config.i18n.enforce_available_locales = false
+    config.i18n.enforce_available_locales = true
 
     config.i18n.default_locale = :pt
 
@@ -35,7 +35,7 @@ module BitcoinBank
 
     config.assets.enabled = true
     config.assets.version = '1.0'
-    
+
     Haml::Template.options[:ugly] = true
   end
 end

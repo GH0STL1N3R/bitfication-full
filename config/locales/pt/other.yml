@@ -14,7 +14,7 @@ pt:
   no_data: Nenhuma informação for encontrada
 
   # controllers/informations_controller.rb
-  chart_date_format: %m/%d
+  chart_date_format: "%m/%d"
 
   # controllers/sessions_controller.rb
   sign_in_success: Você entrou com sucesso na sua conta.

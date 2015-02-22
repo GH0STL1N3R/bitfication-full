@@ -1,6 +1,6 @@
 BitcoinBank::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
-  
+
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
@@ -21,20 +21,20 @@ BitcoinBank::Application.configure do
 
   # It will manage cache for us with memcached
   config.cache_store = :dalli_store, 'localhost'
-  
+
   # Uncomment this to test e-mails in development mode
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = {
     :host => "bitfication.com"
   }
-  
+
   config.middleware.use ::ExceptionNotification::Rack,
     :email => {
-      :email_prefix => "[BF Exception] ",	 	
-      :sender_address => %w{no-reply@bitfication.com},	 
+      :email_prefix => "[BF Exception] ",
+      :sender_address => %w{no-reply@bitfication.com},
       :exception_recipients => %w{support@bitfication.com}
     }
-  
+
   # Used to broadcast invoices public URLs
   config.base_url = "https://bitfication.com/"
 
