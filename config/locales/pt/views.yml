@@ -312,7 +312,7 @@ pt:
       no_tickets_found: Você não tem pedidos de suporte para visualizar
     ticket:
       add_comment: Fazer um comentário
-      someone_wrote: %{who} escreveu, %{when} atrás
+      someone_wrote: "%{who} escreveu, %{when} atrá"
       you: Você
       reopen : Reabrir o ticket
       close: Fechar o ticket

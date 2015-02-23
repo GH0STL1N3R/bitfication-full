@@ -51,7 +51,7 @@ gem 'apn_on_rails'
 
 gem 'debugger', '1.6.8'
 
-#gem 'fpm', '1.3.3'
+gem 'fpm', '1.3.3'
 
 #group :development do
 #  gem 'debugger', '1.6.8'

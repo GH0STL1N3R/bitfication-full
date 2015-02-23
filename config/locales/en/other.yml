@@ -50,7 +50,7 @@ en:
   # helpers/transfers_helper.rb
   confirmations_left:
     one: 1 confirmation left
-    other: %{count} confirmations left
+    other: "%{count} confirmations left"
 
   # mailers/backup_mailer.rb
   support_from: Bitfication support <%{support_email}>

@@ -251,7 +251,7 @@ fr:
       no_tickets_found: Vous n'avez ouvert aucun ticket de support
     ticket:
       add_comment: Ajouter un commentaire
-      someone_wrote: %{who} avez écrit, il y a %{when}
+      someone_wrote: "%{who} avez écrit, il y a %{when}"
       you: Vous
       reopen : Rouvrir le ticket
       close: Fermer le ticket      
