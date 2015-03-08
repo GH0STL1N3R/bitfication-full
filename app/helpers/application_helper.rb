@@ -30,7 +30,13 @@ module ApplicationHelper
   end
 
   def number_to_bitcoins(amount, options = {})
-    number_to_currency(amount, options.merge({:unit => "BTC", :format => "%n %u"}) )
+    string = number_to_currency(amount, options.merge({:unit => "BTC", :format => "%n %u"}) )
+    if (options.has_key?(:color)==true)
+      "#{string.to_s.split(".")[0]}.#{string.to_s.split(".")[1][0..-7]}<span class=\"lastdigits\">#{string.to_s.split(".")[1][-6..-5]}</span> #{string.to_s.split(".")[1][-4..-1]}"
+    else
+      string
+    end
+
   end
 
   def number_to_lrusd(amount, options = {})
