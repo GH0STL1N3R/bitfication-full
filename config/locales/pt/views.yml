@@ -30,6 +30,9 @@ pt:
         history: Histórico
         withdraw: Retirada
         deposit: Depósito
+      buysell:
+        main: Buy / Sell
+        new_order: Create New Order
       trading:
         main: Negociações
         your_orders: Ordens

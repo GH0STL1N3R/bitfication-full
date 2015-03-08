@@ -30,6 +30,9 @@ en:
         history: History
         withdraw: Withdraw
         deposit: Deposit
+      buysell:
+        main: Buy / Sell
+        new_order: Create New Order
       trading:
         main: Trading
         your_orders: Trade orders

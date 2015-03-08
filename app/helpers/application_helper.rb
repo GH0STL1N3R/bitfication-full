@@ -1,22 +1,32 @@
 module ApplicationHelper
   # Displays a menu option if the logged-in user matches the optional criteria
   def menu_item(label, link, options = {}, &block)
+
+    # set default class
+    if (!options[:class])
+      item_class = "item_left"
+    else
+      item_class = options[:class]
+    end
+
     if options.blank? or display_menu?(current_user, options)
-      content_tag :li do
+      content_tag :li, class: item_class do
         out = link_to(content_tag(:span, t(label)), link)
-        
+
         if block
           out += block_is_haml?(block) ? capture_haml(&block) : block.call
         end
-        
+
         out
       end
     end
+
   end
-  
+
   # Checks whether the option should be displayed to the currently logged-in user
   def display_menu?(user, options)
-    options.blank? || (user && (user.is_a?(Admin) || (user.is_a?(Manager) && options[:manager]) || (user.merchant? && options[:merchant]) || (user && options[:logged_in])))
+    options.blank? || (!(options.has_key?(:logged_in)||options.has_key?(:manager)||options.has_key?(:merchant))) || (user && (user.is_a?(Admin) || (user.is_a?(Manager) && options[:manager]) || (user.merchant? && options[:merchant]) || (user && options[:logged_in])))
+
   end
 
   def number_to_bitcoins(amount, options = {})
@@ -53,9 +63,9 @@ module ApplicationHelper
         send("new_#{resource}_path")
     end
   end
-  
+
   def currency_icon_for(currency)
-    image_tag "currencies/#{currency.downcase}_icon.png", 
+    image_tag "currencies/#{currency.downcase}_icon.png",
       :alt => currency,
       :title => currency,
       :class => "currency-icon"
@@ -76,19 +86,19 @@ module ApplicationHelper
     #end
     #"#{scheme}://#{locale}#{address}"
     #"#{url}?locale=#{locale}"
-    
+
     if !request.port.nil? && !request.port==80
       "#{scheme}://#{request.host}:#{request.port}#{request.path}?locale=#{locale}"
     else
       "#{scheme}://#{request.host}:#{request.port}#{request.path}?locale=#{locale}"
     end
-    
+
   end
-  
+
   def qrcode_image_tag(data)
     image_tag(qrcode_image_path(data), :class => "qrcode", :alt => data, :title => data)
   end
-  
+
   def qrcode_image_path(data)
     qrcode_path(:data => CGI.escape(data))
   end

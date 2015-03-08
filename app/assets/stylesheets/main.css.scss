@@ -225,6 +225,33 @@ ul#menu > li {
   border-left: 1px solid white;
 }
 
+ul#menu {
+
+  li.item_right {
+
+    float:right;
+
+    ul {
+
+      left: -60px;
+
+    }
+
+  }
+
+  li.no_border:hover {
+
+    border: 1px solid white;
+    border-bottom: 1px solid #6E0701;
+
+  }
+
+  li.no_border a:hover {
+    color: #CE0701;
+  }
+
+}
+
 ul#menu > li:hover {
   border: 1px solid #6E0701;
   border-bottom: 1px solid white;
@@ -618,6 +645,11 @@ span.cancelled {
   color: gray;
 }
 
+span.cancelled {
+  text-decoration: line-through;
+  color: gray;
+}
+
 td.account-balance span.unconfirmed {
   font-size: 90%;
 }
@@ -642,7 +674,7 @@ div.trade-orders-help {
 
 div.trade-orders-help img {
   position: relative;
-  top: 6px;    
+  top: 6px;
 }
 
 /* Trade orders history */

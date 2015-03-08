@@ -1,16 +1,40 @@
 %ul#menu
-  = menu_item ".account.main", nil, :logged_in => true do 
+  = menu_item ".trading.order_book", order_book_path, {:class => "no_border"}
+
+  = menu_item ".buysell.main", new_account_trade_order_path, {:class => "no_border", :logged_in => true}
+
+  = menu_item ".help.main", static_path(:faq), {:class => "item_right"} do
+    %ul
+      = menu_item ".help.support_newticket", new_user_ticket_path, :logged_in => true
+      = menu_item ".help.support_alltickets", user_tickets_path, :logged_in => true
+      = menu_item ".help.faq", static_path(:faq)
+      = menu_item ".help.terms_of_service", static_path(:terms_of_service), :logged_in => true
+      = menu_item ".help.fees", static_path(:fees)
+      = menu_item ".help.api_docs", static_path(:api_docs)
+
+
+
+  -#= menu_item ".trading.main", nil, {:logged_in => true, :right => true} do
+  -#  %ul
+  -#    = menu_item ".account.balance", account_path
+  -#    = menu_item ".account.history", account_transfers_path
+  -#    = menu_item ".account.deposit", deposit_account_path
+  -#    = menu_item ".account.withdraw", new_account_transfer_path
+
+  = menu_item ".trading.main", account_trade_orders_path, {:logged_in => true, :class => "item_right"}  do
+    %ul
+      = menu_item ".trading.your_orders", account_trade_orders_path, :logged_in => true
+      = menu_item ".trading.trade_history", account_trades_path, :logged_in => true
+
+  = menu_item ".account.main", account_path, {:logged_in => true, :class => "item_right"} do
     %ul
       = menu_item ".account.balance", account_path
       = menu_item ".account.history", account_transfers_path
       = menu_item ".account.deposit", new_account_deposit_path
       = menu_item ".account.withdraw", new_account_transfer_path
 
-  = menu_item ".trading.main", nil do
-    %ul
-      = menu_item ".trading.your_orders", account_trade_orders_path, :logged_in => true
-      = menu_item ".trading.trade_history", account_trades_path, :logged_in => true
-      = menu_item ".trading.order_book", order_book_path
+
+  -# begin special menus (admin, mechants, etc)
 
   = menu_item ".admin.main", nil, :manager => true do
     %ul
@@ -26,12 +50,3 @@
   = menu_item ".ecommerce.main", nil, :merchant => true do
     %ul
       = menu_item "activerecord.models.invoice.other", invoices_path
-
-  = menu_item ".help.main", nil do
-    %ul
-      = menu_item ".help.support_newticket", new_user_ticket_path
-      = menu_item ".help.support_alltickets", user_tickets_path
-      = menu_item ".help.faq", static_path(:faq)
-      = menu_item ".help.terms_of_service", static_path(:terms_of_service), :logged_in => true
-      = menu_item ".help.fees", static_path(:fees)
-      = menu_item ".help.api_docs", static_path(:api_docs)
