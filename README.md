@@ -234,6 +234,8 @@ Your `Bitcoin Exchange` should now be running at: `http://localhost:3000/`!
 
         a2enmod rewrite
 
+	a2enmod headers
+
 * Download Apache's files:
 
         cd /etc/apache2/sites-available
@@ -285,6 +287,8 @@ Those tasks does:
         wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/cronjobs/bitfication-stats.sh
 
         wget https://raw.githubusercontent.com/Bitfication/bitfication-full/master/misc/cronjobs/notification-trades.sh
+
+	chmod +x *.sh
 
 * Then, configure `webapp's` cronjobs by running `crontab -e` and then, copy and paste this:
 
