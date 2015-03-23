@@ -130,7 +130,7 @@ pt:
         description: Descrição
         created_at: Aberto em
         updated_at: Atualizado em
-                    
+
     models:
       invoice:
         one: Fatura
@@ -168,7 +168,7 @@ pt:
       currency:
         one: Moeda
         other: Moedas
-        
+
     extra:
       invoice:
         state_translations:
@@ -196,7 +196,7 @@ pt:
           lrusd: Dólar do Liberty Reserve
           lreur: Euro do Liberty Reserve
           pgau: Ouro do Pecunix
-          btc: Bitcoin   
+          btc: Bitcoin
           brl: Real Brasileiro
       ticket:
         states:

@@ -129,7 +129,7 @@ en:
         description: Description
         created_at: Opened at
         updated_at: Updated at
-                    
+
     models:
       invoice:
         one: Invoice
@@ -142,7 +142,7 @@ en:
         other: Trade orders
       account_operation:
         one: Operation
-        other: Operations        
+        other: Operations
       transfer:
         one: Transfer
         other: Transfers
@@ -151,7 +151,7 @@ en:
         other: Trades
       announcement:
         one: Announcement
-        other: Announcements        
+        other: Announcements
       yubikey:
         one: Yubikey
         other: Yubikeys
@@ -167,7 +167,7 @@ en:
       currency:
         one: Currency
         other: Currencies
-        
+
     extra:
       invoice:
         state_translations:
@@ -177,15 +177,15 @@ en:
         state_tooltips:
           pending: No payment has been received yet
           processing: A payment has been detected and awaits confirmation from the Bitcoin network
-          paid: Payment has been confirmed        
+          paid: Payment has been confirmed
       trade:
         types:
           buy: Buy
-          sell: Sell        
+          sell: Sell
       bank_account:
         states:
           unverified: Unverified
-          verified: Verified        
+          verified: Verified
       currency:
         codes:
           eur: Euro
@@ -195,8 +195,8 @@ en:
           lrusd: Liberty Reserve Dollar
           lreur: Liberty Reserve Euro
           pgau: Pecunix Gold
-          btc: Bitcoin   
-          brl: Brazilian Real  
+          btc: Bitcoin
+          brl: Brazilian Real
       ticket:
         states:
           pending: Pending
