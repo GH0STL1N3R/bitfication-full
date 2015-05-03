@@ -42,11 +42,11 @@ This new PPA contains a fews backports from Ubuntu Utopic, to Trusty. So, if you
 
 * Adding InternetGroup's Ubuntu PPA Repository:
 
-	add-apt-repository ppa:martinx/ig
+        add-apt-repository ppa:martinx/ig
 
-	apt-get update
+        apt-get update
 
-	apt-get dist-upgrade
+        apt-get dist-upgrade
 
 ## Install Bitcoin Daemon
 
