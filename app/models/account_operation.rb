@@ -13,7 +13,7 @@ class AccountOperation < ActiveRecord::Base
   default_scope order('`account_operations`.`created_at` DESC')
   
   #for attachments
-  has_attached_file :attachment, :styles => {:original => "75x75#"}
+  has_attached_file :attachment, :styles => {:normal => "100x100#"}
   validates_attachment_content_type :attachment, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf']
 
   belongs_to :operation
